@@ -8,7 +8,19 @@
 
 /* eslint-env node */
 /* eslint-disable @typescript-eslint/no-var-requires */
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
+/* eslint-disable @typescript-eslint/no-unsafe-argument */
+/* eslint-disable @typescript-eslint/no-unsafe-call */
+/* eslint-disable @typescript-eslint/restrict-template-expressions */
+
 const { configure } = require('quasar/wrappers')
+const path = require('path')
+const { name } = require('./package')
+const SystemJSPublicPathWebpackPlugin = require('systemjs-webpack-interop/SystemJSPublicPathWebpackPlugin')
+
+function resolve (...dirs) {
+  return path.join(__dirname, ...dirs)
+}
 
 module.exports = configure(function (ctx) {
   return {
@@ -54,7 +66,7 @@ module.exports = configure(function (ctx) {
 
     // Full list of options: https://quasar.dev/quasar-cli/quasar-conf-js#Property%3A-build
     build: {
-      vueRouterMode: 'hash', // available values: 'hash', 'history'
+      vueRouterMode: 'history', // available values: 'hash', 'history'
 
       // transpile: false,
       // publicPath: '/',
@@ -75,8 +87,41 @@ module.exports = configure(function (ctx) {
 
       // https://quasar.dev/quasar-cli/handling-webpack
       // "chain" is a webpack-chain object https://github.com/neutrinojs/webpack-chain
-      chainWebpack (/* chain */) {
-        //
+      chainWebpack (chain) {
+        chain.entry('app').add(resolve('src', 'single-spa-entry.js'))
+      },
+      extendWebpack (cfg) {
+        cfg.output = {
+          // https://single-spa.js.org/docs/recommended-setup/#build-tools-webpack--rollup
+          libraryTarget: 'system',
+          // chunkLoadingGlobal: `webpackJsonp_${name}`,  // not sure what this is
+          publicPath: ''
+        }
+        // Dependencies that will be provided by the container
+        cfg.externals = [
+          'single-spa'
+          // 'single-spa-vue',
+          // 'quasar',
+          // '@quasar/extras',
+          // 'vue',
+          // 'vue-router',
+          // 'core-js',
+          // 'axios'
+        ]
+        // https://single-spa.js.org/docs/recommended-setup/#build-tools-webpack--rollup
+        cfg.optimization.splitChunks = false // potentially problematic
+        cfg.devtool = 'source-map'
+        cfg.plugins.push(
+          new SystemJSPublicPathWebpackPlugin({ systemjsModuleName: name })
+        )
+        cfg.module.rules.push({
+          test: /\.js$/,
+          loader: 'string-replace-loader',
+          options: {
+            search: '[Quasar] Running SPA.',
+            replace: `[Quasar] Running SPA: Micro Frontend ${name}.`
+          }
+        })
       }
     },
 
@@ -85,8 +130,13 @@ module.exports = configure(function (ctx) {
       server: {
         type: 'http'
       },
-      port: 8080,
-      open: true // opens browser window automatically
+      port: 9100,
+      open: false, // opens browser window automatically
+      headers: {
+        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, PATCH, OPTIONS',
+        'Access-Control-Allow-Headers': 'X-Requested-With, content-type, Authorization'
+      }
     },
 
     // https://quasar.dev/quasar-cli/quasar-conf-js#Property%3A-framework
@@ -148,7 +198,7 @@ module.exports = configure(function (ctx) {
       manifest: {
         name: 'Micro Frontend Main',
         short_name: 'Micro Frontend Main',
-        description: 'Micro Frontedn Main',
+        description: 'Micro Frontend Main',
         display: 'standalone',
         orientation: 'portrait',
         background_color: '#ffffff',

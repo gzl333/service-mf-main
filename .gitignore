@@ -1,17 +1,13 @@
 ### VSCode settings --> only keep in develop branch
 ## after git clone the project: enable .vscode at next line
-.vscode
+# .vscode
 
 ### WebStorm settings --> only keep in develop branch
 ## after git clone the project: enable .idea at next line
-.idea
-## and comment off next a few lines
-# .idea/*
-# !.idea/codeStyles
-# !.idea/fileTemplates
-# !.idea/inspectionProfiles
-# !.idea/jsLinters
-# !.idea/vcs.xml
+# .idea
+## and comment off next a few lines：ignore every files but next a few
+.idea/*
+!.idea/fileTemplates
 
 # System cache
 .DS_Store
