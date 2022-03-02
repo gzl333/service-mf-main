@@ -15,8 +15,12 @@ declare module '@vue/runtime-core' {
 // for each client)
 const api = axios.create({ baseURL: 'https://api.example.com' })
 
-export default boot(({ app }) => {
+export default boot(({
+  app,
+  store
+}) => {
   console.log('@cnic/main booting!')
+  console.log('store:', store)
   // for use inside Vue files (Options API) through this.$axios and this.$api
 
   app.config.globalProperties.$axios = axios

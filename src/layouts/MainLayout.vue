@@ -9,17 +9,13 @@
           @cnic/main
         </q-toolbar-title>
 
-        <q-btn
-          color="positive"
-          label="/"
-          @click="window.location.href='/'"
-        />
+        <a href="/">goto /</a>
 
-        <q-btn
-          color="positive"
-          label="/my/server"
-          @click="window.location.href='/my/server'"
-        />
+        <a href="/my">goto /my</a>
+
+        <a href="/my/server">goto /my/server</a>
+
+        <a href="/my/server/good">goto /my/server/good</a>
 
         <div>Quasar v{{ $q.version }}</div>
 

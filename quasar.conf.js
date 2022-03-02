@@ -94,7 +94,7 @@ module.exports = configure(function (ctx) {
         cfg.output = {
           // https://single-spa.js.org/docs/recommended-setup/#build-tools-webpack--rollup
           libraryTarget: 'system',
-          // chunkLoadingGlobal: `webpackJsonp_${name}`,  // not sure what this is
+          chunkLoadingGlobal: `webpackJsonp_${name}`, // not sure what this is
           publicPath: ''
         }
         // Dependencies that will be provided by the container
@@ -122,6 +122,32 @@ module.exports = configure(function (ctx) {
             replace: `[Quasar] Running SPA: Micro Frontend ${name}.`
           }
         })
+        // 停止自动创建quasar实例, 由single - spa - vue处理
+        cfg.module.rules.push({
+          test: /\.js$/,
+          loader: 'string-replace-loader',
+          options: {
+            search: '      start(app, boot)',
+            replace: '// console.log("created router !!"); start(app, boot)'
+          }
+        })
+        // // 去掉quasar（有boot）的自动mount，等待single-spa来mount -> boots受影响
+        // cfg.module.rules.push({
+        //   test: /\.js$/,
+        //   loader: 'string-replace-loader',
+        //   options: {
+        //     search: 'createQuasarApp(createApp, quasarUserOptions)',
+        //     replace: '// createQuasarApp(createApp, quasarUserOptions)'
+        //   }
+        // })
+        // cfg.module.rules.push({
+        //   test: /\.js$/,
+        //   loader: 'string-replace-loader',
+        //   options: {
+        //     search: 'async function start ({ app, router, store, storeKey }, bootFiles) {',
+        //     replace: 'export default async function ({ app, router, store, storeKey }, bootFiles) {'
+        //   }
+        // })
       }
     },
 
