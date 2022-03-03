@@ -28,7 +28,7 @@ console.info(packageInfo.name + ' Running Single-Spa Application: Quasar')
 // as per https://single-spa.js.org/docs/ecosystem-vue#usage
 const publicPath = packageInfo.name
 
-export async function start ({
+async function start ({
   app,
   router
   // store,
