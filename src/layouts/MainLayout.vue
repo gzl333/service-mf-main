@@ -9,36 +9,57 @@
           @cnic/main
         </q-toolbar-title>
 
-        <a href="/">goto /</a>
+        count: {{ count }}
 
-        <a href="/my">goto /my</a>
+        <q-btn label="add" @click="count++"/>
 
-        <a href="/my/server">goto /my/server</a>
+        <q-btn label="goto /" @click="jump"/>
+        <q-btn label="goto /my" @click="singleSpa.navigateToUrl('/my')"/>
+        <q-btn label="goto /my/server" to="/my/server"/>
+        <q-btn label="goto /my/server/good" to="/my/server/good"/>
 
-        <a href="/my/server/good">goto /my/server/good</a>
+        <a href="/" onclick="singleSpaNavigate(event)">goto /</a>
+
+        <a href="/my" onclick="singleSpaNavigate(event)">goto /my</a>
+
+        <a href="/my/server" onclick="singleSpaNavigate(event)">goto /my/server</a>
+
+        <a href="/my/server/good" onclick="singleSpaNavigate(event)">goto /my/server/good</a>
 
         <div>Quasar v{{ $q.version }}</div>
 
       </q-toolbar>
     </q-header>
 
-<!--    <q-page-container>-->
-<!--      <router-view></router-view>-->
-<!--    </q-page-container>-->
+<!--        <q-page-container>-->
+<!--          <router-view></router-view>-->
+<!--        </q-page-container>-->
 
   </q-layout>
 </template>
 
 <script lang="ts">
 
-import { defineComponent } from 'vue'
+import { defineComponent, ref } from 'vue'
+import * as singleSpa from 'single-spa'
+
+export const count = ref(0)
+
+export const getCount = () => count.value
 
 export default defineComponent({
   name: 'MainLayout',
-  components: {
-  },
+  components: {},
   setup () {
+    const jump = () => {
+      singleSpa.navigateToUrl('/')
+      console.info(singleSpa.getAppNames())
+    }
+
     return {
+      singleSpa,
+      count,
+      jump
     }
   }
 })

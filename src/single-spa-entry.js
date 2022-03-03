@@ -20,10 +20,11 @@ import quasarUserOptions from '../.quasar/quasar-user-options'
 // const bootModules = ['i18n', 'axios']
 
 /* subtracted from .quasar/client-entry.js
-* which is the very specific file called for initiating quasar instance
+* which is the very specific file called to initiate a quasar instance
 * current version is working with v2.5.5
-* need to update if upgrading quasar */
-console.info(packageInfo.name + ' Running Single-Spa Application: Quasar')
+* need to update accordingly if upgrading quasar */
+
+// console.info(packageInfo.name + ' Initiating Single-Spa Application: Quasar')
 
 // as per https://single-spa.js.org/docs/ecosystem-vue#usage
 const publicPath = packageInfo.name
@@ -109,7 +110,7 @@ void createQuasarApp(createApp, quasarUserOptions).then((app) => {
 })
 /* subtracted from .quasar/client-entry.js */
 
-/* get life cycle functions using single-spa-vue */
+/* get lifecycle functions using single-spa-vue */
 const vueLifecycles = singleSpaVue({
   createApp,
   appOptions: {
@@ -124,7 +125,15 @@ const vueLifecycles = singleSpaVue({
   }
 })
 
-export const bootstrap = vueLifecycles.bootstrap
-export const mount = vueLifecycles.mount
-export const unmount = vueLifecycles.unmount
-export const update = vueLifecycles.update
+console.info(packageInfo.name + ' Running Single-Spa Application: Quasar')
+
+export const {
+  bootstrap,
+  mount,
+  unmount,
+  update
+} = vueLifecycles
+
+// single-spa application public interface, share with other apps. Communications between apps happen here.
+export { getCount } from 'layouts/MainLayout.vue'
+export { count as countRef } from 'layouts/MainLayout.vue'
