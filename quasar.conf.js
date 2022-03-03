@@ -14,13 +14,14 @@
 /* eslint-disable @typescript-eslint/restrict-template-expressions */
 
 const { configure } = require('quasar/wrappers')
-const path = require('path')
+const resolve = require('path').resolve
 const { name } = require('./package')
 const SystemJSPublicPathWebpackPlugin = require('systemjs-webpack-interop/SystemJSPublicPathWebpackPlugin')
 
-function resolve (...dirs) {
-  return path.join(__dirname, ...dirs)
-}
+// const path = require('path')
+// function resolve (...dirs) {
+//   return path.join(__dirname, ...dirs)
+// }
 
 module.exports = configure(function (ctx) {
   return {
@@ -40,10 +41,12 @@ module.exports = configure(function (ctx) {
     // app boot file (/src/boot)
     // --> boot files are part of "main.js"
     // https://quasar.dev/quasar-cli/boot-files
-    boot: [
-      'i18n',
-      'axios'
-    ],
+
+    // boot files are now configured in single-spa-entry.js
+    // boot: [
+    //   'i18n',
+    //   'axios'
+    // ],
 
     // https://quasar.dev/quasar-cli/quasar-conf-js#Property%3A-css
     css: [
@@ -87,6 +90,9 @@ module.exports = configure(function (ctx) {
 
       // https://quasar.dev/quasar-cli/handling-webpack
       // "chain" is a webpack-chain object https://github.com/neutrinojs/webpack-chain
+
+      // adding a second entry point for single-spa-vue
+      // existing entry point is for original packing
       chainWebpack (chain) {
         chain.entry('app').add(resolve('src', 'single-spa-entry.js'))
       },
@@ -95,7 +101,7 @@ module.exports = configure(function (ctx) {
           // https://single-spa.js.org/docs/recommended-setup/#build-tools-webpack--rollup
           libraryTarget: 'system',
           chunkLoadingGlobal: `webpackJsonp_${name}`, // not sure what this is
-          publicPath: ''
+          publicPath: `${name}`
         }
         // Dependencies that will be provided by the container
         cfg.externals = [
@@ -114,40 +120,16 @@ module.exports = configure(function (ctx) {
         cfg.plugins.push(
           new SystemJSPublicPathWebpackPlugin({ systemjsModuleName: name })
         )
+        // replace .quasar/client-entry.js with an empty file
         cfg.module.rules.push({
-          test: /\.js$/,
-          loader: 'string-replace-loader',
+          test: /client-entry.js$/,
+          loader: 'file-replace-loader',
           options: {
-            search: '[Quasar] Running SPA.',
-            replace: `[Quasar] Running SPA: Micro Frontend ${name}.`
+            // condition: process.env.NODE_ENV === 'development',
+            replacement: resolve('src', 'client-entry.js'), // the empty client-entry.js is a must
+            async: true
           }
         })
-        // 停止自动创建quasar实例, 由single - spa - vue处理
-        cfg.module.rules.push({
-          test: /\.js$/,
-          loader: 'string-replace-loader',
-          options: {
-            search: '      start(app, boot)',
-            replace: '// console.log("created router !!"); start(app, boot)'
-          }
-        })
-        // // 去掉quasar（有boot）的自动mount，等待single-spa来mount -> boots受影响
-        // cfg.module.rules.push({
-        //   test: /\.js$/,
-        //   loader: 'string-replace-loader',
-        //   options: {
-        //     search: 'createQuasarApp(createApp, quasarUserOptions)',
-        //     replace: '// createQuasarApp(createApp, quasarUserOptions)'
-        //   }
-        // })
-        // cfg.module.rules.push({
-        //   test: /\.js$/,
-        //   loader: 'string-replace-loader',
-        //   options: {
-        //     search: 'async function start ({ app, router, store, storeKey }, bootFiles) {',
-        //     replace: 'export default async function ({ app, router, store, storeKey }, bootFiles) {'
-        //   }
-        // })
       }
     },
 
