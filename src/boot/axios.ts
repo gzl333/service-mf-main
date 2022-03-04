@@ -6,7 +6,6 @@ declare module '@vue/runtime-core' {
     $axios: AxiosInstance;
   }
 }
-
 // Be careful when using SSR for cross-request state pollution
 // due to creating a Singleton instance here;
 // If any client changes this (global) instance, it might be a
@@ -18,6 +17,7 @@ const api = axios.create({ baseURL: 'https://api.example.com' })
 export default boot(({
   app
 }) => {
+  debugger
   console.log('@cnic/main booting axios!')
   // for use inside Vue files (Options API) through this.$axios and this.$api
 

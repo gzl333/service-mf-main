@@ -12,6 +12,7 @@
 /* eslint-disable @typescript-eslint/no-unsafe-argument */
 /* eslint-disable @typescript-eslint/no-unsafe-call */
 /* eslint-disable @typescript-eslint/restrict-template-expressions */
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
 
 const { configure } = require('quasar/wrappers')
 const resolve = require('path').resolve
@@ -43,10 +44,10 @@ module.exports = configure(function (ctx) {
     // https://quasar.dev/quasar-cli/boot-files
 
     // boot files are now configured in single-spa-entry.js
-    // boot: [
-    //   'i18n',
-    //   'axios'
-    // ],
+    boot: [
+      'i18n',
+      'axios'
+    ],
 
     // https://quasar.dev/quasar-cli/quasar-conf-js#Property%3A-css
     css: [
@@ -93,9 +94,9 @@ module.exports = configure(function (ctx) {
 
       // adding a second entry point for single-spa-vue
       // existing entry point is for original packing
-      chainWebpack (chain) {
-        chain.entry('app').add(resolve('src', 'single-spa-entry.js'))
-      },
+      // chainWebpack (chain) {
+      //   chain.entry('app').add(resolve('src', 'single-spa-entry.js'))
+      // },
       extendWebpack (cfg) {
         cfg.output = {
           // https://single-spa.js.org/docs/recommended-setup/#build-tools-webpack--rollup
@@ -120,16 +121,61 @@ module.exports = configure(function (ctx) {
         cfg.plugins.push(
           new SystemJSPublicPathWebpackPlugin({ systemjsModuleName: name })
         )
-        // replace .quasar/client-entry.js with an empty file
+        // 向原版里插入debugger用
+        // cfg.module.rules.push({
+        //   test: /app.js$/,
+        //   loader: 'string-replace-loader',
+        //   options: {
+        //     search: 'import { Quasar } from \'quasar\'',
+        //     replace: 'debugger;  console.info("in app.js"); import { Quasar } from \'quasar\''
+        //   }
+        // })
+        //
+        // cfg.module.rules.push({
+        //   test: /client-entry.js$/,
+        //   loader: 'string-replace-loader',
+        //   options: {
+        //     search: '.then(app => {',
+        //     replace: '.then(app => { debugger;'
+        //   }
+        // })
+
+        // // replace .quasar files with .single-spa file
         cfg.module.rules.push({
-          test: /client-entry.js$/,
+          test: /\.js$/,
           loader: 'file-replace-loader',
           options: {
-            // condition: process.env.NODE_ENV === 'development',
-            replacement: resolve('src', 'client-entry.js'), // the empty client-entry.js is a must
+            condition: 'always',
+            replacement (resourcePath) {
+              if (resourcePath.endsWith('app.js')) {
+                return resolve('.single-spa', 'app-modified.js')
+              }
+              if (resourcePath.endsWith('client-entry.js')) {
+                return resolve('.single-spa', 'client-entry-modified.js')
+              }
+            },
             async: true
           }
         })
+
+        // cfg.module.rules.push({
+        //   test: /client-entry.js$/,
+        //   loader: 'file-replace-loader',
+        //   options: {
+        //     // condition: process.env.NODE_ENV === 'development',
+        //     replacement: resolve('.single-spa', 'client-entry-modified.js'),
+        //     async: true
+        //   }
+        // })
+        // cfg.module.rules.push({
+        //   test: /app.js$/,
+        //   loader: 'file-replace-loader',
+        //   options: {
+        //     // condition: process.env.NODE_ENV === 'development',
+        //     replacement: resolve('.single-spa', 'app-modified.js'),
+        //     async: true
+        //   }
+        // })
       }
     },
 

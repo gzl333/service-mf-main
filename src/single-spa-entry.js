@@ -17,6 +17,8 @@ import packageInfo from '../package.json'
 import createQuasarApp from '../.quasar/app.js'
 import quasarUserOptions from '../.quasar/quasar-user-options'
 
+console.info('@cnic/main Entering Entry!')
+
 // const bootModules = ['i18n', 'axios']
 
 /* subtracted from .quasar/client-entry.js
@@ -31,8 +33,8 @@ const publicPath = packageInfo.name
 
 async function start ({
   app,
-  router
-  // store,
+  router,
+  store
   // storeKey
 }, bootFiles) {
   let hasRedirected = false
@@ -63,7 +65,7 @@ async function start ({
       await bootFiles[i]({
         app,
         router,
-        // store,
+        store,
         ssrContext: null,
         redirect,
         urlPath,
@@ -88,12 +90,13 @@ async function start ({
 
 /* create our own quasar instance, meanwhile get the router and store instances */
 let routerInstance
-// let storeInstance
-// let storeKeyInstance
-void createQuasarApp(createApp, quasarUserOptions).then((app) => {
+let storeInstance
+let storeKeyInstance
+createQuasarApp(createApp, quasarUserOptions).then(app => {
+  // appInstance = app.app
   routerInstance = app.router
-  // storeInstance = app.store
-  // storeKeyInstance = app.storeKey
+  storeInstance = app.store
+  storeKeyInstance = app.storeKey
   /* modify next array if adding new boot modules */
   return Promise.all(
     [
@@ -105,7 +108,7 @@ void createQuasarApp(createApp, quasarUserOptions).then((app) => {
     const boot = bootFiles
       .map(entry => entry.default)
       .filter(entry => typeof entry === 'function')
-    void start(app, boot)
+    start(app, boot)
   })
 })
 /* subtracted from .quasar/client-entry.js */
@@ -115,13 +118,16 @@ const vueLifecycles = singleSpaVue({
   createApp,
   appOptions: {
     render () {
+      console.info(packageInfo.name + ' Start rendering')
       return h(App)
     }
   },
   handleInstance (app) {
-    app.use(Quasar, quasarUserOptions)
+    console.info('in handleInstance')
+    app.use(Quasar, quasarUserOptions) // todo 来自app.js
+    // app.use(appInstance)
     app.use(routerInstance)
-    // app.use(storeInstance, storeKeyInstance)
+    app.use(storeInstance, storeKeyInstance)
   }
 })
 
