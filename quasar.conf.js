@@ -98,7 +98,7 @@ module.exports = configure(function (ctx) {
 
         // @mimas: dependencies that will be provided by root-config
         cfg.externals = [
-          'single-spa'
+          // 'single-spa'
           // 'single-spa-vue',
           // 'quasar',
           // '@quasar/extras',

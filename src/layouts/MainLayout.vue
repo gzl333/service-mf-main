@@ -1,47 +1,44 @@
+<script setup lang="ts">
+// import { ref, computed } from "vue"
+import useStore from 'src/store'
+// import { useI18n } from 'vue-i18n'
+import { navigateToUrl } from 'single-spa'
+
+// const props = defineProps({
+//   foo: {
+//     type: String,
+//     required: false,
+//     default: ''
+//   }
+// })
+// const emits = defineEmits(['change', 'delete'])
+
+const store = useStore()
+// const { locale } = useI18n({ useScope: 'global' })
+
+// code starts...
+</script>
+
 <template>
-  <q-layout view="lHh Lpr lFf">
+  <q-layout view="lHh Lpr lFf" style="min-height: 0px !important;">
     <q-header elevated>
       <q-toolbar>
-        <q-btn
-          flat
-          dense
-          round
-          icon="menu"
-          aria-label="Menu"
-          @click="toggleLeftDrawer"
-        />
-
         <q-toolbar-title>
           Quasar App {{ $appName }}
         </q-toolbar-title>
 
-        counter: {{ mainStore.counter }}
+        <q-btn @click="navigateToUrl('/')">/</q-btn>
+        <q-btn @click="navigateToUrl('/my')">/my</q-btn>
+        <q-btn @click="navigateToUrl('/my/server')">/my/server</q-btn>
+        <q-btn @click="navigateToUrl('/my/server/param')">/my/server/param</q-btn>
 
-        <q-btn @click="mainStore.increment">+1</q-btn>
+        counter: {{ store.counter }}
+
+        <q-btn @click="store.increment">+1</q-btn>
 
         <div>Quasar v{{ $q.version }}</div>
       </q-toolbar>
     </q-header>
-
-    <q-drawer
-      v-model="leftDrawerOpen"
-      show-if-above
-      bordered
-    >
-      <q-list>
-        <q-item-label
-          header
-        >
-          Essential Links
-        </q-item-label>
-
-        <EssentialLink
-          v-for="link in essentialLinks"
-          :key="link.title"
-          v-bind="link"
-        />
-      </q-list>
-    </q-drawer>
 
     <q-page-container>
       <router-view/>
@@ -49,78 +46,7 @@
   </q-layout>
 </template>
 
-<script lang="ts">
-import EssentialLink from 'components/EssentialLink.vue'
-
-const linksList = [
-  {
-    title: 'Docs',
-    caption: 'quasar.dev',
-    icon: 'school',
-    link: 'https://quasar.dev'
-  },
-  {
-    title: 'Github',
-    caption: 'github.com/quasarframework',
-    icon: 'code',
-    link: 'https://github.com/quasarframework'
-  },
-  {
-    title: 'Discord Chat Channel',
-    caption: 'chat.quasar.dev',
-    icon: 'chat',
-    link: 'https://chat.quasar.dev'
-  },
-  {
-    title: 'Forum',
-    caption: 'forum.quasar.dev',
-    icon: 'record_voice_over',
-    link: 'https://forum.quasar.dev'
-  },
-  {
-    title: 'Twitter',
-    caption: '@quasarframework',
-    icon: 'rss_feed',
-    link: 'https://twitter.quasar.dev'
-  },
-  {
-    title: 'Facebook',
-    caption: '@QuasarFramework',
-    icon: 'public',
-    link: 'https://facebook.quasar.dev'
-  },
-  {
-    title: 'Quasar Awesome',
-    caption: 'Community Quasar projects',
-    icon: 'favorite',
-    link: 'https://awesome.quasar.dev'
-  }
-]
-
-import { defineComponent, ref } from 'vue'
-
-import useStore from 'src/store'
-
-const mainStore = useStore()
-
-export default defineComponent({
-  name: 'MainLayout',
-
-  components: {
-    EssentialLink
-  },
-
-  setup () {
-    const leftDrawerOpen = ref(false)
-
-    return {
-      essentialLinks: linksList,
-      leftDrawerOpen,
-      toggleLeftDrawer () {
-        leftDrawerOpen.value = !leftDrawerOpen.value
-      },
-      mainStore
-    }
-  }
-})
-</script>
+<style lang="scss" scoped>
+.MainLayout {
+}
+</style>

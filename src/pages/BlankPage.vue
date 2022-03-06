@@ -19,12 +19,12 @@
 </script>
 
 <template>
-  <div class="${NAME}">
-    this is ${NAME}
+  <div class="BlankPage">
+
   </div>
 </template>
 
 <style lang="scss" scoped>
-.${NAME} {
+.BlankPage {
 }
 </style>
