@@ -12,8 +12,12 @@
         />
 
         <q-toolbar-title>
-          Quasar App
+          Quasar App {{ $appName }}
         </q-toolbar-title>
+
+        counter: {{ mainStore.counter }}
+
+        <q-btn @click="mainStore.increment">+1</q-btn>
 
         <div>Quasar v{{ $q.version }}</div>
       </q-toolbar>
@@ -40,7 +44,7 @@
     </q-drawer>
 
     <q-page-container>
-      <router-view />
+      <router-view/>
     </q-page-container>
   </q-layout>
 </template>
@@ -95,6 +99,10 @@ const linksList = [
 
 import { defineComponent, ref } from 'vue'
 
+import useStore from 'src/store'
+
+const mainStore = useStore()
+
 export default defineComponent({
   name: 'MainLayout',
 
@@ -110,7 +118,8 @@ export default defineComponent({
       leftDrawerOpen,
       toggleLeftDrawer () {
         leftDrawerOpen.value = !leftDrawerOpen.value
-      }
+      },
+      mainStore
     }
   }
 })

@@ -116,7 +116,7 @@ createQuasarApp(createApp, quasarUserOptions)
     router = app.router
 
     return Promise.all([
-      // import(/* webpackMode: "eager" */ 'boot/pinia'),
+      import(/* webpackMode: "eager" */ 'boot/pinia'),
 
       import(/* webpackMode: "eager" */ 'boot/axios'),
 
@@ -145,6 +145,7 @@ const vueLifecycles = singleSpaVue({
     app.use(router)
     // @mimas: set application name as a global property
     app.config.globalProperties.$appName = packageInfo.name
+
   }
 })
 
