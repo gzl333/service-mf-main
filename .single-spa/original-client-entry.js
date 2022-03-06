@@ -10,41 +10,53 @@
  * Boot files are your "main.js"
  **/
 
-console.info('Enter client-entry.js')
 
 import { createApp } from 'vue'
 
+
+
+
+
+
+
 import '@quasar/extras/roboto-font/roboto-font.css'
+
 import '@quasar/extras/material-icons/material-icons.css'
+
+
+
 
 // We load Quasar stylesheet file
 import 'quasar/dist/quasar.sass'
+
+
+
+
 import 'src/css/app.scss'
 
-import singleSpaVue from 'single-spa-vue'
-import packageInfo from 'app/package.json'
-import { h } from 'vue'
-import App from 'src/App'
-import { Quasar } from 'quasar'
 
-import createQuasarApp from '/.quasar/app.js'
-import quasarUserOptions from '/.quasar/quasar-user-options.js'
+import createQuasarApp from './app.js'
+import quasarUserOptions from './quasar-user-options.js'
+
+
+
+
+
+
+
+
 
 const publicPath = `/`
 
-async function start ({
-  app,
-  router,
-  store,
-  storeKey
-}, bootFiles) {
 
+async function start ({ app, router }, bootFiles) {
+  
+
+  
   let hasRedirected = false
   const getRedirectUrl = url => {
-    try {
-      return router.resolve(url).href
-    } catch (err) {
-    }
+    try { return router.resolve(url).href }
+    catch (err) {}
 
     return Object(url) === url
       ? null
@@ -63,7 +75,7 @@ async function start ({
     // continue if we didn't fail to resolve the url
     if (href !== null) {
       window.location.href = href
-
+      
     }
   }
 
@@ -74,13 +86,14 @@ async function start ({
       await bootFiles[i]({
         app,
         router,
-        store,
+        
         ssrContext: null,
         redirect,
         urlPath,
         publicPath
       })
-    } catch (err) {
+    }
+    catch (err) {
       if (err && err.url) {
         redirect(err.url)
         return
@@ -94,39 +107,37 @@ async function start ({
   if (hasRedirected === true) {
     return
   }
+  
 
   app.use(router)
-  app.use(store, storeKey)
+  
 
-  app.mount('#q-app')
+  
+
+    
+
+    
+      app.mount('#q-app')
+    
+
+    
+
+  
 
 }
 
-let routerInstance
-let storeInstance
-let storeKeyInstance
-
 createQuasarApp(createApp, quasarUserOptions)
 
-  .then(app => {  // todo 问题就在于这里慢了
-    debugger
-    console.info('Enter function: extract router instance')
-
-    routerInstance = app.router
-    storeInstance = app.store
-    // storeKeyInstance = app.storeKey
-    debugger
-
+  .then(app => {
     return Promise.all([
-
+      
+      import(/* webpackMode: "eager" */ 'boot/axios'),
+      
       import(/* webpackMode: "eager" */ 'boot/i18n'),
-
-      import(/* webpackMode: "eager" */ 'boot/axios')
-
+      
+      import(/* webpackMode: "eager" */ 'boot/pinia')
+      
     ]).then(bootFiles => {
-
-      console.info('Enter function: loading boots')
-
       const boot = bootFiles
         .map(entry => entry.default)
         .filter(entry => typeof entry === 'function')
@@ -135,33 +146,3 @@ createQuasarApp(createApp, quasarUserOptions)
     })
   })
 
-/* get lifecycle functions using single-spa-vue */
-const vueLifecycles = singleSpaVue({
-  createApp,
-  appOptions: {
-    render () {
-      console.info(packageInfo.name + ' Start rendering')
-      return h(App)
-    }
-  },
-  handleInstance (app) {
-    console.info('in handleInstance')
-    app.use(Quasar, quasarUserOptions) // 来自app.js
-    // app.use(appInstance)
-    app.use(routerInstance)
-    app.use(storeInstance, storeKeyInstance)
-  }
-})
-
-console.info(packageInfo.name + ' Running Single-Spa Application: Quasar')
-
-export const {
-  bootstrap,
-  mount,
-  unmount,
-  update
-} = vueLifecycles
-
-// single-spa application public interface, share with other apps. Communications between apps happen here.
-export { getCount } from 'layouts/MainLayout.vue'
-export { count as countRef } from 'layouts/MainLayout.vue'

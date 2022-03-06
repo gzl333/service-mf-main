@@ -1,71 +1,126 @@
 <template>
-  <q-layout view="hHh lpR fFf" style="min-height: 0px !important;">
-    <q-header elevated reveal>
+  <q-layout view="lHh Lpr lFf">
+    <q-header elevated>
       <q-toolbar>
+        <q-btn
+          flat
+          dense
+          round
+          icon="menu"
+          aria-label="Menu"
+          @click="toggleLeftDrawer"
+        />
 
         <q-toolbar-title>
-          CSTCloud
-          Universal Service Portal
-          @cnic/main
+          Quasar App {{ $appName }}
         </q-toolbar-title>
 
-        count: {{ count }}
-
-        $store:{{$store.state}}
-
-        <q-btn label="add" @click="count++"/>
-
-        <q-btn label="goto /" @click="jump"/>
-        <q-btn label="goto /my" @click="singleSpa.navigateToUrl('/my')"/>
-        <q-btn label="goto /my/server" to="/my/server"/>
-        <q-btn label="goto /my/server/good" to="/my/server/good"/>
-
-        <a href="/" onclick="singleSpaNavigate(event)">goto /</a>
-
-        <a href="/my" onclick="singleSpaNavigate(event)">goto /my</a>
-
-        <a href="/my/server" onclick="singleSpaNavigate(event)">goto /my/server</a>
-
-        <a href="/my/server/good" onclick="singleSpaNavigate(event)">goto /my/server/good</a>
+        store: {{ store.counter }}
+        <q-btn @click="store.increment()">add</q-btn>
 
         <div>Quasar v{{ $q.version }}</div>
-
       </q-toolbar>
     </q-header>
 
-<!--        <q-page-container>-->
-<!--          <router-view></router-view>-->
-<!--        </q-page-container>-->
+    <q-drawer
+      v-model="leftDrawerOpen"
+      show-if-above
+      bordered
+    >
+      <q-list>
+        <q-item-label
+          header
+        >
+          Essential Links
+        </q-item-label>
 
+        <EssentialLink
+          v-for="link in essentialLinks"
+          :key="link.title"
+          v-bind="link"
+        />
+      </q-list>
+    </q-drawer>
+
+<!--    <q-page-container>-->
+<!--      <router-view/>-->
+<!--    </q-page-container>-->
   </q-layout>
 </template>
 
 <script lang="ts">
+console.info('loading layout')
+
+import EssentialLink from 'components/EssentialLink.vue'
+
+import mainStore from 'src/store/mainStore'
+
+export const store = mainStore()
+
+const linksList = [
+  {
+    title: 'Docs',
+    caption: 'quasar.dev',
+    icon: 'school',
+    link: 'https://quasar.dev'
+  },
+  {
+    title: 'Github',
+    caption: 'github.com/quasarframework',
+    icon: 'code',
+    link: 'https://github.com/quasarframework'
+  },
+  {
+    title: 'Discord Chat Channel',
+    caption: 'chat.quasar.dev',
+    icon: 'chat',
+    link: 'https://chat.quasar.dev'
+  },
+  {
+    title: 'Forum',
+    caption: 'forum.quasar.dev',
+    icon: 'record_voice_over',
+    link: 'https://forum.quasar.dev'
+  },
+  {
+    title: 'Twitter',
+    caption: '@quasarframework',
+    icon: 'rss_feed',
+    link: 'https://twitter.quasar.dev'
+  },
+  {
+    title: 'Facebook',
+    caption: '@QuasarFramework',
+    icon: 'public',
+    link: 'https://facebook.quasar.dev'
+  },
+  {
+    title: 'Quasar Awesome',
+    caption: 'Community Quasar projects',
+    icon: 'favorite',
+    link: 'https://awesome.quasar.dev'
+  }
+]
 
 import { defineComponent, ref } from 'vue'
-import * as singleSpa from 'single-spa'
-
-console.info('@cnic/main Before Layout Setup!')
-debugger
-export const count = ref(0)
-
-export const getCount = () => count.value
 
 export default defineComponent({
   name: 'MainLayout',
-  components: {},
-  setup () {
-    console.info('@cnic/main In Layout Setup!')
 
-    const jump = () => {
-      singleSpa.navigateToUrl('/')
-      console.info(singleSpa.getAppNames())
-    }
+  components: {
+    EssentialLink
+  },
+
+  setup () {
+    const leftDrawerOpen = ref(false)
 
     return {
-      singleSpa,
-      count,
-      jump
+      essentialLinks: linksList,
+      leftDrawerOpen,
+      toggleLeftDrawer () {
+        leftDrawerOpen.value = !leftDrawerOpen.value
+      },
+      store
     }
   }
 })

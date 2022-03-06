@@ -19,11 +19,6 @@ const resolve = require('path').resolve
 const { name } = require('./package')
 const SystemJSPublicPathWebpackPlugin = require('systemjs-webpack-interop/SystemJSPublicPathWebpackPlugin')
 
-// const path = require('path')
-// function resolve (...dirs) {
-//   return path.join(__dirname, ...dirs)
-// }
-
 module.exports = configure(function (ctx) {
   return {
     // https://quasar.dev/quasar-cli/supporting-ts
@@ -42,11 +37,9 @@ module.exports = configure(function (ctx) {
     // app boot file (/src/boot)
     // --> boot files are part of "main.js"
     // https://quasar.dev/quasar-cli/boot-files
-
-    // boot files are now configured in single-spa-entry.js
     boot: [
-      'i18n',
-      'axios'
+      'axios',
+      'i18n'
     ],
 
     // https://quasar.dev/quasar-cli/quasar-conf-js#Property%3A-css
@@ -91,20 +84,18 @@ module.exports = configure(function (ctx) {
 
       // https://quasar.dev/quasar-cli/handling-webpack
       // "chain" is a webpack-chain object https://github.com/neutrinojs/webpack-chain
-
-      // adding a second entry point for single-spa-vue
-      // existing entry point is for original packing
-      // chainWebpack (chain) {
-      //   chain.entry('app').add(resolve('src', 'single-spa-entry.js'))
-      // },
+      chainWebpack (/* chain */) {
+        //
+      },
       extendWebpack (cfg) {
         cfg.output = {
           // https://single-spa.js.org/docs/recommended-setup/#build-tools-webpack--rollup
           libraryTarget: 'system',
-          chunkLoadingGlobal: `webpackJsonp_${name}`, // not sure what this is
+          chunkLoadingGlobal: `webpackJsonp_${name}`, // @mimas: not sure what this is
           publicPath: `${name}`
         }
-        // Dependencies that will be provided by the container
+
+        // @mimas: dependencies that will be provided by root-config
         cfg.externals = [
           'single-spa'
           // 'single-spa-vue',
@@ -115,67 +106,40 @@ module.exports = configure(function (ctx) {
           // 'core-js',
           // 'axios'
         ]
-        // https://single-spa.js.org/docs/recommended-setup/#build-tools-webpack--rollup
+
+        // @mimas: https://single-spa.js.org/docs/recommended-setup/#build-tools-webpack--rollup
         cfg.optimization.splitChunks = false // potentially problematic
-        cfg.devtool = 'source-map'
+        cfg.devtool = 'source-map' // for debugging
         cfg.plugins.push(
           new SystemJSPublicPathWebpackPlugin({ systemjsModuleName: name })
         )
-        // 向原版里插入debugger用
-        // cfg.module.rules.push({
-        //   test: /app.js$/,
-        //   loader: 'string-replace-loader',
-        //   options: {
-        //     search: 'import { Quasar } from \'quasar\'',
-        //     replace: 'debugger;  console.info("in app.js"); import { Quasar } from \'quasar\''
-        //   }
-        // })
-        //
-        // cfg.module.rules.push({
-        //   test: /client-entry.js$/,
-        //   loader: 'string-replace-loader',
-        //   options: {
-        //     search: '.then(app => {',
-        //     replace: '.then(app => { debugger;'
-        //   }
-        // })
-
-        // // replace .quasar files with .single-spa file
+        // @mimas: real meat for single-spa!
+        // replace /.quasar files with /.single-spa files during bundling!
         cfg.module.rules.push({
           test: /\.js$/,
           loader: 'file-replace-loader',
           options: {
             condition: 'always',
             replacement (resourcePath) {
+              // modified for single-spa
               if (resourcePath.endsWith('app.js')) {
-                return resolve('.single-spa', 'app-modified.js')
+                return resolve('.single-spa', 'modified-app.js')
               }
               if (resourcePath.endsWith('client-entry.js')) {
-                return resolve('.single-spa', 'client-entry-modified.js')
+                return resolve('.single-spa', 'modified-client-entry.js')
               }
+
+              // originals for debugging
+              // if (resourcePath.endsWith('app.js')) {
+              //   return resolve('.single-spa', 'original-app.js')
+              // }
+              // if (resourcePath.endsWith('client-entry.js')) {
+              //   return resolve('.single-spa', 'original-client-entry.js')
+              // }
             },
             async: true
           }
         })
-
-        // cfg.module.rules.push({
-        //   test: /client-entry.js$/,
-        //   loader: 'file-replace-loader',
-        //   options: {
-        //     // condition: process.env.NODE_ENV === 'development',
-        //     replacement: resolve('.single-spa', 'client-entry-modified.js'),
-        //     async: true
-        //   }
-        // })
-        // cfg.module.rules.push({
-        //   test: /app.js$/,
-        //   loader: 'file-replace-loader',
-        //   options: {
-        //     // condition: process.env.NODE_ENV === 'development',
-        //     replacement: resolve('.single-spa', 'app-modified.js'),
-        //     async: true
-        //   }
-        // })
       }
     },
 
@@ -186,6 +150,7 @@ module.exports = configure(function (ctx) {
       },
       port: 9100,
       open: false, // opens browser window automatically
+      // @mimas: allow cors for dev servers
       headers: {
         'Access-Control-Allow-Origin': '*',
         'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, PATCH, OPTIONS',
@@ -250,9 +215,9 @@ module.exports = configure(function (ctx) {
       },
 
       manifest: {
-        name: 'Micro Frontend Main',
-        short_name: 'Micro Frontend Main',
-        description: 'Micro Frontend Main',
+        name: 'Quasar App',
+        short_name: 'Quasar App',
+        description: 'A Quasar Framework app',
         display: 'standalone',
         orientation: 'portrait',
         background_color: '#ffffff',
@@ -317,7 +282,7 @@ module.exports = configure(function (ctx) {
       builder: {
         // https://www.electron.build/configuration/configuration
 
-        appId: '@cnic/main'
+        appId: '@cnic/demo'
       },
 
       // "chain" is a webpack-chain object https://github.com/neutrinojs/webpack-chain
