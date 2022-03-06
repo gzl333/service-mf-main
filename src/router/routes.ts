@@ -5,8 +5,14 @@ const routes: RouteRecordRaw[] = [
     path: '/:catchAll(.*)*',
     component: () => import('layouts/MainLayout.vue'),
     children: [
-      { path: '', component: () => import('pages/Index.vue') },
-      { path: 'my', component: () => import('pages/BlankPage.vue') }
+      {
+        path: '',
+        component: () => import('pages/Index.vue')
+      },
+      {
+        path: 'my',
+        component: () => import('pages/BlankPage.vue')
+      }
     ]
   }
 ]
