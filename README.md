@@ -1,6 +1,6 @@
-# Quasar App (@cnic/demo)
+# Micro Frontend Main (@cnic/main)
 
-A Quasar Framework app
+Micro Frontend Main
 
 ## Install the dependencies
 ```bash

@@ -1,8 +1,8 @@
 {
-  "name": "@cnic/demo",
+  "name": "@cnic/main",
   "version": "0.0.1",
-  "description": "A Quasar Framework app",
-  "productName": "Quasar App",
+  "description": "Micro Frontend Main",
+  "productName": "Micro Frontend Main",
   "author": "mimas",
   "private": true,
   "scripts": {

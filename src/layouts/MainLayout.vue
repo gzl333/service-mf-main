@@ -12,11 +12,8 @@
         />
 
         <q-toolbar-title>
-          Quasar App {{ $appName }}
+          Quasar App
         </q-toolbar-title>
-
-        store: {{ store.counter }}
-        <q-btn @click="store.increment()">add</q-btn>
 
         <div>Quasar v{{ $q.version }}</div>
       </q-toolbar>
@@ -42,20 +39,14 @@
       </q-list>
     </q-drawer>
 
-<!--    <q-page-container>-->
-<!--      <router-view/>-->
-<!--    </q-page-container>-->
+    <q-page-container>
+      <router-view />
+    </q-page-container>
   </q-layout>
 </template>
 
 <script lang="ts">
-console.info('loading layout')
-
 import EssentialLink from 'components/EssentialLink.vue'
-
-import mainStore from 'src/store/mainStore'
-
-export const store = mainStore()
 
 const linksList = [
   {
@@ -119,8 +110,7 @@ export default defineComponent({
       leftDrawerOpen,
       toggleLeftDrawer () {
         leftDrawerOpen.value = !leftDrawerOpen.value
-      },
-      store
+      }
     }
   }
 })

@@ -38,6 +38,7 @@ module.exports = configure(function (ctx) {
     // --> boot files are part of "main.js"
     // https://quasar.dev/quasar-cli/boot-files
     boot: [
+      'pinia',
       'axios',
       'i18n'
     ],
@@ -131,10 +132,10 @@ module.exports = configure(function (ctx) {
 
               // originals for debugging
               // if (resourcePath.endsWith('app.js')) {
-              //   return resolve('.single-spa', 'original-app.js')
+              //   return resolve('.single-spa', 'app.js')
               // }
               // if (resourcePath.endsWith('client-entry.js')) {
-              //   return resolve('.single-spa', 'original-client-entry.js')
+              //   return resolve('.single-spa', 'client-entry.js')
               // }
             },
             async: true
