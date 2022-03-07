@@ -283,7 +283,7 @@ module.exports = configure(function (ctx) {
       builder: {
         // https://www.electron.build/configuration/configuration
 
-        appId: '@cnic/demo'
+        appId: '@cnic/main'
       },
 
       // "chain" is a webpack-chain object https://github.com/neutrinojs/webpack-chain

@@ -22,7 +22,10 @@ export default route(function (/* { store, ssrContext } */) {
     : (process.env.VUE_ROUTER_MODE === 'history' ? createWebHistory : createWebHashHistory)
 
   const Router = createRouter({
-    scrollBehavior: () => ({ left: 0, top: 0 }),
+    scrollBehavior: () => ({
+      left: 0,
+      top: 0
+    }),
     routes,
 
     // Leave this as is and make changes in quasar.conf.js instead!
@@ -35,6 +38,11 @@ export default route(function (/* { store, ssrContext } */) {
 
   Router.beforeEach((to, from, next) => {
     console.log('@cnic/main fullPath: ', to.fullPath)
+
+    // if (to.meta.title) {
+    //   document.title = to.meta.title as string
+    // }
+    document.title = '中国科技云统一服务入口'
 
     next()
   })

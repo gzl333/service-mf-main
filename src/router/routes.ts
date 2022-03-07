@@ -13,7 +13,13 @@ const routes: RouteRecordRaw[] = [
   },
   {
     path: '/my',
-    redirect: '/my/server'
+    component: () => import('layouts/MyLayout.vue'),
+    children: [
+      {
+        path: '',
+        component: () => import('pages/MyPage.vue')
+      }
+    ]
   },
   {
     path: '/:catchAll(.*)*',

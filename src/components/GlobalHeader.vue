@@ -21,16 +21,16 @@ const store = useStore()
 
 <template>
 
-  <q-header elevated>
+  <q-header bordered reveal>
     <q-toolbar>
       <q-toolbar-title>
         中国科技云统一服务入口
       </q-toolbar-title>
 
-      <q-btn @click="navigateToUrl('/')">/</q-btn>
-      <q-btn @click="navigateToUrl('/my')">/my</q-btn>
-      <q-btn @click="navigateToUrl('/my/server')">/my/server</q-btn>
-      <q-btn @click="navigateToUrl('/my/server/param')">/my/server/param</q-btn>
+      <q-btn color="positive" @click="navigateToUrl('/')">/</q-btn>
+      <q-btn color="positive" @click="navigateToUrl('/my')">my</q-btn>
+      <q-btn color="positive" @click="navigateToUrl('/my/server')">server</q-btn>
+      <q-btn color="positive" @click="navigateToUrl('/my/storage')">storage</q-btn>
 
       counter: {{ store.counter }}
 
