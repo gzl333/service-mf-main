@@ -19,12 +19,12 @@
 </script>
 
 <template>
-  <div class="BlankPage">
-
+  <div class="HomePage">
+    登录前页面内容
   </div>
 </template>
 
 <style lang="scss" scoped>
-.BlankPage {
+.HomePage {
 }
 </style>

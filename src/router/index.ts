@@ -33,5 +33,11 @@ export default route(function (/* { store, ssrContext } */) {
     )
   })
 
+  Router.beforeEach((to, from, next) => {
+    console.log('@cnic/main fullPath: ', to.fullPath)
+
+    next()
+  })
+
   return Router
 })

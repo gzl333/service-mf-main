@@ -2,18 +2,22 @@ import { RouteRecordRaw } from 'vue-router'
 
 const routes: RouteRecordRaw[] = [
   {
-    path: '/:catchAll(.*)*',
-    component: () => import('layouts/MainLayout.vue'),
+    path: '/',
+    component: () => import('layouts/HomeLayout.vue'),
     children: [
       {
         path: '',
-        component: () => import('pages/Index.vue')
-      },
-      {
-        path: 'my',
-        component: () => import('pages/BlankPage.vue')
+        component: () => import('pages/HomePage.vue')
       }
     ]
+  },
+  {
+    path: '/my',
+    redirect: '/my/server'
+  },
+  {
+    path: '/:catchAll(.*)*',
+    component: () => import('layouts/MyLayout.vue')
   }
 ]
 
