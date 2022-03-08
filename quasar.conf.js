@@ -39,8 +39,7 @@ module.exports = configure(function (ctx) {
     // https://quasar.dev/quasar-cli/boot-files
     boot: [
       'pinia',
-      'axios',
-      'i18n'
+      'axios'
     ],
 
     // https://quasar.dev/quasar-cli/quasar-conf-js#Property%3A-css
@@ -109,6 +108,8 @@ module.exports = configure(function (ctx) {
           // 'vue',
           // 'vue-i18n',
           // 'vue-router'
+
+          /^@cnic\/.+/ // @mimas: get exports from another micro frontend
         ]
 
         // @mimas: https://single-spa.js.org/docs/recommended-setup/#build-tools-webpack--rollup

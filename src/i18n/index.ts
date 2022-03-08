@@ -1,5 +1,8 @@
-import enUS from './en-US'
+import zh from './zh'
+import en from './en'
 
 export default {
-  'en-US': enUS
+  // 此处结构：浏览器locale代码字符串: 本地locale定义模块
+  zh: zh,
+  en: en
 }
