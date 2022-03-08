@@ -79,6 +79,7 @@ watch(localeModel, val => {
       <div class="text-amber">{{ $t('翻译测试') }}</div>
 
       <div class="q-gutter-md row items-center no-wrap">
+
         <q-select
           v-model="localeModel"
           :options="localeOptions"
