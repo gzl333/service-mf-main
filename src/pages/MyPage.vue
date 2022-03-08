@@ -26,6 +26,7 @@ const store = useStore()
 
     <div>this is my index store: {{ store.counter }}</div>
     <q-btn @click="store.increment">add</q-btn>
+
   </div>
 </template>
 

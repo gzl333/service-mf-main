@@ -98,14 +98,17 @@ module.exports = configure(function (ctx) {
 
         // @mimas: dependencies that will be provided by root-config
         cfg.externals = [
-          // 'single-spa'
-          // 'single-spa-vue',
-          // 'quasar',
+          'single-spa',
+          'single-spa-vue',
+          'axios',
+          'core-js',
+          'quasar',
+
           // '@quasar/extras',
+          // 'pinia',
           // 'vue',
-          // 'vue-router',
-          // 'core-js',
-          // 'axios'
+          // 'vue-i18n',
+          // 'vue-router'
         ]
 
         // @mimas: https://single-spa.js.org/docs/recommended-setup/#build-tools-webpack--rollup
