@@ -10,7 +10,6 @@
  * Boot files are your "main.js"
  **/
 
-
 import { createApp } from 'vue'
 // @mimas: !all css files need to be included in root-config!
 import '@quasar/extras/roboto-font/roboto-font.css' // include a cdn version in root-config
@@ -32,23 +31,19 @@ import packageInfo from 'app/package.json'
 
 console.info(packageInfo.name + ' Running Single-Spa Application: Quasar')
 
-
-
-
-
-
-
 const publicPath = `/`
 
-
-async function start ({ app, router }, bootFiles) {
-
-
+async function start ({
+  app,
+  router
+}, bootFiles) {
 
   let hasRedirected = false
   const getRedirectUrl = url => {
-    try { return router.resolve(url).href }
-    catch (err) {}
+    try {
+      return router.resolve(url).href
+    } catch (err) {
+    }
 
     return Object(url) === url
       ? null
@@ -84,8 +79,7 @@ async function start ({ app, router }, bootFiles) {
         urlPath,
         publicPath
       })
-    }
-    catch (err) {
+    } catch (err) {
       if (err && err.url) {
         redirect(err.url)
         return
@@ -105,7 +99,6 @@ async function start ({ app, router }, bootFiles) {
   // app.mount('#q-app')
 
 }
-
 
 // @mimas: grab the router instance during quasar initiation
 let router
@@ -130,7 +123,6 @@ createQuasarApp(createApp, quasarUserOptions)
       start(app, boot)
     })
   })
-
 
 // @mimas: single-spa-vue
 const vueLifecycles = singleSpaVue({
@@ -158,3 +150,4 @@ export const {
 
 // @mimas: single-spa application public interface
 // share with other apps. Communications between apps happen here.
+export { default as useStoreMain } from 'src/store'

@@ -5,6 +5,9 @@ import { i18n } from 'boot/i18n'
 import { navigateToUrl } from 'single-spa'
 import { useQuasar } from 'quasar'
 
+// @ts-expect-error
+import { i18nServer } from '@cnic/server'
+
 // const props = defineProps({
 //   foo: {
 //     type: String,
@@ -40,16 +43,18 @@ const localeOptions = [
 ]
 
 // 根据localeModel改变Quasar Language Pack
-watch(localeModel, val => {
+watch(localeModel, value => {
   // 因本地i18n简化为zh和en，此处应补全为'zh-CN'和'en-US'共quasar寻址使用
-  const locale = val.includes('zh') ? 'zh-CN' : 'en-US'
+  const locale = value.includes('zh') ? 'zh-CN' : 'en-US'
   void import('quasar/lang/' + locale).then(lang => {
     // eslint-disable-next-line
     $q.lang.set(lang.default)
   })
 
   // 改变其他app的i18n locale
-  // i18nServer.global.locale = val
+  if (i18nServer.global && i18nServer.global.locale) {
+    i18nServer.global.locale = value
+  }
 })
 
 </script>
