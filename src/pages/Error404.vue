@@ -1,11 +1,8 @@
 <template>
-  <div class="fullscreen bg-blue text-white text-center q-pa-md flex flex-center">
+  <div class="bg-blue text-white text-center q-pa-md flex flex-center">
     <div>
-
-      @cnic/main
-
       <div style="font-size: 30vh">
-        404
+        @cnic/main 404
       </div>
 
       <div class="text-h2" style="opacity:.4">

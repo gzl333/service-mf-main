@@ -1,8 +1,8 @@
 {
   "name": "@cnic/main",
   "version": "0.0.1",
-  "description": "Micro Frontend Main",
-  "productName": "Micro Frontend Main",
+  "description": "Main",
+  "productName": "Main",
   "author": "mimas",
   "private": true,
   "scripts": {
@@ -34,8 +34,7 @@
     "eslint-plugin-promise": "^5.1.0",
     "eslint-plugin-vue": "^7.0.0",
     "file-replace-loader": "^1.4.0",
-    "string-replace-loader": "^3.1.0",
-    "systemjs-webpack-interop": "^2.3.7"
+    "string-replace-loader": "^3.1.0"
   },
   "browserslist": [
     "last 10 Chrome versions",

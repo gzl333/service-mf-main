@@ -1,6 +1,6 @@
-# Micro Frontend Main (@cnic/main)
+# Main (@cnic/main)
 
-Micro Frontend Main
+Main
 
 ## Install the dependencies
 ```bash

@@ -1,13 +1,9 @@
 <script setup lang="ts">
 import { watch, computed } from 'vue'
 import useStore from 'src/store'
-import { useI18n } from 'vue-i18n'
+import { i18n } from 'boot/i18n'
 import { navigateToUrl } from 'single-spa'
 import { useQuasar } from 'quasar'
-
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-expect-error
-import { i18nServer } from '@cnic/server'
 
 // const props = defineProps({
 //   foo: {
@@ -19,15 +15,16 @@ import { i18nServer } from '@cnic/server'
 // const emits = defineEmits(['change', 'delete'])
 
 const store = useStore()
-const { locale } = useI18n({ useScope: 'global' })
 const $q = useQuasar()
+
+// code starts...
 
 // i18n
 // 保持localeModel与i18n模块同步
 const localeModel = computed({
-  get: () => locale.value,
+  get: () => i18n.global.locale,
   set: newVal => {
-    locale.value = newVal
+    i18n.global.locale = newVal
   }
 })
 
@@ -52,17 +49,16 @@ watch(localeModel, val => {
   })
 
   // 改变其他app的i18n locale
-  i18nServer.global.locale = val
+  // i18nServer.global.locale = val
 })
 
 </script>
 
 <template>
-
   <q-header bordered reveal>
     <q-toolbar>
       <q-toolbar-title>
-        中国科技云统一服务入口
+        统一服务入口
       </q-toolbar-title>
 
       <q-btn color="positive" @click="navigateToUrl('/')">/</q-btn>
@@ -97,8 +93,9 @@ watch(localeModel, val => {
 
     </q-toolbar>
   </q-header>
-
 </template>
 
 <style lang="scss" scoped>
+.MyHeader {
+}
 </style>

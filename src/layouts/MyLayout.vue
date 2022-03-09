@@ -1,9 +1,9 @@
 <script setup lang="ts">
 // import { ref, computed } from "vue"
 // import useStore from 'src/store'
-// import { useI18n } from 'vue-i18n'
+// import { i18n } from 'boot/i18n'
 
-import GlobalHeader from 'components/GlobalHeader.vue'
+import MyHeader from 'components/MyHeader.vue'
 
 // const props = defineProps({
 //   foo: {
@@ -15,7 +15,6 @@ import GlobalHeader from 'components/GlobalHeader.vue'
 // const emits = defineEmits(['change', 'delete'])
 
 // const store = useStore()
-// const { locale } = useI18n({ useScope: 'global' })
 
 // code starts...
 </script>
@@ -23,7 +22,7 @@ import GlobalHeader from 'components/GlobalHeader.vue'
 <template>
   <q-layout view="lHh Lpr lFf" style="min-height: 0px !important;">
 
-    <GlobalHeader/>
+    <MyHeader/>
 
     <q-page-container>
       <router-view/>
@@ -33,4 +32,6 @@ import GlobalHeader from 'components/GlobalHeader.vue'
 </template>
 
 <style lang="scss" scoped>
+.MyLayout {
+}
 </style>

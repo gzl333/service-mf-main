@@ -1,7 +1,7 @@
 <script setup lang="ts">
 // import { ref, computed } from "vue"
 // import useStore from 'src/store'
-// import { useI18n } from 'vue-i18n'
+// import { i18n } from 'boot/i18n'
 
 // const props = defineProps({
 //   foo: {
@@ -13,7 +13,6 @@
 // const emits = defineEmits(['change', 'delete'])
 
 // const store = useStore()
-// const { locale } = useI18n({ useScope: 'global' })
 
 // code starts...
 </script>

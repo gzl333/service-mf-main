@@ -1,7 +1,7 @@
 <script setup lang="ts">
 // import { ref, computed } from "vue"
-// import useStore from 'src/store'
-// import { useI18n } from 'vue-i18n'
+import useStore from 'src/store'
+// import { i18n } from 'boot/i18n'
 
 // const props = defineProps({
 //   foo: {
@@ -12,15 +12,17 @@
 // })
 // const emits = defineEmits(['change', 'delete'])
 
-// const store = useStore()
-// const { locale } = useI18n({ useScope: 'global' })
+const store = useStore()
 
 // code starts...
 </script>
 
 <template>
   <div class="HomePage">
-    登录前页面内容
+    登录前的展示页面
+    <div class="text-primary">{{ $t('翻译测试') }}</div>
+    <div>store:{{ store.counter }}</div>
+    <q-btn @click="store.increment">+1</q-btn>
   </div>
 </template>
 

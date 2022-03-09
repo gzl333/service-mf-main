@@ -1,5 +1,5 @@
 // en
 export default {
   忽略: 'Dismiss',
-  翻译测试: 'Test Translation'
+  翻译测试: 'Translation Test'
 }

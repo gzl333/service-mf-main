@@ -8,16 +8,7 @@
 
 /* eslint-env node */
 /* eslint-disable @typescript-eslint/no-var-requires */
-/* eslint-disable @typescript-eslint/no-unsafe-assignment */
-/* eslint-disable @typescript-eslint/no-unsafe-argument */
-/* eslint-disable @typescript-eslint/no-unsafe-call */
-/* eslint-disable @typescript-eslint/restrict-template-expressions */
-/* eslint-disable @typescript-eslint/no-unsafe-member-access */
-
 const { configure } = require('quasar/wrappers')
-const resolve = require('path').resolve
-const { name } = require('./package')
-const SystemJSPublicPathWebpackPlugin = require('systemjs-webpack-interop/SystemJSPublicPathWebpackPlugin')
 
 module.exports = configure(function (ctx) {
   return {
@@ -39,6 +30,7 @@ module.exports = configure(function (ctx) {
     // https://quasar.dev/quasar-cli/boot-files
     boot: [
       'pinia',
+      'i18n',
       'axios'
     ],
 
@@ -86,65 +78,6 @@ module.exports = configure(function (ctx) {
       // "chain" is a webpack-chain object https://github.com/neutrinojs/webpack-chain
       chainWebpack (/* chain */) {
         //
-      },
-      extendWebpack (cfg) {
-        cfg.output = {
-          // https://single-spa.js.org/docs/recommended-setup/#build-tools-webpack--rollup
-          libraryTarget: 'system',
-          chunkLoadingGlobal: `webpackJsonp_${name}`, // @mimas: not sure what this is
-          publicPath: `${name}`
-        }
-
-        // @mimas: dependencies that will be provided by root-config
-        cfg.externals = [
-          'single-spa',
-          'single-spa-vue',
-          'axios',
-          'core-js',
-          'quasar',
-
-          // '@quasar/extras',
-          // 'pinia',
-          // 'vue',
-          // 'vue-i18n',
-          // 'vue-router'
-
-          /^@cnic\/.+/ // @mimas: get exports from another micro frontend
-        ]
-
-        // @mimas: https://single-spa.js.org/docs/recommended-setup/#build-tools-webpack--rollup
-        cfg.optimization.splitChunks = false // potentially problematic
-        cfg.devtool = 'source-map' // for debugging
-        cfg.plugins.push(
-          new SystemJSPublicPathWebpackPlugin({ systemjsModuleName: name })
-        )
-        // @mimas: real meat for single-spa!
-        // replace /.quasar files with /.single-spa files during bundling!
-        cfg.module.rules.push({
-          test: /\.js$/,
-          loader: 'file-replace-loader',
-          options: {
-            condition: 'always',
-            replacement (resourcePath) {
-              // modified for single-spa
-              if (resourcePath.endsWith('app.js')) {
-                return resolve('.single-spa', 'modified-app.js')
-              }
-              if (resourcePath.endsWith('client-entry.js')) {
-                return resolve('.single-spa', 'modified-client-entry.js')
-              }
-
-              // originals for debugging
-              // if (resourcePath.endsWith('app.js')) {
-              //   return resolve('.single-spa', 'app.js')
-              // }
-              // if (resourcePath.endsWith('client-entry.js')) {
-              //   return resolve('.single-spa', 'client-entry.js')
-              // }
-            },
-            async: true
-          }
-        })
       }
     },
 
@@ -153,14 +86,8 @@ module.exports = configure(function (ctx) {
       server: {
         type: 'http'
       },
-      port: 9100,
-      open: false, // opens browser window automatically
-      // @mimas: allow cors for dev servers
-      headers: {
-        'Access-Control-Allow-Origin': '*',
-        'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, PATCH, OPTIONS',
-        'Access-Control-Allow-Headers': 'X-Requested-With, content-type, Authorization'
-      }
+      port: 8080,
+      open: true // opens browser window automatically
     },
 
     // https://quasar.dev/quasar-cli/quasar-conf-js#Property%3A-framework
@@ -220,9 +147,9 @@ module.exports = configure(function (ctx) {
       },
 
       manifest: {
-        name: 'Quasar App',
-        short_name: 'Quasar App',
-        description: 'A Quasar Framework app',
+        name: 'Main',
+        short_name: 'Main',
+        description: 'Main',
         display: 'standalone',
         orientation: 'portrait',
         background_color: '#ffffff',
