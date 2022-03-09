@@ -1,9 +1,7 @@
 <script setup lang="ts">
 // import { ref, computed } from "vue"
-// import useStore from 'src/store'
+import useStore from 'src/store'
 // import { i18n } from 'boot/i18n'
-
-import HomeHeader from 'components/HomeHeader.vue'
 
 // const props = defineProps({
 //   foo: {
@@ -14,24 +12,25 @@ import HomeHeader from 'components/HomeHeader.vue'
 // })
 // const emits = defineEmits(['change', 'delete'])
 
-// const store = useStore()
+const store = useStore()
 
 // code starts...
 </script>
 
 <template>
-  <q-layout view="lHh Lpr lFf" style="min-height: 0px !important;">
+  <q-header bordered reveal>
+    <q-toolbar>
+      <q-toolbar-title>
+        统一服务入口 登录前
+      </q-toolbar-title>
 
-    <HomeHeader/>
+      <q-btn  :ripple="false" color="primary" label="登 录" @click="store.askUrl('passport')"/>
 
-    <q-page-container>
-      <router-view/>
-    </q-page-container>
-
-  </q-layout>
+    </q-toolbar>
+  </q-header>
 </template>
 
 <style lang="scss" scoped>
-.HomeLayout {
+.HomeHeader {
 }
 </style>
