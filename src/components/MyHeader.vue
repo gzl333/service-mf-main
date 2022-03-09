@@ -72,7 +72,7 @@ watch(localeModel, val => {
 
       <div>{{ $appName }}</div>
 
-      <div class="text-amber">{{ $t('翻译测试') }}</div>
+      <div class="text-amber">{{ i18n.global.tc('翻译测试') }}</div>
 
       <div class="q-gutter-md row items-center no-wrap">
 
