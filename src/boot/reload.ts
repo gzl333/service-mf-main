@@ -4,10 +4,9 @@ import useStore from 'src/store'
 export default boot(async (/* { store } */) => {
   try {
     const store = useStore()
-    console.log(window.location.origin)
+    console.info('@cnic/main location: ', window.location.origin)
     await store.reloadToken()
-    console.log('after reload ')
   } catch (e) {
-    console.log('Boot login error:', e)
+    console.log('@cnic/main Boot Reload error:', e)
   }
 })

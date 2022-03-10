@@ -15,10 +15,10 @@
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 
 const { configure } = require('quasar/wrappers')
-const resolve = require('path').resolve
+const path = require('path')
+const resolve = path.resolve
 const { name } = require('./package')
 const SystemJSPublicPathWebpackPlugin = require('systemjs-webpack-interop/SystemJSPublicPathWebpackPlugin')
-// const path = require('path')
 
 module.exports = configure(function (ctx) {
   return {
@@ -43,7 +43,8 @@ module.exports = configure(function (ctx) {
     boot: [
       'pinia',
       'i18n',
-      'axios'
+      'axios',
+      'reload'
     ],
 
     // https://quasar.dev/quasar-cli/quasar-conf-js#Property%3A-css
@@ -151,17 +152,17 @@ module.exports = configure(function (ctx) {
           }
         })
 
-        // // @mimas: alias
-        // cfg.resolve.alias = {
-        //   ...cfg.resolve.alias, // This adds the existing alias
-        //   // Add your own alias like this
-        //   api: path.resolve(__dirname, './src/api'),
-        //   css: path.resolve(__dirname, './src/css'),
-        //   hooks: path.resolve(__dirname, './src/hooks'),
-        //   i18n: path.resolve(__dirname, './src/i18n'),
-        //   store: path.resolve(__dirname, './src/store'),
-        //   router: path.resolve(__dirname, './src/router')
-        // }
+        // @mimas: alias
+        cfg.resolve.alias = {
+          ...cfg.resolve.alias, // This adds the existing alias
+          // Add your own alias like this
+          api: path.resolve(__dirname, './src/api'),
+          css: path.resolve(__dirname, './src/css'),
+          hooks: path.resolve(__dirname, './src/hooks'),
+          i18n: path.resolve(__dirname, './src/i18n'),
+          store: path.resolve(__dirname, './src/store'),
+          router: path.resolve(__dirname, './src/router')
+        }
       }
     },
 

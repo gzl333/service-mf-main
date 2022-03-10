@@ -68,25 +68,51 @@ async function start ({
 
   const urlPath = window.location.href.replace(window.location.origin, '')
 
-  for (let i = 0; hasRedirected === false && i < bootFiles.length; i++) {
-    try {
-      await bootFiles[i]({
-        app,
-        router,
+  // @mimas: original
+  // for (let i = 0; hasRedirected === false && i < bootFiles.length; i++) {
+  //   try {
+  //     await bootFiles[i]({
+  //       app,
+  //       router,
+  //
+  //       ssrContext: null,
+  //       redirect,
+  //       urlPath,
+  //       publicPath
+  //     })
+  //   } catch (err) {
+  //     if (err && err.url) {
+  //       redirect(err.url)
+  //       return
+  //     }
+  //
+  //     console.error('[Quasar] boot error:', err)
+  //     return
+  //   }
+  // }
 
-        ssrContext: null,
-        redirect,
-        urlPath,
-        publicPath
-      })
-    } catch (err) {
-      if (err && err.url) {
-        redirect(err.url)
+  // @mimas: make each boot file is awaited during booting!
+  for await (let boot of bootFiles) {
+    if (hasRedirected === false) {
+      try {
+        await boot({
+          app,
+          router,
+
+          ssrContext: null,
+          redirect,
+          urlPath,
+          publicPath
+        })
+      } catch (err) {
+        if (err && err.url) {
+          redirect(err.url)
+          return
+        }
+
+        console.error('[Quasar] boot error:', err)
         return
       }
-
-      console.error('[Quasar] boot error:', err)
-      return
     }
   }
 
@@ -103,6 +129,7 @@ async function start ({
 // @mimas: grab the router instance during quasar initiation
 let router
 
+// @mimas: original
 // createQuasarApp(createApp, quasarUserOptions)
 //
 //   .then(app => {
@@ -127,9 +154,9 @@ let router
 //     })
 //   })
 
+// @mimas: await each step
 (async () => {
   const app = await createQuasarApp(createApp, quasarUserOptions)
-  router = app.router
   const bootFiles = await Promise.all([
     import(/* webpackMode: "eager" */ 'boot/pinia'),
     import(/* webpackMode: "eager" */ 'boot/i18n'),
@@ -138,6 +165,7 @@ let router
   ])
   const boot = bootFiles.map(entry => entry.default).filter(entry => typeof entry === 'function')
   start(app, boot)
+  router = app.router
 })()
 
 // @mimas: single-spa-vue

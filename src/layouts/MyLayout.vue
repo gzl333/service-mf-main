@@ -15,8 +15,9 @@ import MyHeader from 'components/MyHeader.vue'
 // const emits = defineEmits(['change', 'delete'])
 
 const store = useStore()
-// code starts...
-console.info('@cnic/main', store.$state)
+console.log('@cnic/main store:', store.$state)
+// the root layout of @cnic/main, load @cnic/main's  store here
+
 </script>
 
 <template>

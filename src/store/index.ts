@@ -148,7 +148,7 @@ const useStore = defineStore('main', {
         if (tokenDecoded?.exp) {
           // const timeOut = decodedToken.exp * 1000 - Date.now() - 3595000 // 测试用，快速refresh
           const timeOut = tokenDecoded.exp * 1000 - Date.now() - 5000 // 到期时间前5秒钟更新token,到期时间小于5秒时立即尝试更新token
-          console.log('retain timeout', timeOut)
+          console.log('@cnic/main retain timeout: ', timeOut)
           setTimeout(() => {
             // https://stackoverflow.com/questions/63488141/promise-returned-in-function-argument-where-a-void-return-was-expected/63488201
             void (async () => {

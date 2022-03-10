@@ -3,6 +3,9 @@
 // import useStore from 'src/store'
 // import { i18n } from 'boot/i18n'
 
+// const store = useStore()
+// const tc = i18n.global.tc
+
 // const props = defineProps({
 //   foo: {
 //     type: String,
@@ -12,9 +15,7 @@
 // })
 // const emits = defineEmits(['change', 'delete'])
 
-// const store = useStore()
-
-// code starts...
+// your code starts...
 </script>
 
 <template>

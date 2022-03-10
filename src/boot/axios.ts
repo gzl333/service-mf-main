@@ -29,7 +29,6 @@ const axiosLogin = axios.create({
 
 /* 原生axios的拦截器 */
 axios.interceptors.request.use(config => {
-  // console.log('REQ-Fulfilled')
   return config
 }, (error: AxiosError) => {
   console.log('axios-REQ-Rejected')
@@ -38,7 +37,6 @@ axios.interceptors.request.use(config => {
   throw error // throw error就无法把错误传递给发送请求处
 })
 axios.interceptors.response.use(config => {
-  // console.log('RESP-Fulfilled')
   return config
 }, (error: AxiosError) => {
   console.log('axios-RESP-Rejected')
@@ -50,19 +48,17 @@ axios.interceptors.response.use(config => {
 
 /* axiosLogin的拦截器 */
 axiosLogin.interceptors.request.use(config => {
-  // console.log('REQ-Fulfilled')
   return config
 }, (error: AxiosError) => {
-  console.log('apiLogin-REQ-Rejected')
+  console.log('axiosLogin-REQ-Rejected')
   // errorNotifier(error)
   // return error
   throw error // throw error就无法把错误传递给发送请求处
 })
 axiosLogin.interceptors.response.use(config => {
-  // console.log('RESP-Fulfilled')
   return config
 }, (error: AxiosError) => {
-  console.log('apiLogin-RESP-Rejected')
+  console.log('axiosLogin-RESP-Rejected')
   // errorNotifier(error)
   // 响应里的error信息在error.response.data里面，被包成了axios error对象
   // return error
