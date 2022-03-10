@@ -102,27 +102,43 @@ async function start ({
 
 // @mimas: grab the router instance during quasar initiation
 let router
-createQuasarApp(createApp, quasarUserOptions)
 
-  .then(app => {
+// createQuasarApp(createApp, quasarUserOptions)
+//
+//   .then(app => {
+//
+//     router = app.router
+//
+//     return Promise.all([
+//       import(/* webpackMode: "eager" */ 'boot/pinia'),
+//
+//       import(/* webpackMode: "eager" */ 'boot/i18n'),
+//
+//       import(/* webpackMode: "eager" */ 'boot/axios'),
+//
+//       import(/* webpackMode: "eager" */ 'boot/reload'),
+//
+//     ]).then(bootFiles => {
+//       const boot = bootFiles
+//         .map(entry => entry.default)
+//         .filter(entry => typeof entry === 'function')
+//
+//       start(app, boot)
+//     })
+//   })
 
-    router = app.router
-
-    return Promise.all([
-      import(/* webpackMode: "eager" */ 'boot/pinia'),
-
-      import(/* webpackMode: "eager" */ 'boot/i18n'),
-
-      import(/* webpackMode: "eager" */ 'boot/axios'),
-
-    ]).then(bootFiles => {
-      const boot = bootFiles
-        .map(entry => entry.default)
-        .filter(entry => typeof entry === 'function')
-
-      start(app, boot)
-    })
-  })
+(async () => {
+  const app = await createQuasarApp(createApp, quasarUserOptions)
+  router = app.router
+  const bootFiles = await Promise.all([
+    import(/* webpackMode: "eager" */ 'boot/pinia'),
+    import(/* webpackMode: "eager" */ 'boot/i18n'),
+    import(/* webpackMode: "eager" */ 'boot/axios'),
+    import(/* webpackMode: "eager" */ 'boot/reload'),
+  ])
+  const boot = bootFiles.map(entry => entry.default).filter(entry => typeof entry === 'function')
+  start(app, boot)
+})()
 
 // @mimas: single-spa-vue
 const vueLifecycles = singleSpaVue({

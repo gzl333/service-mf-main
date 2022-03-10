@@ -1,6 +1,6 @@
 <script setup lang="ts">
 // import { ref, computed } from "vue"
-// import useStore from 'src/store'
+import useStore from 'src/store'
 // import { i18n } from 'boot/i18n'
 
 import MyHeader from 'components/MyHeader.vue'
@@ -14,9 +14,9 @@ import MyHeader from 'components/MyHeader.vue'
 // })
 // const emits = defineEmits(['change', 'delete'])
 
-// const store = useStore()
-
+const store = useStore()
 // code starts...
+console.info('@cnic/main', store.$state)
 </script>
 
 <template>

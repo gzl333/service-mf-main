@@ -80,7 +80,6 @@ watch(localeModel, value => {
       <div class="text-amber">{{ i18n.global.tc('翻译测试') }}</div>
 
       <div class="q-gutter-md row items-center no-wrap">
-
         <q-select
           v-model="localeModel"
           :options="localeOptions"
@@ -95,6 +94,8 @@ watch(localeModel, value => {
           </template>
         </q-select>
       </div>
+
+      <q-btn @click="store.userLogout">登出</q-btn>
 
     </q-toolbar>
   </q-header>

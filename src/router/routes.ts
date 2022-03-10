@@ -18,7 +18,7 @@ const routes: RouteRecordRaw[] = [
     path: '/my',
     component: () => import('layouts/MyLayout.vue'),
     meta: {
-      // requireLogin: true
+      requireLogin: true
     },
     children: [
       {
@@ -31,7 +31,7 @@ const routes: RouteRecordRaw[] = [
     path: '/:catchAll(.*)*',
     component: () => import('layouts/MyLayout.vue'),
     meta: {
-      // requireLogin: true
+      requireLogin: true
     }
   }
 ]
