@@ -38,7 +38,7 @@ export default route(function (/* { store, ssrContext } */) {
   })
 
   Router.beforeEach(async (to, from, next) => {
-    console.log('@cnic/main fullPath: ', to.fullPath)
+    console.log('@cnic/main ', 'from:', from.fullPath, ' to:', to.fullPath)
     const store = useStore()
     const isLogin = store.items.isLogin
 

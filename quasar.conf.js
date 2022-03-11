@@ -15,8 +15,7 @@
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 
 const { configure } = require('quasar/wrappers')
-const path = require('path')
-const resolve = path.resolve
+const resolve = require('path').resolve
 const { name } = require('./package')
 const SystemJSPublicPathWebpackPlugin = require('systemjs-webpack-interop/SystemJSPublicPathWebpackPlugin')
 
@@ -55,11 +54,11 @@ module.exports = configure(function (ctx) {
     // https://github.com/quasarframework/quasar/tree/dev/extras
     extras: [
       // 'ionicons-v4',
-      // 'mdi-v5',
-      // 'fontawesome-v5',
+      'mdi-v5',
+      'fontawesome-v5',
       // 'eva-icons',
       // 'themify',
-      // 'line-awesome',
+      'line-awesome',
       // 'roboto-font-latin-ext', // this or either 'roboto-font', NEVER both!
 
       'roboto-font', // optional, you are not bound to it
@@ -134,10 +133,10 @@ module.exports = configure(function (ctx) {
             replacement (resourcePath) {
               // modified for single-spa
               if (resourcePath.endsWith('app.js')) {
-                return resolve('.singleSpa', 'singleSpa-app.js')
+                return resolve(__dirname, '.singleSpa', 'singleSpa-app.js')
               }
               if (resourcePath.endsWith('client-entry.js')) {
-                return resolve('.singleSpa', 'singleSpa-client-entry.js')
+                return resolve(__dirname, '.singleSpa', 'singleSpa-client-entry.js')
               }
 
               // originals for debugging
@@ -156,12 +155,12 @@ module.exports = configure(function (ctx) {
         cfg.resolve.alias = {
           ...cfg.resolve.alias, // This adds the existing alias
           // Add your own alias like this
-          api: path.resolve(__dirname, './src/api'),
-          css: path.resolve(__dirname, './src/css'),
-          hooks: path.resolve(__dirname, './src/hooks'),
-          i18n: path.resolve(__dirname, './src/i18n'),
-          store: path.resolve(__dirname, './src/store'),
-          router: path.resolve(__dirname, './src/router')
+          api: resolve(__dirname, './src/api'),
+          css: resolve(__dirname, './src/css'),
+          hooks: resolve(__dirname, './src/hooks'),
+          i18n: resolve(__dirname, './src/i18n'),
+          store: resolve(__dirname, './src/store'),
+          router: resolve(__dirname, './src/router')
         }
       }
     },
@@ -195,8 +194,15 @@ module.exports = configure(function (ctx) {
       // components: [],
       // directives: [],
 
+      // Quasar language pack
+      lang: 'zh-CN', // en-US'
+
       // Quasar plugins
-      plugins: []
+      plugins: [
+        'Loading',
+        'Notify',
+        'Dialog'
+      ]
     },
 
     // animations: 'all', // --- includes all animations

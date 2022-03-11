@@ -20,7 +20,7 @@ import HomeHeader from 'components/HomeHeader.vue'
 </script>
 
 <template>
-  <q-layout view="lHh Lpr lFf" style="min-height: 0px !important;">
+  <q-layout view="lHh Lpr lFf">
 
     <HomeHeader/>
 
