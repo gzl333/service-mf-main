@@ -69,52 +69,52 @@ async function start ({
   const urlPath = window.location.href.replace(window.location.origin, '')
 
   // @mimas: original
-  // for (let i = 0; hasRedirected === false && i < bootFiles.length; i++) {
-  //   try {
-  //     await bootFiles[i]({
-  //       app,
-  //       router,
-  //
-  //       ssrContext: null,
-  //       redirect,
-  //       urlPath,
-  //       publicPath
-  //     })
-  //   } catch (err) {
-  //     if (err && err.url) {
-  //       redirect(err.url)
-  //       return
-  //     }
-  //
-  //     console.error('[Quasar] boot error:', err)
-  //     return
-  //   }
-  // }
+  for (let i = 0; hasRedirected === false && i < bootFiles.length; i++) {
+    try {
+      await bootFiles[i]({
+        app,
+        router,
 
-  // @mimas: make each boot file is awaited during booting!
-  for await (let boot of bootFiles) {
-    if (hasRedirected === false) {
-      try {
-        await boot({
-          app,
-          router,
-
-          ssrContext: null,
-          redirect,
-          urlPath,
-          publicPath
-        })
-      } catch (err) {
-        if (err && err.url) {
-          redirect(err.url)
-          return
-        }
-
-        console.error('[Quasar] boot error:', err)
+        ssrContext: null,
+        redirect,
+        urlPath,
+        publicPath
+      })
+    } catch (err) {
+      if (err && err.url) {
+        redirect(err.url)
         return
       }
+
+      console.error('[Quasar] boot error:', err)
+      return
     }
   }
+
+  // @mimas: make each boot file is awaited during booting!
+  // for await (let boot of bootFiles) {
+  //   if (hasRedirected === false) {
+  //     try {
+  //       await boot({
+  //         app,
+  //         router,
+  //
+  //         ssrContext: null,
+  //         redirect,
+  //         urlPath,
+  //         publicPath
+  //       })
+  //     } catch (err) {
+  //       if (err && err.url) {
+  //         redirect(err.url)
+  //         return
+  //       }
+  //
+  //       console.error('[Quasar] boot error:', err)
+  //       return
+  //     }
+  //   }
+  // }
 
   if (hasRedirected === true) {
     return
@@ -130,43 +130,43 @@ async function start ({
 let router
 
 // @mimas: original
-// createQuasarApp(createApp, quasarUserOptions)
-//
-//   .then(app => {
-//
-//     router = app.router
-//
-//     return Promise.all([
-//       import(/* webpackMode: "eager" */ 'boot/pinia'),
-//
-//       import(/* webpackMode: "eager" */ 'boot/i18n'),
-//
-//       import(/* webpackMode: "eager" */ 'boot/axios'),
-//
-//       import(/* webpackMode: "eager" */ 'boot/reload'),
-//
-//     ]).then(bootFiles => {
-//       const boot = bootFiles
-//         .map(entry => entry.default)
-//         .filter(entry => typeof entry === 'function')
-//
-//       start(app, boot)
-//     })
-//   })
+createQuasarApp(createApp, quasarUserOptions)
+
+  .then(app => {
+
+    router = app.router
+
+    return Promise.all([
+      import(/* webpackMode: "eager" */ 'boot/pinia'),
+
+      import(/* webpackMode: "eager" */ 'boot/i18n'),
+
+      import(/* webpackMode: "eager" */ 'boot/axios'),
+
+      import(/* webpackMode: "eager" */ 'boot/reload'),
+
+    ]).then(bootFiles => {
+      const boot = bootFiles
+        .map(entry => entry.default)
+        .filter(entry => typeof entry === 'function')
+
+      start(app, boot)
+    })
+  })
 
 // @mimas: await each step
-(async () => {
-  const app = await createQuasarApp(createApp, quasarUserOptions)
-  const bootFiles = await Promise.all([
-    import(/* webpackMode: "eager" */ 'boot/pinia'),
-    import(/* webpackMode: "eager" */ 'boot/i18n'),
-    import(/* webpackMode: "eager" */ 'boot/axios'),
-    import(/* webpackMode: "eager" */ 'boot/reload'),
-  ])
-  const boot = bootFiles.map(entry => entry.default).filter(entry => typeof entry === 'function')
-  start(app, boot)
-  router = app.router
-})()
+// (async () => {
+//   const app = await createQuasarApp(createApp, quasarUserOptions)
+//   const bootFiles = await Promise.all([
+//     import(/* webpackMode: "eager" */ 'boot/pinia'),
+//     import(/* webpackMode: "eager" */ 'boot/i18n'),
+//     import(/* webpackMode: "eager" */ 'boot/axios'),
+//     import(/* webpackMode: "eager" */ 'boot/reload'),
+//   ])
+//   const boot = bootFiles.map(entry => entry.default).filter(entry => typeof entry === 'function')
+//   start(app, boot)
+//   router = app.router
+// })()
 
 // @mimas: single-spa-vue
 const vueLifecycles = singleSpaVue({

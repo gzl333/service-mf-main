@@ -5,9 +5,6 @@ import { i18n } from 'boot/i18n'
 import { navigateToUrl } from 'single-spa'
 import { useQuasar } from 'quasar'
 
-// @ts-expect-error
-import { i18nServer } from '@cnic/server'
-
 // const props = defineProps({
 //   foo: {
 //     type: String,
@@ -51,10 +48,8 @@ watch(localeModel, value => {
     $q.lang.set(lang.default)
   })
 
-  // 改变其他app的i18n locale
-  if (i18nServer.global && i18nServer.global.locale) {
-    i18nServer.global.locale = value
-  }
+  // dispatch global i18n event. Listened at micro-app's boot/i18n
+  window.dispatchEvent(new CustomEvent('i18n', { detail: i18n.global.locale }))
 })
 
 </script>

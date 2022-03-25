@@ -67,6 +67,14 @@ const useStore = defineStore('main', {
       localStorage.setItem('usp_refresh', this.items.tokenRefresh)
       localStorage.setItem('usp_loginType', this.items.loginType)
 
+      // dispatch global token event. Listened at micro-app's boot/axios
+      window.dispatchEvent(new CustomEvent('token', {
+        detail: {
+          tokenAccess: this.items.tokenAccess,
+          tokenDecoded: this.items.tokenDecoded
+        }
+      }))
+
       // retain token
       this.retainToken()
     },
@@ -130,6 +138,14 @@ const useStore = defineStore('main', {
         localStorage.setItem('usp_refresh', this.items.tokenRefresh)
         localStorage.setItem('usp_loginType', this.items.loginType)
 
+        // dispatch global token event. Listened at micro-app's boot/axios
+        window.dispatchEvent(new CustomEvent('token', {
+          detail: {
+            tokenAccess: this.items.tokenAccess,
+            tokenDecoded: this.items.tokenDecoded
+          }
+        }))
+
         const respPostCheckToken = loginType === 'passport' ? await api.login.passport.postCheckToken({ query: { jwtToken: tokenAccess } }) : await api.login.aai.postCheckToken({ query: { jwtToken: tokenAccess } })
         if (respPostCheckToken.data.code === 200 && respPostCheckToken.data.data === true) {
           this.retainToken()
@@ -167,10 +183,20 @@ const useStore = defineStore('main', {
                     this.items.tokenAccess = respPostRefreshToken?.data.data.accessToken as string
                     this.items.tokenRefresh = respPostRefreshToken?.data.data.refreshToken as string
                     this.items.tokenDecoded = jwtDecode(respPostRefreshToken?.data.data.accessToken as string)
+
                     // localStorage
                     localStorage.setItem('usp_access', this.items.tokenAccess)
                     localStorage.setItem('usp_refresh', this.items.tokenRefresh)
                     localStorage.setItem('usp_loginType', this.items.loginType)
+
+                    // dispatch global token event. Listened at micro-app's boot/axios
+                    window.dispatchEvent(new CustomEvent('token', {
+                      detail: {
+                        tokenAccess: this.items.tokenAccess,
+                        tokenDecoded: this.items.tokenDecoded
+                      }
+                    }))
+
                     // retain again
                     this.retainToken()
                   } else {

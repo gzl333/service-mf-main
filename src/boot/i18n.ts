@@ -14,6 +14,7 @@ export const i18n = createI18n({
   messages
 })
 
+// 同步代码在boot外，异步代码可能需要卸载boot里，但不保证成功
 export default boot(({ app }) => {
   app.use(i18n)
 })
