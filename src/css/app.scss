@@ -1,5 +1,15 @@
 // app global css in SCSS form
 
+// general page fixed width
+.content-fixed-width {
+  padding: 0 30px;
+  width: 1290px;
+}
+
+.content-fixed-width-no-padding {
+  width: 1230px;
+}
+
 // 对话栏自定义样式
 .dialog-primary {
   border-top: 5px solid $primary;
@@ -27,7 +37,6 @@
   border-left: 5px solid $primary;
   border-radius: 0;
   background-color: white;
-  //color: $primary !important; // notify函数的样式比此处优先级高，如果要在此处设置颜色，则要用important覆盖。考虑到通知中可能还要写style，不在此处设置。
   width: 600px;
 }
 

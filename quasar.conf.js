@@ -106,19 +106,17 @@ module.exports = configure(function (ctx) {
 
         // @mimas: dependencies that will be provided by root-config
         cfg.externals = [
+          /^@cnic\/.+/, // @mimas: treat other micro frontends as in-browser modules
           'single-spa',
           'single-spa-vue',
           'axios',
-          'core-js',
-
+          'core-js'
           // 'quasar',
           // '@quasar/extras',
           // 'pinia',
           // 'vue',
           // 'vue-i18n',
           // 'vue-router'
-
-          /^@cnic\/.+/ // @mimas: treat other micro frontends as in-browser modules
         ]
 
         // @mimas: https://single-spa.js.org/docs/recommended-setup/#build-tools-webpack--rollup
