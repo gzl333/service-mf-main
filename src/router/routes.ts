@@ -17,6 +17,7 @@ const routes: RouteRecordRaw[] = [
   {
     path: '/my',
     component: () => import('layouts/MyLayout.vue'),
+    props: true, // 接收url中的参数
     meta: {
       requireLogin: true
     },

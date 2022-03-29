@@ -71,7 +71,7 @@ export default route(function (/* { store, ssrContext } */) {
     // if (to.meta.title) {
     //   document.title = to.meta.title as string
     // }
-    document.title = '中国科技云统一服务入口'
+    document.title = '中国科技云一体化云服务平台'
 
     // 不符合上述所有条件的catch-all跳转，否则会卡在空白页
     next()
