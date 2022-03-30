@@ -56,18 +56,24 @@ watch(localeModel, value => {
 
   // dispatch global i18n event. Listened at micro-app's boot/i18n
   window.dispatchEvent(new CustomEvent('i18n', { detail: i18n.global.locale }))
+  // set global i18n record on window object
+  window.i18n = i18n.global.locale
 })
 </script>
 
 <template>
   <q-layout view="lHh Lpr lFf" style="min-height: 0 !important;">
 
-    <q-header bordered class="bg-white">
+    <q-header elevated class="bg-grey-3">
 
       <q-toolbar style="height: 60px">
 
         <q-toolbar-title shrink>
-          <div class="text-black">一体化云服务平台</div>
+          <div class="row items-center no-wrap">
+            <img src="../assets/cstcloud_logo.png" style="height: 40px;"/>
+            <div class="text-grey-7 text-weight-bold">{{ tc('一体化云服务平台') }}</div>
+          </div>
+
         </q-toolbar-title>
 
         <q-space/>
@@ -79,8 +85,7 @@ watch(localeModel, value => {
           no-caps
           class="text-black"
           active-color="primary"
-          style="height: 60px"
-          :breakpoint="-1"
+          style="height: 60px;"
         >
           <q-tab class="q-px-sm"
                  name="my"

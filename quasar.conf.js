@@ -100,7 +100,7 @@ module.exports = configure(function (ctx) {
           // https://single-spa.js.org/docs/recommended-setup/#build-tools-webpack--rollup
           libraryTarget: 'system',
           chunkLoadingGlobal: `webpackJsonp_${name}`, // @mimas: not sure what this is
-          publicPath: `${name}`,
+          publicPath: `${name}`, // @mimas: publicPath needs an initial value, but will be changed on the fly by 'systemjs-webpack-interop'
           path: resolve(__dirname, 'dist/mf') // @mimas: where to put all files but index.html (which goes with the distDir setting)
         }
 

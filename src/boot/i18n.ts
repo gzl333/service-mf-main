@@ -3,6 +3,13 @@ import { createI18n } from 'vue-i18n'
 import { Quasar } from 'quasar'
 import messages from 'src/i18n'
 
+// extend the global Window type with 'i18n'
+declare global {
+  interface Window {
+    i18n: string;
+  }
+}
+
 // 获取浏览器locale, 因只提供英文和简体中文两种locale，只截取locale code的前两位
 const browserLocale = Quasar.lang.getLocale()?.slice(0, 2)
 
@@ -13,6 +20,9 @@ export const i18n = createI18n({
   globalInjection: true,
   messages
 })
+
+// set global i18n record on window object. This for all applications to read during their init.
+window.i18n = i18n.global.locale
 
 // 同步代码在boot外，异步代码可能需要卸载boot里，但不保证成功
 export default boot(({ app }) => {

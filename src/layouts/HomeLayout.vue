@@ -34,8 +34,9 @@ const dynamicBackground = computed(() => {
               style="min-width: 500px;">
       <div class="row justify-between items-center no-wrap content-fixed-width">
 
-        <div class="col-auto text-h5">
-          一体化云服务平台
+        <div class="col-auto row items-center">
+          <img src="../assets/cstcloud_logo.png" style="height: 50px;"/>
+          <div class="text-grey-3 text-h5">一体化云服务平台</div>
         </div>
 
         <div class="col-auto q-gutter-sm">

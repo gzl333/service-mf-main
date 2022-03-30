@@ -1,5 +1,6 @@
 // en
 export default {
+  一体化云服务平台: 'Universal Service Portal',
   首页: 'Home',
   云主机: 'Cloud Server',
   对象存储: 'Object Storage',
