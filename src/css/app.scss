@@ -1,6 +1,3 @@
-// app global css in SCSS form
-
-// general page fixed width
 .content-fixed-width {
   padding: 0 30px;
   width: 1290px;
@@ -10,46 +7,92 @@
   width: 1230px;
 }
 
-// 对话栏自定义样式
+.bg-c-blue1 {
+  background-color: #142467;
+}
+
+.bg-c-blue2 {
+  background-color: #007BFC;
+}
+
+.bg-c-blue3 {
+  background-color: #51B9FF;
+}
+
+.bg-c-blue4 {
+  background-color: #245099;
+}
+
+.bg-c-blue5 {
+  background-color: #AEB6D5;
+}
+
+.bg-c-blue6 {
+  background-color: #010C38;
+}
+
+.text-c-blue1 {
+  color: #142467;
+}
+
+.text-c-blue2 {
+  color: #007BFC;
+}
+
+.text-c-blue3 {
+  color: #51B9FF;
+}
+
+.text-c-blue4 {
+  color: #245099;
+}
+
+.text-c-blue5 {
+  color: #AEB6D5;
+}
+
+.text-c-blue5 {
+  color: #010C38;
+}
+
 .dialog-primary {
-  border-top: 5px solid $primary;
+  border-top: 5px solid #1976D2;
   border-radius: 0 !important;
-  background-color: white;
+  background-color: white !important;
   width: 600px;
 }
 
 .dialog-positive {
-  border-top: 5px solid $positive;
+  border-top: 5px solid #21BA45;
   border-radius: 0 !important;
-  background-color: white;
+  background-color: white !important;
   width: 600px;
 }
 
 .dialog-negative {
-  border-top: 5px solid $negative;
+  border-top: 5px solid #C10015;
   border-radius: 0 !important;
-  background-color: white;
+  background-color: white !important;
   width: 600px;
 }
 
-// 通知栏自定义样式
 .notification-primary {
-  border-left: 5px solid $primary;
-  border-radius: 0;
-  background-color: white;
+  border-left: 5px solid #1976D2;
+  border-radius: 0 !important;
+  background-color: white !important;
   width: 600px;
 }
 
 .notification-positive {
-  border-left: 5px solid $positive;
-  border-radius: 0;
-  background-color: white;
+  border-left: 5px solid #21BA45;
+  border-radius: 0 !important;
+  background-color: white !important;
   width: 600px;
 }
 
 .notification-negative {
-  border-left: 5px solid $negative;
-  border-radius: 0;
-  background-color: white;
+  border-left: 5px solid #C10015;
+  border-radius: 0 !important;
+  background-color: white !important;
   width: 600px;
 }

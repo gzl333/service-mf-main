@@ -23,7 +23,13 @@ console.log('@cnic/main store:', store.$state)
 const quasar = useQuasar()
 const route = useRoute()
 const paths = route.path.split('/')
-const tab = ref(paths[2] || 'my') // keep selection when reloading
+const currentApplication = ref(paths[2] || 'my') // keep selection when reloading
+
+const gotoManual = () => {
+  // 中文访问/manual 英文访问/manual/en
+  const url = computed(() => location.origin + (i18n.global.locale === 'zh' ? '/manual' : '/manual/en'))
+  window.open(url.value)
+}
 
 // i18n
 // 保持localeModel与i18n模块同步
@@ -62,32 +68,35 @@ watch(localeModel, value => {
 </script>
 
 <template>
-  <q-layout view="lHh Lpr lFf" style="min-height: 0 !important;">
+  <q-layout view="lHh Lpr lFf" style="min-height: 0 !important; min-width: 1350px !important;">
 
-    <q-header elevated class="bg-grey-3">
+    <q-header elevated class="bg-grey-3" style="min-width: 1350px;">
 
       <q-toolbar style="height: 60px">
 
         <q-toolbar-title shrink>
           <div class="row items-center no-wrap">
             <img src="../assets/cstcloud_logo.png" style="height: 40px;"/>
-            <div class="text-grey-7 text-weight-bold">{{ tc('一体化云服务平台') }}</div>
+            <div class="text-grey-8 text-weight-bold">{{ tc('一体化云服务平台') }}</div>
           </div>
 
         </q-toolbar-title>
 
         <q-space/>
 
+        <!--        可以改用btn-toggle-->
         <q-tabs
-          v-model="tab"
+          id="header-tabs"
+          class="text-black q-pr-xl"
+          style="height: 60px;"
+          v-model="currentApplication"
           dense
           shrink
           no-caps
-          class="text-black"
           active-color="primary"
-          style="height: 60px;"
         >
           <q-tab class="q-px-sm"
+                 style="min-width: 30px !important;"
                  name="my"
                  :ripple="false"
                  @click="navigateToUrl('/my')">
@@ -119,7 +128,7 @@ watch(localeModel, value => {
           </q-tab>
         </q-tabs>
 
-        <div class="row items-center q-gutter-x-lg">
+        <div class="row items-center q-gutter-x-none">
 
           <div class="q-gutter-md row items-center no-wrap">
             <q-select
@@ -137,16 +146,54 @@ watch(localeModel, value => {
             </q-select>
           </div>
 
-          <q-btn class="text-black" @click="store.userLogout">登出</q-btn>
+          <q-btn class="text-weight-regular" color="grey-8" :ripple="false" flat dense no-caps no-wrap
+                 icon="mdi-book-open-outline" @click="gotoManual">
+            {{ tc('使用手册') }}
+          </q-btn>
+
+          <q-btn-dropdown :ripple="false" flat class="q-py-none q-px-none text-weight-regular" color="grey-8" no-caps>
+
+            <template v-slot:label>
+              <q-icon name="las la-user-circle"/>
+              {{ store.items.tokenDecoded.email }}
+            </template>
+
+            <div class="row justify-center no-wrap q-pa-md non-selectable"
+                 style="  min-width: 200px;background-color: #245099;">
+              <div class="column items-center">
+                <q-icon class="q-pt-lg q-pb-none q-ma-none" name="mdi-account" color="white" size="90px"/>
+
+                <div class="text-subtitle1  text-white no-wrap">{{ store.items.tokenDecoded.name }}</div>
+                <div class="text-subtitle1 text-white no-wrap">{{ store.items.tokenDecoded.orgName }}</div>
+
+                <div class="q-pt-sm text-caption text-grey-5">
+                  {{ store.items.loginType === 'aai' ? tc('使用科技云AAI联盟登录') : tc('使用科技云通行证登录') }}
+                </div>
+              </div>
+            </div>
+
+            <q-list class="non-selectable" style="text-align: center">
+              <!--              <q-item clickable disable>-->
+              <!--                <q-item-section>账户设置</q-item-section>-->
+              <!--              </q-item>-->
+              <q-item clickable tag="a" href="https://passport.escience.cn/user/password.do?act=showChangePassword"
+                      target="_blank">
+                <q-item-section>修改密码</q-item-section>
+              </q-item>
+              <q-item clickable @click="store.userLogout" class="bg-grey-2">
+                <q-item-section>退出登录</q-item-section>
+              </q-item>
+            </q-list>
+
+          </q-btn-dropdown>
 
         </div>
 
       </q-toolbar>
-
     </q-header>
 
     <q-page-container>
-      <router-view/>
+      <router-view style="min-width: 1350px;"/>
     </q-page-container>
 
   </q-layout>
@@ -155,4 +202,11 @@ watch(localeModel, value => {
 <style lang="scss" scoped>
 .MyLayout {
 }
+
+#header-tabs {
+  .q-tab__content {
+    min-width: 44px !important;
+  }
+}
+
 </style>
