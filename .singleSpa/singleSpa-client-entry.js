@@ -11,12 +11,15 @@
  **/
 
 import { createApp } from 'vue'
-// @mimas: !all css files need to be included in root-config!
-import '@quasar/extras/roboto-font/roboto-font.css' // include a cdn version in root-config
-import '@quasar/extras/material-icons/material-icons.css' // include a cdn version in root-config
+// @mimas: !all css files MUST be included in root-config!
+import '@quasar/extras/mdi-v5/mdi-v5.css'
+import '@quasar/extras/fontawesome-v5/fontawesome-v5.css'
+import '@quasar/extras/line-awesome/line-awesome.css'
+import '@quasar/extras/roboto-font/roboto-font.css'
+import '@quasar/extras/material-icons/material-icons.css'
 // We load Quasar stylesheet file
-import 'quasar/dist/quasar.sass'  // include a cdn version in root-config
-import 'src/css/app.scss'  // contains customed css variables, need to include in root-config
+import 'quasar/dist/quasar.sass'  // MUST include a cdn version in root-config
+import 'src/css/app.scss'  // contains customized css variables, does not need to be included in root-config
 
 // @mimas: /.quasar files
 import createQuasarApp from './app.js'

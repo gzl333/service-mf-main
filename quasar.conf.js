@@ -101,7 +101,7 @@ module.exports = configure(function (ctx) {
           libraryTarget: 'system',
           chunkLoadingGlobal: `webpackJsonp_${name}`, // @mimas: not sure what this is
           publicPath: `${name}`, // @mimas: publicPath needs an initial value, but will be changed on the fly by 'systemjs-webpack-interop'
-          path: resolve(__dirname, 'dist/mf') // @mimas: where to put all files but index.html (which goes with the distDir setting)
+          path: resolve(__dirname, 'dist/main') // @mimas: where to put all files but index.html (which goes with the distDir setting)
         }
 
         // @mimas: dependencies that will be provided by root-config
@@ -111,7 +111,7 @@ module.exports = configure(function (ctx) {
           'single-spa-vue',
           'axios',
           'core-js'
-          // 'quasar',
+          // 'quasar'
           // '@quasar/extras',
           // 'pinia',
           // 'vue',
