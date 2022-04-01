@@ -69,6 +69,10 @@ module.exports = configure(function (ctx) {
     build: {
       vueRouterMode: 'history', // available values: 'hash', 'history'
       distDir: 'dist/main', // @mimas: change quasar build dir, quasar will clean this folder each time building
+      // @mimas: release time stamp, process.env.releaseTime
+      env: {
+        releaseTime: `${new Date()}`
+      },
 
       // transpile: false,
       // publicPath: '/',

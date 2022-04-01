@@ -13,7 +13,6 @@
 import { createApp } from 'vue'
 // @mimas: !all css files MUST be included in root-config!
 import '@quasar/extras/mdi-v5/mdi-v5.css'
-import '@quasar/extras/fontawesome-v5/fontawesome-v5.css'
 import '@quasar/extras/line-awesome/line-awesome.css'
 import '@quasar/extras/roboto-font/roboto-font.css'
 import '@quasar/extras/material-icons/material-icons.css'
