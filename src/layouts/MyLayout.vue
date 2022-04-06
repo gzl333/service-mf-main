@@ -70,7 +70,7 @@ watch(localeModel, value => {
 <template>
   <q-layout view="lHh Lpr lFf" style="min-height: 0 !important; min-width: 1350px !important;">
 
-    <q-header elevated class="bg-grey-3" style="min-width: 1350px;">
+    <q-header bordered class="bg-grey-2" style="min-width: 1350px;">
 
       <q-toolbar style="height: 60px">
 

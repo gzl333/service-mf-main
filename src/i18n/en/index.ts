@@ -5,5 +5,6 @@ export default {
   云主机: 'Cloud Server',
   对象存储: 'Object Storage',
   用量账单: 'Billing',
-  综合监控: 'Monitor'
+  综合监控: 'Monitor',
+  使用手册: 'User Manual'
 }
