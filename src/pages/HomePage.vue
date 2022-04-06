@@ -22,14 +22,14 @@
 
     <div class="part1 shapedivider" ref="part1">
       <div class="q-pa-lg">
-        <h3 class="text-white">服务简介1</h3>
+        <h3 class="text-white">服务简介</h3>
       </div>
 
     </div>
 
     <div class="part2" ref="part2">
       <div class="q-pa-lg">
-        <h3>服务简介2</h3>
+        <h3>服务简介</h3>
       </div>
 
     </div>

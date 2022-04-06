@@ -115,6 +115,12 @@ watch(localeModel, value => {
             {{ tc('对象存储') }}
           </q-tab>
           <q-tab class="q-px-sm"
+                 name="hpc"
+                 :ripple="false"
+                 @click="navigateToUrl('/my/hpc')">
+            {{ tc('高性能计算') }}
+          </q-tab>
+          <q-tab class="q-px-sm"
                  name="bill"
                  :ripple="false"
                  @click="navigateToUrl('/my/bill')">

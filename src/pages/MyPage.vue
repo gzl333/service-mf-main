@@ -25,13 +25,57 @@ const tc = i18n.global.tc
   <q-scroll-area style="height: 100vh">
     <div class="MyPage" style="height: 100vh">
       登录后的首页：全局统计信息，快捷方式
-      <div class="text-primary">{{ tc('翻译测试') }}</div>
 
-      <div class="q-pa-md q-gutter-sm">
-        <q-btn align="left" class="btn-fixed-width" color="primary" label="Align to left"/>
-        <q-btn align="right" class="btn-fixed-width" color="secondary" label="Align to right"/>
-        <q-btn align="between" class="btn-fixed-width" color="accent" label="Align between" icon="flight_takeoff"/>
-        <q-btn align="around" class="btn-fixed-width" color="brown-5" label="Align around" icon="lightbulb_outline"/>
+      <div class="q-pa-md row items-start q-gutter-lg">
+        <q-card class="my-card" style="width: 250px;">
+          <q-card-section class="bg-primary text-white">
+            <div class="text-h6">{{ tc('云主机') }}</div>
+            <div class="text-subtitle2">统计信息</div>
+          </q-card-section>
+
+          <q-separator/>
+
+          <q-card-actions align="right">
+            <q-btn flat>Action 1</q-btn>
+            <q-btn flat>Action 2</q-btn>
+          </q-card-actions>
+        </q-card>
+
+        <q-card class="my-card" style="width: 250px;">
+          <q-card-section class="bg-green text-white">
+            <div class="text-h6">{{ tc('对象存储') }}</div>
+            <div class="text-subtitle2">统计信息</div>
+          </q-card-section>
+
+          <q-card-actions align="around">
+            <q-btn flat>Action 1</q-btn>
+            <q-btn flat>Action 2</q-btn>
+          </q-card-actions>
+        </q-card>
+
+        <q-card class="my-card" style="width: 250px;">
+          <q-card-section class="bg-teal text-white">
+            <div class="text-h6">{{ tc('高性能计算') }}</div>
+            <div class="text-subtitle2">统计信息</div>
+          </q-card-section>
+
+          <q-card-actions vertical align="right">
+            <q-btn flat>Action 1</q-btn>
+            <q-btn flat>Action 2</q-btn>
+          </q-card-actions>
+        </q-card>
+
+        <q-card class="my-card" style="width: 250px;">
+          <q-card-section class="bg-grey-8 text-white">
+            <div class="text-h6">{{ tc('用量账单') }}</div>
+            <div class="text-subtitle2">统计信息</div>
+          </q-card-section>
+
+          <q-card-actions vertical align="center">
+            <q-btn flat>Action 1</q-btn>
+            <q-btn flat>Action 2</q-btn>
+          </q-card-actions>
+        </q-card>
       </div>
 
     </div>
