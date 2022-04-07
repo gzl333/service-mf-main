@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { watch, computed, ref } from 'vue'
-import useStore from 'src/store'
+import useStore from 'stores/main'
 import { useRoute } from 'vue-router'
 import { i18n } from 'boot/i18n'
 import { navigateToUrl } from 'single-spa'

@@ -1,11 +1,9 @@
 <script setup lang="ts">
 // import { ref, computed } from "vue"
-// import useStore from 'src/store'
-// import { i18n } from 'boot/i18n'
 // import { navigateToUrl } from 'single-spa'
-
-// const store = useStore()
-// const tc = i18n.global.tc
+// import useStore from 'src/store'
+// import { useRoute } from 'vue-router'
+// import { i18n } from 'boot/i18n'
 
 // const props = defineProps({
 //   foo: {
@@ -16,7 +14,10 @@
 // })
 // const emits = defineEmits(['change', 'delete'])
 
-// your code starts...
+// const store = useStore()
+// const route = userRoute()
+// const tc = i18n.global.tc
+
 </script>
 
 <template>

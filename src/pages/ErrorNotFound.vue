@@ -1,8 +1,8 @@
 <template>
-  <div class="bg-blue text-white text-center q-pa-md flex flex-center">
+  <div class="fullscreen bg-blue text-white text-center q-pa-md flex flex-center">
     <div>
       <div style="font-size: 30vh">
-        @cnic/main 404
+        404
       </div>
 
       <div class="text-h2" style="opacity:.4">
@@ -26,6 +26,6 @@
 import { defineComponent } from 'vue'
 
 export default defineComponent({
-  name: 'Error404'
+  name: 'ErrorNotFound'
 })
 </script>

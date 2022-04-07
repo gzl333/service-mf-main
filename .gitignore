@@ -1,6 +1,6 @@
 ### VSCode settings --> only keep in develop branch
 ## after git clone the project: enable .vscode at next line
-# .vscode
+.vscode
 
 ### WebStorm settings --> only keep in develop branch
 ## after git clone the project: enable .idea at next line

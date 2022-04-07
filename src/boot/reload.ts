@@ -1,5 +1,5 @@
 import { boot } from 'quasar/wrappers'
-import useStore from 'src/store'
+import useStore from 'stores/main'
 
 export default boot(async (/* { store } */) => {
   try {

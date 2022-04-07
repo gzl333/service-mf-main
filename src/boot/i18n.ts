@@ -1,7 +1,7 @@
 import { boot } from 'quasar/wrappers'
 import { createI18n } from 'vue-i18n'
 import { Quasar } from 'quasar'
-import messages from 'src/i18n'
+import messages from 'src/i18n/index'
 
 // extend the global Window type with 'i18n'
 declare global {
@@ -24,7 +24,7 @@ export const i18n = createI18n({
 // set global i18n record on window object. This for all applications to read during their init.
 window.i18n = i18n.global.locale
 
-// 同步代码在boot外，异步代码可能需要卸载boot里，但不保证成功
+// 同步代码在boot外，异步代码可能需要写在boot里，但不保证成功
 export default boot(({ app }) => {
   app.use(i18n)
 })

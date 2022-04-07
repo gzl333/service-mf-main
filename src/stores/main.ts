@@ -18,7 +18,6 @@ export interface DecodedToken {
 const useStore = defineStore('main', {
   state: () => {
     return {
-      counter: 0,
       items: {
         isLogin: false,
         loginType: '' as 'passport' | 'aai' | undefined,
@@ -30,12 +29,8 @@ const useStore = defineStore('main', {
     }
   },
   getters: {
-    getCounter: state => state.counter
   },
   actions: {
-    increment () {
-      this.counter++
-    },
     async askUrl (loginType: 'passport' | 'aai') {
       // 本函数只负责获取登录页面地址，并跳转。 code及token处理、/login路由跳转逻辑处理，均放在router.beforeEach中
       let respPostLoginUrl

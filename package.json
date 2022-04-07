@@ -1,8 +1,8 @@
 {
   "name": "@cnic/main",
   "version": "0.0.1",
-  "description": "Main",
-  "productName": "Main",
+  "description": "Micro Frontend Main",
+  "productName": "Micro Frontend Main",
   "author": "mimas",
   "private": true,
   "scripts": {
@@ -10,13 +10,14 @@
     "test": "echo \"No test specified\" && exit 0"
   },
   "dependencies": {
-    "@quasar/extras": "^1.13.5",
+    "@quasar/extras": "^1.0.0",
     "axios": "^0.21.1",
     "core-js": "^3.6.5",
     "jwt-decode": "^3.1.2",
+    "normalizr": "^3.6.2",
     "pinia": "^2.0.11",
     "qs": "^6.10.3",
-    "quasar": "^2.6.4",
+    "quasar": "^2.6.0",
     "single-spa": "^5.9.3",
     "single-spa-vue": "^2.5.1",
     "vue": "^3.0.0",
@@ -24,17 +25,16 @@
     "vue-router": "^4.0.0"
   },
   "devDependencies": {
-    "@babel/eslint-parser": "^7.13.14",
-    "@quasar/app": "^3.0.0",
+    "@quasar/app-webpack": "^3.0.0",
     "@types/node": "^12.20.21",
     "@typescript-eslint/eslint-plugin": "^5.10.0",
     "@typescript-eslint/parser": "^5.10.0",
-    "eslint": "^7.14.0",
-    "eslint-config-standard": "^16.0.2",
+    "eslint": "^8.10.0",
+    "eslint-config-standard": "^17.0.0-1",
     "eslint-plugin-import": "^2.19.1",
-    "eslint-plugin-node": "^11.0.0",
-    "eslint-plugin-promise": "^5.1.0",
-    "eslint-plugin-vue": "^8.0.0",
+    "eslint-plugin-n": "^14.0.0",
+    "eslint-plugin-promise": "^6.0.0",
+    "eslint-plugin-vue": "^8.5.0",
     "file-replace-loader": "^1.4.0",
     "string-replace-loader": "^3.1.0",
     "systemjs-webpack-interop": "^2.3.7"
