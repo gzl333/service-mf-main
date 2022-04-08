@@ -19,6 +19,7 @@ export const useStore = defineStore('main', {
   state: () => {
     return {
       items: {
+        currentApp: '' as string, // 当前挂载的微服务， 被main的header使用
         isLogin: false,
         loginType: '' as 'passport' | 'aai' | undefined,
         tokenAccess: '' as string | undefined,

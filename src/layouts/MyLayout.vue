@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import { watch, computed, ref } from 'vue'
+import { watch, computed/* , ref  */ } from 'vue'
 import { useStore } from 'stores/store'
-import { useRoute } from 'vue-router'
+// import { useRoute } from 'vue-router'
 import { i18n } from 'boot/i18n'
 import { navigateToUrl } from 'single-spa'
 import { useQuasar } from 'quasar'
@@ -21,9 +21,10 @@ console.log('@cnic/main store:', store.$state)
 // the root layout of @cnic/main, load @cnic/main's  store here
 
 const quasar = useQuasar()
-const route = useRoute()
-const paths = route.path.split('/')
-const currentApplication = ref(paths[2] || 'my') // keep selection when reloading
+
+// const route = useRoute()
+// const paths = route.path.split('/')
+const currentApp = computed(() => store.items.currentApp) // keep selection when reloading
 
 const gotoManual = () => {
   // 中文访问/manual 英文访问/manual/en
@@ -89,7 +90,7 @@ watch(localeModel, value => {
           id="header-tabs"
           class="text-black q-pr-xl"
           style="height: 60px;"
-          v-model="currentApplication"
+          v-model="currentApp"
           dense
           shrink
           no-caps
@@ -121,9 +122,9 @@ watch(localeModel, value => {
             {{ tc('高性能计算') }}
           </q-tab>
           <q-tab class="q-px-sm"
-                 name="bill"
+                 name="stats"
                  :ripple="false"
-                 @click="navigateToUrl('/my/bill')">
+                 @click="navigateToUrl('/my/stats')">
             {{ tc('用量账单') }}
           </q-tab>
           <q-tab class="q-px-sm"
