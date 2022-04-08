@@ -50,6 +50,7 @@ const tc = i18n.global.tc
 
           <q-card-actions align="around">
             <q-btn flat @click="navigateToUrl('/my/storage')">goto {{ tc('对象存储') }}</q-btn>
+            <q-btn flat @click="navigateToUrl('/my/storage/service2')">goto {{ tc('对象存储') }}service2</q-btn>
           </q-card-actions>
         </q-card>
 

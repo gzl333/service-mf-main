@@ -66,6 +66,8 @@ watch(localeModel, value => {
   // set global i18n record on window object
   window.i18n = i18n.global.locale
 })
+
+const releaseTime = process.env.releaseTime
 </script>
 
 <template>
@@ -82,6 +84,12 @@ watch(localeModel, value => {
           </div>
 
         </q-toolbar-title>
+
+        <q-icon name="info" color="grey" size="xs">
+          <q-tooltip>
+            release time: {{ new Date(releaseTime).toLocaleString() }}
+          </q-tooltip>
+        </q-icon>
 
         <q-space/>
 
