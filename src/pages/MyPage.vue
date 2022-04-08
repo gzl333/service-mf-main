@@ -1,6 +1,6 @@
 <script setup lang="ts">
 // import { ref, computed } from "vue"
-// import useStore from 'src/store'
+// import { useStore } from 'stores/store'
 import { i18n } from 'boot/i18n'
 
 const tc = i18n.global.tc

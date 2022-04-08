@@ -190,4 +190,4 @@ export const {
 
 // @mimas: single-spa application public interface
 // share with other apps. Communications between apps happen here.
-export { default as useStoreMain } from 'stores/main'
+export { useStore as useStoreMain } from 'stores/store'
