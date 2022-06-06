@@ -104,38 +104,38 @@ const releaseTime = process.env.releaseTime
           no-caps
           active-color="primary"
         >
-<!--          <q-tab class="q-px-sm"-->
-<!--                 style="min-width: 30px !important;"-->
-<!--                 name="my"-->
-<!--                 :ripple="false"-->
-<!--                 @click="navigateToUrl('/my')">-->
-<!--            {{ tc('首页') }}-->
-<!--          </q-tab>-->
-          <q-tab class="q-px-sm"
+          <!--          <q-tab class="q-px-sm"-->
+          <!--                 style="min-width: 30px !important;"-->
+          <!--                 name="my"-->
+          <!--                 :ripple="false"-->
+          <!--                 @click="navigateToUrl('/my')">-->
+          <!--            {{ tc('首页') }}-->
+          <!--          </q-tab>-->
+          <q-tab class="headerTab q-px-sm"
                  name="server"
                  :ripple="false"
                  @click="navigateToUrl('/my/server')">
             {{ tc('云主机') }}
           </q-tab>
-          <q-tab class="q-px-sm"
+          <q-tab class="headerTab q-px-sm"
                  name="storage"
                  :ripple="false"
                  @click="navigateToUrl('/my/storage')">
             {{ tc('对象存储') }}
           </q-tab>
-          <q-tab class="q-px-sm"
+          <q-tab class="headerTab q-px-sm"
                  name="hpc"
                  :ripple="false"
                  @click="navigateToUrl('/my/hpc')">
             {{ tc('高性能计算') }}
           </q-tab>
-          <q-tab class="q-px-sm"
+          <q-tab class="headerTab q-px-sm"
                  name="stats"
                  :ripple="false"
                  @click="navigateToUrl('/my/stats')">
             {{ tc('用量账单') }}
           </q-tab>
-          <q-tab class="q-px-sm"
+          <q-tab class="headerTab q-px-sm"
                  name="monitor"
                  :ripple="false"
                  @click="navigateToUrl('/my/monitor')">
@@ -218,10 +218,11 @@ const releaseTime = process.env.releaseTime
 .MyLayout {
 }
 
-#header-tabs {
-  .q-tab__content {
-    min-width: 44px !important;
-  }
+.headerTab {
+  min-width: 60px !important;
 }
 
+.q-footer .q-tab__content, .q-header .q-tab__content {
+  min-width: 60px !important;
+}
 </style>
