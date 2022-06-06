@@ -24,7 +24,8 @@ const routes: RouteRecordRaw[] = [
     children: [
       {
         path: '',
-        component: () => import('pages/MyPage.vue')
+        component: () => import('pages/MyPage.vue'),
+        redirect: '/my/server'
       }
     ]
   },

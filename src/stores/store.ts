@@ -19,7 +19,7 @@ export const useStore = defineStore('main', {
   state: () => {
     return {
       items: {
-        currentApp: '' as string, // 当前挂载的微服务， 被main的header使用
+        currentApp: '' as string, // 当前挂载的微服务， 被main的header使用。更新机制在router/index内部
         isLogin: false,
         loginType: '' as 'passport' | 'aai' | undefined,
         tokenAccess: '' as string | undefined,
@@ -29,8 +29,7 @@ export const useStore = defineStore('main', {
       tables: {}
     }
   },
-  getters: {
-  },
+  getters: {},
   actions: {
     async askUrl (loginType: 'passport' | 'aai') {
       // 本函数只负责获取登录页面地址，并跳转。 code及token处理、/login路由跳转逻辑处理，均放在router.beforeEach中

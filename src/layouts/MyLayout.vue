@@ -73,7 +73,7 @@ const releaseTime = process.env.releaseTime
 <template>
   <q-layout view="lHh Lpr lFf" style="min-height: 0 !important; min-width: 1350px !important;">
 
-    <q-header bordered class="bg-grey-2" style="min-width: 1350px;">
+    <q-header elevated class="bg-grey-2" style="min-width: 1350px;">
 
       <q-toolbar style="height: 60px">
 
@@ -104,13 +104,13 @@ const releaseTime = process.env.releaseTime
           no-caps
           active-color="primary"
         >
-          <q-tab class="q-px-sm"
-                 style="min-width: 30px !important;"
-                 name="my"
-                 :ripple="false"
-                 @click="navigateToUrl('/my')">
-            {{ tc('首页') }}
-          </q-tab>
+<!--          <q-tab class="q-px-sm"-->
+<!--                 style="min-width: 30px !important;"-->
+<!--                 name="my"-->
+<!--                 :ripple="false"-->
+<!--                 @click="navigateToUrl('/my')">-->
+<!--            {{ tc('首页') }}-->
+<!--          </q-tab>-->
           <q-tab class="q-px-sm"
                  name="server"
                  :ripple="false"
