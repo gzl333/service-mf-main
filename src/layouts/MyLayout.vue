@@ -93,55 +93,87 @@ const releaseTime = process.env.releaseTime
 
         <q-space/>
 
-        <!--        可以改用btn-toggle-->
-        <q-tabs
-          id="header-tabs"
-          class="text-black q-pr-xl"
-          style="height: 60px;"
-          v-model="currentApp"
-          dense
-          shrink
-          no-caps
-          active-color="primary"
-        >
-          <!--          <q-tab class="q-px-sm"-->
-          <!--                 style="min-width: 30px !important;"-->
-          <!--                 name="my"-->
-          <!--                 :ripple="false"-->
-          <!--                 @click="navigateToUrl('/my')">-->
-          <!--            {{ tc('首页') }}-->
-          <!--          </q-tab>-->
-          <q-tab class="headerTab q-px-sm"
-                 name="server"
-                 :ripple="false"
+        <div class="row full-height items-center q-pr-xl">
+          <q-btn flat no-caps dense :ripple="false"
+                 class="full-height q-mx-md"
+                 :class="currentApp === 'server' ? 'active-btn':'inactive-btn'"
                  @click="navigateToUrl('/my/server')">
             {{ tc('云主机') }}
-          </q-tab>
-          <q-tab class="headerTab q-px-sm"
-                 name="storage"
-                 :ripple="false"
+          </q-btn>
+          <q-btn flat no-caps dense :ripple="false"
+                 class="full-height q-mx-md"
+                 :class="currentApp === 'storage' ? 'active-btn':'inactive-btn'"
                  @click="navigateToUrl('/my/storage')">
             {{ tc('对象存储') }}
-          </q-tab>
-          <q-tab class="headerTab q-px-sm"
-                 name="hpc"
-                 :ripple="false"
+          </q-btn>
+          <q-btn flat no-caps dense :ripple="false"
+                 class="full-height q-mx-md"
+                 :class="currentApp === 'hpc' ? 'active-btn':'inactive-btn'"
                  @click="navigateToUrl('/my/hpc')">
             {{ tc('高性能计算') }}
-          </q-tab>
-          <q-tab class="headerTab q-px-sm"
-                 name="stats"
-                 :ripple="false"
+          </q-btn>
+          <q-btn flat no-caps dense :ripple="false"
+                 class="full-height q-mx-md"
+                 :class="currentApp === 'stats' ? 'active-btn':'inactive-btn'"
                  @click="navigateToUrl('/my/stats')">
             {{ tc('用量账单') }}
-          </q-tab>
-          <q-tab class="headerTab q-px-sm"
-                 name="monitor"
-                 :ripple="false"
+          </q-btn>
+          <q-btn flat no-caps dense :ripple="false"
+                 class="full-height q-mx-md"
+                 :class="currentApp === 'monitor' ? 'active-btn':'inactive-btn'"
                  @click="navigateToUrl('/my/monitor')">
             {{ tc('综合监控') }}
-          </q-tab>
-        </q-tabs>
+          </q-btn>
+
+        </div>
+        <!--        <q-tabs-->
+        <!--          id="header-tabs"-->
+        <!--          class="text-black q-pr-xl"-->
+        <!--          style="height: 60px;"-->
+        <!--          v-model="currentApp"-->
+        <!--          dense-->
+        <!--          shrink-->
+        <!--          no-caps-->
+        <!--          active-color="primary"-->
+        <!--        >-->
+        <!--          &lt;!&ndash;          <q-tab class="q-px-sm"&ndash;&gt;-->
+        <!--          &lt;!&ndash;                 style="min-width: 30px !important;"&ndash;&gt;-->
+        <!--          &lt;!&ndash;                 name="my"&ndash;&gt;-->
+        <!--          &lt;!&ndash;                 :ripple="false"&ndash;&gt;-->
+        <!--          &lt;!&ndash;                 @click="navigateToUrl('/my')">&ndash;&gt;-->
+        <!--          &lt;!&ndash;            {{ tc('首页') }}&ndash;&gt;-->
+        <!--          &lt;!&ndash;          </q-tab>&ndash;&gt;-->
+        <!--          <q-tab class="headerTab q-px-sm"-->
+        <!--                 name="server"-->
+        <!--                 :ripple="false"-->
+        <!--                 @click="navigateToUrl('/my/server')">-->
+        <!--            {{ tc('云主机') }}-->
+        <!--          </q-tab>-->
+        <!--          <q-tab class="headerTab q-px-sm"-->
+        <!--                 name="storage"-->
+        <!--                 :ripple="false"-->
+        <!--                 @click="navigateToUrl('/my/storage')">-->
+        <!--            {{ tc('对象存储') }}-->
+        <!--          </q-tab>-->
+        <!--          <q-tab class="headerTab q-px-sm"-->
+        <!--                 name="hpc"-->
+        <!--                 :ripple="false"-->
+        <!--                 @click="navigateToUrl('/my/hpc')">-->
+        <!--            {{ tc('高性能计算') }}-->
+        <!--          </q-tab>-->
+        <!--          <q-tab class="headerTab q-px-sm"-->
+        <!--                 name="stats"-->
+        <!--                 :ripple="false"-->
+        <!--                 @click="navigateToUrl('/my/stats')">-->
+        <!--            {{ tc('用量账单') }}-->
+        <!--          </q-tab>-->
+        <!--          <q-tab class="headerTab q-px-sm"-->
+        <!--                 name="monitor"-->
+        <!--                 :ripple="false"-->
+        <!--                 @click="navigateToUrl('/my/monitor')">-->
+        <!--            {{ tc('综合监控') }}-->
+        <!--          </q-tab>-->
+        <!--        </q-tabs>-->
 
         <div class="row items-center q-gutter-x-none">
 
@@ -218,11 +250,14 @@ const releaseTime = process.env.releaseTime
 .MyLayout {
 }
 
-.headerTab {
-  min-width: 60px !important;
+.active-btn {
+  color: $primary;
+  border-bottom: 2px solid $primary;
+  border-radius: 0;
 }
 
-.q-footer .q-tab__content, .q-header .q-tab__content {
-  min-width: 60px !important;
+.inactive-btn {
+  color: black;
+  border-radius: 0;
 }
 </style>
