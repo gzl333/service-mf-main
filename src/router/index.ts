@@ -9,6 +9,8 @@ import routes from './routes'
 
 import { useStore } from 'stores/store'
 
+import { i18n } from 'boot/i18n'
+
 /*
  * If not building with SSR mode, you can
  * directly export the Router instantiation;
@@ -17,6 +19,40 @@ import { useStore } from 'stores/store'
  * async/await or return a Promise which resolves
  * with the Router instance.
  */
+
+// 二级路由（app）登记表，有两个作用：
+// 1. 供@cnic-main记录验证合法二级路由
+// 2. 修改对应二级路由的title
+const titleTable = {
+  default: {
+    zh: '中国科技云',
+    en: 'CSTCloud'
+  },
+  my: {
+    zh: '',
+    en: ''
+  },
+  server: {
+    zh: '云主机-',
+    en: 'Cloud Server-'
+  },
+  storage: {
+    zh: '对象存储-',
+    en: 'Object Storage-'
+  },
+  hpc: {
+    zh: '高性能计算-',
+    en: 'HPC-'
+  },
+  stats: {
+    zh: '用量账单-',
+    en: 'Billing-'
+  },
+  monitor: {
+    zh: '综合监控-',
+    en: 'Monitor-'
+  }
+} as Record<string, Record<'zh' | 'en', string>>
 
 export default route(function (/* { store/!* , ssrContext  *!/ } */) {
   const createHistory = process.env.SERVER
@@ -66,13 +102,17 @@ export default route(function (/* { store/!* , ssrContext  *!/ } */) {
       // 之前都是登录状态有关的强制跳转。进入else后登录状态已经正常，进行页面访问权限的限制跳转
     }
 
-    // 根据当前path更新store.currentApp，保证main里header的选择正确。不写在header里是因为header只setup一次，不能实时根据路径更新
+    // 根据当前path更新store.currentApp，保证main里header的app选择正确。不写在header里是因为header只setup一次，不能实时根据路径更新
     store.items.currentApp = to.path.split('/')[2] || 'my'
 
-    // if (to.meta.title) {
-    //   document.title = to.meta.title as string
-    // }
-    document.title = '中国科技云一体化云服务平台'
+    // 验证二级路由（app）是否合法
+    if (titleTable[store.items.currentApp]) {
+      // 能从table取到则合法, 修改对应title
+      document.title = i18n.global.locale === 'zh' ? titleTable[store.items.currentApp].zh + titleTable.default.zh : titleTable[store.items.currentApp].en + titleTable.default.en
+    } else {
+      // 二级路由不合法, 跳转至/my
+      next({ path: '/my' })
+    }
 
     // 不符合上述所有条件的catch-all跳转，否则会卡在空白页
     next()
