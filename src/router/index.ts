@@ -102,7 +102,7 @@ export default route(function (/* { store/!* , ssrContext  *!/ } */) {
       // 之前都是登录状态有关的强制跳转。进入else后登录状态已经正常，进行页面访问权限的限制跳转
     }
 
-    // 根据当前path更新store.currentApp，保证main里header的app选择正确。不写在header里是因为header只setup一次，不能实时根据路径更新
+    // 根据当前path（取第三位）更新store.currentApp，保证main里header的app选择正确。不写在header里是因为header只setup一次，不能实时根据路径更新
     store.items.currentApp = to.path.split('/')[2] || 'my'
 
     // 验证二级路由（app）是否合法
