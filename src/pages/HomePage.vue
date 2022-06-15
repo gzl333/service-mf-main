@@ -1,7 +1,7 @@
 <script setup lang="ts">
 // import { ref, computed } from "vue"
 // import { useStore } from 'stores/store'
-// import { i18n } from 'boot/i18n'
+import { i18n } from 'boot/i18n'
 
 // const props = defineProps({
 //   foo: {
@@ -12,6 +12,7 @@
 // })
 // const emits = defineEmits(['change', 'delete'])
 
+const { tc } = i18n.global
 // const store = useStore()
 
 // code starts...
@@ -20,20 +21,22 @@
 <template>
   <div class="HomePage">
 
-    <div class="part1 shapedivider" ref="part1">
+    <!--    <div class="part1 shapedivider" ref="part1">-->
+    <div class="part1" ref="part1">
       <div class="q-pa-lg">
-        <h3 class="text-white">服务简介</h3>
+        <h3 class="text-white">{{ tc('一体化云服务平台') }}</h3>
       </div>
     </div>
 
-    <div class="part2" ref="part2">
-      <div class="q-pa-lg">
-        <h3>服务简介</h3>
-      </div>
-    </div>
+    <!--    <div class="part2" ref="part2">-->
+    <!--      <div class="q-pa-lg">-->
+    <!--        <h3>服务简介</h3>-->
+    <!--      </div>-->
+    <!--    </div>-->
 
     <div class="home-footer">
-      <div>©{{ new Date().getFullYear() }} CNIC 京ICP备09112257号-94</div>
+      <div>{{ tc('home.copyright') }}</div>
+      <div>京ICP备09112257号-94</div>
     </div>
   </div>
 </template>
@@ -41,10 +44,11 @@
 <style lang="scss" scoped>
 .HomePage {
 }
+
 .part1 {
   padding-top: 80px;
   user-select: none;
-  height: 100vh;
+  height: calc(100vh - 50px);
   top: 0;
   left: 0;
   z-index: -10;
@@ -104,7 +108,7 @@
   color: #ECEFF4;
   text-align: center;
   height: 50px;
-  line-height: 50px;
+  line-height: 25px;
   background-color: #2E3440;
 }
 </style>

@@ -31,10 +31,9 @@ const dynamicBackground = computed(() => {
 </script>
 
 <template>
-  <q-layout view="lHh Lpr lFf">
+  <q-layout view="lHh Lpr lFf" style="min-width: 500px; min-height: 500px;">
 
-    <q-header :elevated="scrollRatio===0.4" class="home-header row justify-center" :style="dynamicBackground"
-              style="min-width: 500px;">
+    <q-header :elevated="scrollRatio===0.4" class="home-header row justify-center" :style="dynamicBackground">
       <div class="row justify-between items-center no-wrap content-fixed-width">
 
         <div class="col-auto row items-center">
@@ -42,14 +41,19 @@ const dynamicBackground = computed(() => {
           <div class="text-grey-3 text-h5">{{ tc('一体化云服务平台') }}</div>
         </div>
 
-        <div class="col-auto q-gutter-sm row">
+        <div class="col-auto q-gutter-md row">
 
           <I18nSwitch :is-dark="true"/>
 
-          <q-btn class="gt-xs" outline :ripple="false" color="white" label="注 册" type="a"
+          <q-btn class="gt-xs" outline :ripple="false" color="white" type="a" no-caps
                  href="https://passport.escience.cn/regist.jsp"
-                 target="_blank"/>
-          <q-btn unelevated :ripple="false" color="primary" label="登 录" @click="store.askUrl('passport')"/>
+                 target="_blank">
+            {{ tc('注册') }}
+          </q-btn>
+
+          <q-btn unelevated :ripple="false" color="primary" no-caps @click="store.askUrl('passport')">
+            {{ tc('登录') }}
+          </q-btn>
 
         </div>
       </div>

@@ -48,14 +48,19 @@ const localeOptions = [
 watch(localeModel, value => {
   // 因本地i18n简化为zh和en，此处应补全为'zh-CN'和'en-US'共quasar寻址使用
   const locale = value.includes('zh') ? 'zh-CN' : 'en-US'
+
+  // set quasar language set locale
   void import('quasar/lang/' + locale).then(lang => {
-    // eslint-disable-next-line
     quasar.lang.set(lang.default)
   })
 
+  // store locale preference in localStorage : 'zh' / 'en'
+  localStorage.setItem('locale', locale.slice(0, 2))
+
   // dispatch global i18n event. Listened at micro-app's boot/i18n
   window.dispatchEvent(new CustomEvent('i18n', { detail: i18n.global.locale }))
-  // set global i18n record on window object
+
+  // set global i18n record on window object. This for all applications to read during their init.
   window.i18n = i18n.global.locale
 })
 

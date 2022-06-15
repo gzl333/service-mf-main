@@ -6,9 +6,7 @@ import {
   createWebHistory
 } from 'vue-router'
 import routes from './routes'
-
 import { useStore } from 'stores/store'
-
 import { i18n } from 'boot/i18n'
 
 /*
