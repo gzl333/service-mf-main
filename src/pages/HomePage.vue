@@ -24,14 +24,12 @@
       <div class="q-pa-lg">
         <h3 class="text-white">服务简介</h3>
       </div>
-
     </div>
 
     <div class="part2" ref="part2">
       <div class="q-pa-lg">
         <h3>服务简介</h3>
       </div>
-
     </div>
 
     <div class="home-footer">

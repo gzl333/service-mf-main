@@ -1,7 +1,9 @@
 <script setup lang="ts">
 import { ref, computed } from 'vue'
 import { useStore } from 'stores/store'
-// import { i18n } from 'boot/i18n'
+import { i18n } from 'boot/i18n'
+
+import I18nSwitch from 'components/I18nSwitch.vue'
 
 // const props = defineProps({
 //   foo: {
@@ -12,6 +14,7 @@ import { useStore } from 'stores/store'
 // })
 // const emits = defineEmits(['change', 'delete'])
 
+const { tc } = i18n.global
 const store = useStore()
 
 // scroll info
@@ -36,10 +39,13 @@ const dynamicBackground = computed(() => {
 
         <div class="col-auto row items-center">
           <img src="../assets/cstcloud_logo.png" style="height: 50px;"/>
-          <div class="text-grey-3 text-h5">一体化云服务平台</div>
+          <div class="text-grey-3 text-h5">{{ tc('一体化云服务平台') }}</div>
         </div>
 
-        <div class="col-auto q-gutter-sm">
+        <div class="col-auto q-gutter-sm row">
+
+          <I18nSwitch :is-dark="true"/>
+
           <q-btn class="gt-xs" outline :ripple="false" color="white" label="注 册" type="a"
                  href="https://passport.escience.cn/regist.jsp"
                  target="_blank"/>

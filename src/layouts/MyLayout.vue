@@ -1,10 +1,12 @@
 <script setup lang="ts">
-import { watch, computed/* , ref  */ } from 'vue'
+import { /* watch, */ computed/* , ref  */ } from 'vue'
 import { useStore } from 'stores/store'
 // import { useRoute } from 'vue-router'
 import { i18n } from 'boot/i18n'
 import { navigateToUrl } from 'single-spa'
-import { useQuasar } from 'quasar'
+// import { useQuasar } from 'quasar'
+
+import I18nSwitch from 'components/I18nSwitch.vue'
 
 // const props = defineProps({
 //   foo: {
@@ -20,7 +22,7 @@ const store = useStore()
 console.log('@cnic/main store:', store.$state)
 // the root layout of @cnic/main, load @cnic/main's  store here
 
-const quasar = useQuasar()
+// const quasar = useQuasar()
 
 // const route = useRoute()
 // const paths = route.path.split('/')
@@ -31,41 +33,6 @@ const gotoManual = () => {
   const url = computed(() => location.origin + (i18n.global.locale === 'zh' ? '/manual' : '/manual/en'))
   window.open(url.value)
 }
-
-// i18n
-// 保持localeModel与i18n模块同步
-const localeModel = computed({
-  get: () => i18n.global.locale,
-  set: newVal => {
-    i18n.global.locale = newVal
-  }
-})
-
-const localeOptions = [
-  {
-    value: 'zh',
-    label: '中文'
-  },
-  {
-    value: 'en',
-    label: 'English'
-  }
-]
-
-// 根据localeModel改变Quasar Language Pack
-watch(localeModel, value => {
-  // 因本地i18n简化为zh和en，此处应补全为'zh-CN'和'en-US'共quasar寻址使用
-  const locale = value.includes('zh') ? 'zh-CN' : 'en-US'
-  void import('quasar/lang/' + locale).then(lang => {
-    // eslint-disable-next-line
-    quasar.lang.set(lang.default)
-  })
-
-  // dispatch global i18n event. Listened at micro-app's boot/i18n
-  window.dispatchEvent(new CustomEvent('i18n', { detail: i18n.global.locale }))
-  // set global i18n record on window object
-  window.i18n = i18n.global.locale
-})
 
 const releaseTime = process.env.releaseTime
 </script>
@@ -126,71 +93,11 @@ const releaseTime = process.env.releaseTime
           </q-btn>
 
         </div>
-        <!--        <q-tabs-->
-        <!--          id="header-tabs"-->
-        <!--          class="text-black q-pr-xl"-->
-        <!--          style="height: 60px;"-->
-        <!--          v-model="currentApp"-->
-        <!--          dense-->
-        <!--          shrink-->
-        <!--          no-caps-->
-        <!--          active-color="primary"-->
-        <!--        >-->
-        <!--          &lt;!&ndash;          <q-tab class="q-px-sm"&ndash;&gt;-->
-        <!--          &lt;!&ndash;                 style="min-width: 30px !important;"&ndash;&gt;-->
-        <!--          &lt;!&ndash;                 name="my"&ndash;&gt;-->
-        <!--          &lt;!&ndash;                 :ripple="false"&ndash;&gt;-->
-        <!--          &lt;!&ndash;                 @click="navigateToUrl('/my')">&ndash;&gt;-->
-        <!--          &lt;!&ndash;            {{ tc('首页') }}&ndash;&gt;-->
-        <!--          &lt;!&ndash;          </q-tab>&ndash;&gt;-->
-        <!--          <q-tab class="headerTab q-px-sm"-->
-        <!--                 name="server"-->
-        <!--                 :ripple="false"-->
-        <!--                 @click="navigateToUrl('/my/server')">-->
-        <!--            {{ tc('云主机') }}-->
-        <!--          </q-tab>-->
-        <!--          <q-tab class="headerTab q-px-sm"-->
-        <!--                 name="storage"-->
-        <!--                 :ripple="false"-->
-        <!--                 @click="navigateToUrl('/my/storage')">-->
-        <!--            {{ tc('对象存储') }}-->
-        <!--          </q-tab>-->
-        <!--          <q-tab class="headerTab q-px-sm"-->
-        <!--                 name="hpc"-->
-        <!--                 :ripple="false"-->
-        <!--                 @click="navigateToUrl('/my/hpc')">-->
-        <!--            {{ tc('高性能计算') }}-->
-        <!--          </q-tab>-->
-        <!--          <q-tab class="headerTab q-px-sm"-->
-        <!--                 name="stats"-->
-        <!--                 :ripple="false"-->
-        <!--                 @click="navigateToUrl('/my/stats')">-->
-        <!--            {{ tc('用量账单') }}-->
-        <!--          </q-tab>-->
-        <!--          <q-tab class="headerTab q-px-sm"-->
-        <!--                 name="monitor"-->
-        <!--                 :ripple="false"-->
-        <!--                 @click="navigateToUrl('/my/monitor')">-->
-        <!--            {{ tc('综合监控') }}-->
-        <!--          </q-tab>-->
-        <!--        </q-tabs>-->
 
         <div class="row items-center q-gutter-x-none">
 
           <div class="q-gutter-md row items-center no-wrap">
-            <q-select
-              v-model="localeModel"
-              :options="localeOptions"
-              dense
-              borderless
-              emit-value
-              map-options
-              options-dense
-            >
-              <template v-slot:prepend>
-                <q-icon name="language"/>
-              </template>
-            </q-select>
+            <i18n-switch :is-dark="false"/>
           </div>
 
           <q-btn class="text-weight-regular" color="grey-8" :ripple="false" flat dense no-caps no-wrap
