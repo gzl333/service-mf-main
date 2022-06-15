@@ -14,9 +14,10 @@
 // })
 // const emits = defineEmits(['change', 'delete'])
 
+// const { tc } = i18n.global
 // const store = useStore()
 // const route = userRoute()
-// const tc = i18n.global.tc
+
 
 </script>
 
