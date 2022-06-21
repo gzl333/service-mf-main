@@ -1,8 +1,7 @@
-// login api
+// passport login api
 import { axiosLogin } from 'boot/axios'
 
 export default {
-
   postAskUrl (payload: {
     query: {
       clientUrl: string;
@@ -13,6 +12,16 @@ export default {
       params: payload.query
     }
     return axiosLogin.post('/open/api/UMTOauthLogin/askUrl', null, config)
+  },
+  postCheckToken (payload: {
+    query: {
+      jwtToken: string
+    }
+  }) {
+    const config = {
+      params: payload.query
+    }
+    return axiosLogin.post('/open/api/UMTOauthLogin/checkToken', null, config)
   },
   postDealCode (payload: {
     query: {
@@ -26,15 +35,15 @@ export default {
     }
     return axiosLogin.post('/open/api/UMTOauthLogin/dealCode', null, config)
   },
-  postCheckToken (payload: {
+  postLoginOutSelf (payload: {
     query: {
-      jwtToken: string
+      loginOutUrl: string
     }
   }) {
     const config = {
       params: payload.query
     }
-    return axiosLogin.post('/open/api/UMTOauthLogin/checkToken', null, config)
+    return axiosLogin.post('/open/api/UMTOauthLogin/loginOutSelf', null, config)
   },
   postRefreshToken (payload: {
     query: {

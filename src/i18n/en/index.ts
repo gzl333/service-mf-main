@@ -14,5 +14,12 @@ export default {
   使用手册: 'User Manual',
 
   注册: 'Register',
-  登录: 'Login'
+  登录: 'Login',
+  修改密码: 'Change Password',
+  退出登录: 'Logout',
+  科技云通行证登录: 'Login with CSTCloud Passport',
+  科技云AAI登录: 'Login with CSTCloud AAI',
+
+  使用科技云通行证登录: 'Logged in with CSTCloud Passport',
+  使用科技云AAI登录: 'Logged in with CSTCloud AAI'
 }

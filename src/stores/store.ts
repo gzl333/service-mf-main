@@ -35,10 +35,13 @@ export const useStore = defineStore('main', {
       // 本函数只负责获取登录页面地址，并跳转。 code及token处理、/login路由跳转逻辑处理，均放在router.beforeEach中
       let respPostLoginUrl
       if (loginType === 'passport') {
-        respPostLoginUrl = await api.login.passport.postAskUrl({ query: { clientUrl: window.location.origin + '/login' } })
+        respPostLoginUrl = await api.login.passport.postAskUrl({ query: { clientUrl: window.location.origin + '/login-passport' } })
       } else if (loginType === 'aai') {
-        respPostLoginUrl = await api.login.aai.postAskUrl({ query: { clientUrl: window.location.origin + '/login' } })
+        respPostLoginUrl = await api.login.aai.postAskUrl({ query: { clientUrl: window.location.origin + '/login-aai' } })
       }
+      console.log(respPostLoginUrl?.data.data)
+      // https://gosc-login.cstcloud.cn/oidc/openid_connect_login?identifier=https://aai.cstcloud.net/oidc/&clientUrl=http://servicedev.cstcloud.cn/login-aai
+
       // 跳转至获取token的url
       window.location.href = respPostLoginUrl?.data.data
     },
@@ -87,10 +90,17 @@ export const useStore = defineStore('main', {
       localStorage.removeItem('usp_refresh')
       localStorage.removeItem('usp_loginType')
       // logout remote
-      window.location.href = baseURLLogin + loginType === 'passport' ? '/open/api/UMTOauthLogin/loginOut?loginOutUrl=' : '/open/api/AAILogin/loginOut?loginOutUrl=' + window.location.origin
+      let logoutUrl = ''
+      if (loginType === 'passport') {
+        logoutUrl = baseURLLogin + '/open/api/UMTOauthLogin/loginOut?loginOutUrl=' + window.location.origin
+      } else if (loginType === 'aai') {
+        logoutUrl = baseURLLogin + '/open/api/AAILogin/loginOut?loginOutUrl=' + window.location.origin
+      }
+      window.location.href = logoutUrl
+
       // @ts-ignore
       // eslint-disable-next-line @typescript-eslint/no-unsafe-call
-      this.$router.push('/') // 登出后的路由目标均为首页，其跳转写在这里
+      // this.$router.push('/') // 登出后的路由目标均为首页，其跳转写在这里
     },
     // 页面刷新时从浏览器localStorage里读取token
     async reloadToken () {
@@ -141,12 +151,22 @@ export const useStore = defineStore('main', {
           }
         }))
 
-        const respPostCheckToken = loginType === 'passport' ? await api.login.passport.postCheckToken({ query: { jwtToken: tokenAccess } }) : await api.login.aai.postCheckToken({ query: { jwtToken: tokenAccess } })
-        if (respPostCheckToken.data.code === 200 && respPostCheckToken.data.data === true) {
-          this.retainToken()
-        } else {
+        try {
+          let respPostCheckToken
+          if (loginType === 'passport') {
+            respPostCheckToken = await api.login.passport.postCheckToken({ query: { jwtToken: tokenAccess } })
+          } else if (loginType === 'aai') {
+            respPostCheckToken = await api.login.aai.postCheckToken({ query: { jwtToken: tokenAccess } })
+          }
+          if (respPostCheckToken?.data.code === 200 && respPostCheckToken?.data.data === true) {
+            this.retainToken()
+          } else {
+            this.userLogout()
+          }
+        } catch (e) {
           this.userLogout()
         }
+
         /* 避免刷新页面体验不好，先信任本地存储，再去核实，不通过再登出 */
       }
     },
@@ -170,7 +190,7 @@ export const useStore = defineStore('main', {
                   if (this.items.loginType === 'passport') {
                     respPostRefreshToken = await api.login.passport.postRefreshToken({ query: { refreshToken: tokenRefresh } })
                   } else if (this.items.loginType === 'aai') {
-                    respPostRefreshToken = await api.login.passport.postRefreshToken({ query: { refreshToken: tokenRefresh } })
+                    respPostRefreshToken = await api.login.aai.postRefreshToken({ query: { refreshToken: tokenRefresh } })
                   }
 
                   if (respPostRefreshToken?.data.code === 200) {

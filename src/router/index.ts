@@ -80,11 +80,19 @@ export default route(function (/* { store/!* , ssrContext  *!/ } */) {
 
     // 此处截获科技云通行证返回的 /login?code=xxxx 部分
     // 未登录则获取code，换取token，进行登录
-    if (to.fullPath.includes('/login?code=') && !isLogin) { // fullPath包括 path、 query 和 hash
-      // 在科技云通行证处登录成功后，跳转至/login?code=xxxx。 此处截取code
-      const code = to.fullPath.slice(12)
-      // 利用code，在updatePassportToken中获取token并保存token，改变用户登录状态
-      void await store.userLogin('passport', code)
+    // if (to.fullPath.includes('/login?code=') && !isLogin) { // fullPath包括 path、 query 和 hash
+    if (to.fullPath.includes('/login') && !isLogin) { // fullPath包括 path、 query 和 hash
+      // 在科技云登录成功后，跳转至/login-passport?code=xxxx或/login-aai?code=xxxx。
+      console.log(to.fullPath)
+      // 此处截取code
+      const code = to.fullPath.slice(to.fullPath.indexOf('=') + 1)
+      console.log(code)
+      // 此处区分是passport还是aai
+      if (to.fullPath.includes('passport')) {
+        void await store.userLogin('passport', code)
+      } else if (to.fullPath.includes('aai')) {
+        void await store.userLogin('aai', code)
+      }
       // 跳转至内页
       next({ path: '/my' })
     } else if (to.fullPath.startsWith('/login') && isLogin) {

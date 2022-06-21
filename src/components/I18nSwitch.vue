@@ -55,7 +55,7 @@ watch(localeModel, value => {
   })
 
   // store locale preference in localStorage : 'zh' / 'en'
-  localStorage.setItem('locale', locale.slice(0, 2))
+  localStorage.setItem('usp_locale', locale.slice(0, 2))
 
   // dispatch global i18n event. Listened at micro-app's boot/i18n
   window.dispatchEvent(new CustomEvent('i18n', { detail: i18n.global.locale }))

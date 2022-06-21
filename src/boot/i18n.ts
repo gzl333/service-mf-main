@@ -12,7 +12,7 @@ declare global {
 
 // 获取浏览器locale: localStorage的locale偏好 或者 浏览器locale设置
 // 因只提供英文和简体中文两种locale，只截取locale code的前两位
-const browserLocale = localStorage.getItem('locale') as string || Quasar.lang.getLocale()?.slice(0, 2)
+const browserLocale = localStorage.getItem('usp_locale') as string || Quasar.lang.getLocale()?.slice(0, 2)
 
 // 导出i18n实例供全局使用，singleSpa中避免使用useI18n方式
 export const i18n = createI18n({

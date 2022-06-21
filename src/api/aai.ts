@@ -1,8 +1,7 @@
-// login api
+// aai login api
 import { axiosLogin } from 'boot/axios'
 
 export default {
-  // ...
   postAskUrl (payload: {
     query: {
       clientUrl: string;
@@ -13,6 +12,16 @@ export default {
       params: payload.query
     }
     return axiosLogin.post('/open/api/AAILogin/askUrl', null, config)
+  },
+  postCheckToken (payload: {
+    query: {
+      jwtToken: string
+    }
+  }) {
+    const config = {
+      params: payload.query
+    }
+    return axiosLogin.post('/open/api/AAILogin/checkToken', null, config)
   },
   postDealCode (payload: {
     query: {
@@ -26,14 +35,24 @@ export default {
     }
     return axiosLogin.post('/open/api/AAILogin/dealCode', null, config)
   },
-  postCheckToken (payload: {
+  postLoginOutSelf (payload: {
     query: {
-      jwtToken: string
+      loginOutUrl: string
     }
   }) {
     const config = {
       params: payload.query
     }
-    return axiosLogin.post('/open/api/AAILogin/checkToken', null, config)
+    return axiosLogin.post('/open/api/AAILogin/loginOutSelf', null, config)
+  },
+  postRefreshToken (payload: {
+    query: {
+      refreshToken: string
+    }
+  }) {
+    const config = {
+      params: payload.query
+    }
+    return axiosLogin.post('/open/api/AAILogin/refreshToken', null, config)
   }
 }
