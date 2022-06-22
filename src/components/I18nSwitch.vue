@@ -70,6 +70,8 @@ watch(localeModel, value => {
 
   <q-select
     :dark="isDark"
+    :color="isDark ? 'white' : 'primary'"
+    :popup-content-class="isDark  ? 'bg-transparent':''"
     v-model="localeModel"
     :options="localeOptions"
     dense
@@ -79,12 +81,18 @@ watch(localeModel, value => {
     options-dense
   >
     <template v-slot:prepend>
-      <q-icon name="language" :color="isDark?'white':''"/>
+      <q-icon name="language" :color="isDark ? 'white' : ''"/>
     </template>
+
+    <template v-if="isDark" v-slot:selected-item="scope">
+      <div class="text-white">
+        {{ scope.opt.label }}
+      </div>
+    </template>
+
   </q-select>
 
 </template>
 
 <style lang="scss" scoped>
-
 </style>
