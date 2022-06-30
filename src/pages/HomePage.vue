@@ -53,7 +53,8 @@ const { tc } = i18n.global
   left: 0;
   z-index: -10;
   width: 100%;
-  background-image: linear-gradient(to right top, #92FFC0, #002661);
+  //background-image: linear-gradient(to right top, #92FFC0, #002661);
+  background-image: linear-gradient( 110.5deg,  rgba(71,114,148,1) 14.9%, rgba(149,245,211,1) 77.9% );
 
   h3 {
     text-align: center;
