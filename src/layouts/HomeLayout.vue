@@ -41,55 +41,46 @@ const dynamicBackground = computed(() => {
           <div class="text-grey-3 text-h5">{{ tc('一体化云服务平台') }}</div>
         </div>
 
-        <div class="col-auto q-gutter-md row">
+        <div class="col-auto row">
 
-          <I18nSwitch :is-dark="true"/>
+          <I18nSwitch class="q-mr-lg" :is-dark="true"/>
 
-          <q-btn class="gt-xs" outline :ripple="false" color="white" type="a" no-caps
+          <q-btn class="q-mr-lg gt-xs" flat :ripple="false" color="white" type="a" no-caps dense
                  href="https://passport.escience.cn/regist.jsp"
                  target="_blank">
             {{ tc('注册') }}
           </q-btn>
 
-          <!--          <q-btn unelevated :ripple="false" color="primary" no-caps @click="store.askUrl('passport')">-->
-          <!--            {{ tc('登录') }}-->
-          <!--          </q-btn>-->
+          <q-btn flat
+                 dense
+                 :ripple="false"
+                 color="white"
+                 no-caps
+                 @click="store.askUrl('passport')"
+          >
+            {{ tc('科技云通行证登录') }}
+          </q-btn>
 
           <q-btn-dropdown
-            split
-            unelevated
+            class="transparent"
+            content-class="transparent"
+            flat
+            dense
             no-caps
             auto-close
+            padding="none"
             :ripple="false"
-            color="primary"
-            :label="tc('科技云通行证登录')"
-            @click="store.askUrl('passport')"
+            color="white"
           >
-            <!--            <q-list>-->
-            <!--              <q-item clickable v-close-popup>-->
-            <!--                <q-item-section avatar>-->
-            <!--                  <q-avatar icon="folder" color="primary" text-color="white"/>-->
-            <!--                </q-item-section>-->
-            <!--                <q-item-section>-->
-            <!--                  <q-item-label>Photos</q-item-label>-->
-            <!--                  <q-item-label caption>February 22, 2016</q-item-label>-->
-            <!--                </q-item-section>-->
-            <!--                <q-item-section side>-->
-            <!--                  <q-icon name="info" color="amber"/>-->
-            <!--                </q-item-section>-->
-            <!--              </q-item>-->
-            <!--            </q-list>-->
-
             <q-btn
-              class="full-width"
-              unelevated
+              class="full-width transparent"
+              flat
               :ripple="false"
-              color="primary"
+              text-color="white"
               no-caps
               @click="store.askUrl('aai')">
               {{ tc('科技云AAI登录') }}
             </q-btn>
-
           </q-btn-dropdown>
 
         </div>
