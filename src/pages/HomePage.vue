@@ -104,7 +104,7 @@ onUnmounted(() => {
 
 .shapedivider::before {
   content: '';
-  font-family: 'shape divider from ShapeDividers.com';
+  //font-family: 'shape divider from ShapeDividers.com';
   position: absolute;
   z-index: 3;
   pointer-events: none;
