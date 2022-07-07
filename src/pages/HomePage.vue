@@ -1,7 +1,9 @@
 <script setup lang="ts">
-// import { ref, computed } from "vue"
+import { ref, /* computed, */ onMounted, onUnmounted } from 'vue'
 // import { useStore } from 'stores/store'
 import { i18n } from 'boot/i18n'
+import * as THREE from 'three'
+import CLOUD from 'vanta/dist/vanta.clouds.min'
 
 // const props = defineProps({
 //   foo: {
@@ -15,7 +17,24 @@ import { i18n } from 'boot/i18n'
 const { tc } = i18n.global
 // const store = useStore()
 
-// code starts...
+const part1 = ref()
+
+onMounted(() => {
+  part1.value = CLOUD({
+    THREE,
+    el: part1.value,
+    mouseControls: true,
+    touchControls: true,
+    gyroControls: false,
+    minHeight: 200.00,
+    minWidth: 200.00,
+    skyColor: 0x2977a4,
+    sunColor: 0xe88628
+  })
+})
+onUnmounted(() => {
+  part1.value.destroy()
+})
 </script>
 
 <template>
@@ -24,7 +43,7 @@ const { tc } = i18n.global
     <!--    <div class="part1 shapedivider" ref="part1">-->
     <div class="part1" ref="part1">
       <div class="q-pa-lg">
-        <h3 class="text-white">{{ tc('一体化云服务平台') }}</h3>
+        <h3 class="text-black">{{ tc('一体化云服务平台') }}</h3>
       </div>
     </div>
 
@@ -54,7 +73,7 @@ const { tc } = i18n.global
   z-index: -10;
   width: 100%;
   //background-image: linear-gradient(to right top, #92FFC0, #002661);
-  background-image: linear-gradient( 110.5deg,  rgba(71,114,148,1) 14.9%, rgba(149,245,211,1) 77.9% );
+  //background-image: linear-gradient(110.5deg, rgba(71, 114, 148, 1) 14.9%, rgba(149, 245, 211, 1) 77.9%);
 
   h3 {
     text-align: center;
