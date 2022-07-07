@@ -3,7 +3,7 @@ import { ref, /* computed, */ onMounted, onUnmounted } from 'vue'
 // import { useStore } from 'stores/store'
 import { i18n } from 'boot/i18n'
 import * as THREE from 'three'
-import CLOUD from 'vanta/dist/vanta.clouds.min'
+import VANTA from 'vanta/dist/vanta.clouds.min'
 
 // const props = defineProps({
 //   foo: {
@@ -20,7 +20,7 @@ const { tc } = i18n.global
 const part1 = ref()
 
 onMounted(() => {
-  part1.value = CLOUD({
+  part1.value = VANTA({
     THREE,
     el: part1.value,
     mouseControls: true,
