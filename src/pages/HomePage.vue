@@ -41,10 +41,17 @@ onUnmounted(() => {
   <div class="HomePage">
 
     <!--    <div class="part1 shapedivider" ref="part1">-->
-    <div class="part1" ref="part1">
-      <div class="q-pa-lg">
-        <h3 class="text-black">{{ tc('一体化云服务平台') }}</h3>
+    <div ref="part1" class="column items-center" style="height: 100vh;">
+
+      <div class="col column justify-center">
+        <div class="text-black text-h3">{{ tc('一体化云服务平台') }}</div>
       </div>
+
+      <div class="col-auto column items-center">
+        <div>{{ tc('home.copyright') }}</div>
+        <div>京ICP备09112257号-94</div>
+      </div>
+
     </div>
 
     <!--    <div class="part2" ref="part2">-->
@@ -53,10 +60,10 @@ onUnmounted(() => {
     <!--      </div>-->
     <!--    </div>-->
 
-    <div class="home-footer">
-      <div>{{ tc('home.copyright') }}</div>
-      <div>京ICP备09112257号-94</div>
-    </div>
+    <!--    <div class="home-footer">-->
+    <!--      <div>{{ tc('home.copyright') }}</div>-->
+    <!--      <div>京ICP备09112257号-94</div>-->
+    <!--    </div>-->
   </div>
 </template>
 
@@ -67,7 +74,7 @@ onUnmounted(() => {
 .part1 {
   padding-top: 80px;
   user-select: none;
-  height: calc(100vh - 50px);
+  height: 100vh; // calc(100vh - 50px);
   top: 0;
   left: 0;
   z-index: -10;
@@ -124,11 +131,11 @@ onUnmounted(() => {
   }
 }
 
-.home-footer {
-  color: #ECEFF4;
-  text-align: center;
-  height: 50px;
-  line-height: 25px;
-  background-color: #2E3440;
-}
+//.home-footer {
+//  color: #ECEFF4;
+//  text-align: center;
+//  height: 50px;
+//  line-height: 25px;
+//  background-color: rgba(0,0,0,0.1) //#2E3440;
+//}
 </style>

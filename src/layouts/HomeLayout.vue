@@ -70,7 +70,7 @@ const dynamicBackground = computed(() => {
             auto-close
             padding="none"
             :ripple="false"
-            color="white"
+            color="grey-1"
           >
             <q-btn
               class="full-width transparent"
