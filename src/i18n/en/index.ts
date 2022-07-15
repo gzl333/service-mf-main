@@ -4,7 +4,7 @@ export default {
     copyright: 'Copyright © 1996-2022 Computer Network Information Center, Chinese Academy of Sciences. All Rights Reserved.'
   },
 
-  一体化云服务平台: 'Universal Service Platform',
+  一体化云服务平台: 'Integrated Cloud Service Platform',
   首页: 'Home',
   云主机: 'Cloud Server',
   对象存储: 'Object Storage',
