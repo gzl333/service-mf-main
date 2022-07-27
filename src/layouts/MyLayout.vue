@@ -17,7 +17,7 @@ import I18nSwitch from 'components/I18nSwitch.vue'
 // })
 // const emits = defineEmits(['change', 'delete'])
 
-const tc = i18n.global.tc
+const { tc } = i18n.global
 const store = useStore()
 console.log('@cnic/main store:', store.$state)
 // the root layout of @cnic/main, load @cnic/main's  store here
@@ -44,12 +44,11 @@ const releaseTime = process.env.releaseTime
 
       <q-toolbar style="height: 60px">
 
-        <q-toolbar-title shrink>
+        <q-toolbar-title class="cursor-pointer" shrink @click="navigateToUrl('/my')">
           <div class="row items-center no-wrap">
             <img src="../assets/cstcloud_logo.png" style="height: 40px;"/>
             <div class="text-grey-8 text-weight-bold">{{ tc('一体化云服务平台') }}</div>
           </div>
-
         </q-toolbar-title>
 
         <q-icon name="info" color="grey-5" size="xs">

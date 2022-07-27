@@ -30,6 +30,13 @@ const routes: RouteRecordRaw[] = [
     ]
   },
   {
+    path: '/storage/share/:serviceId?',
+    component: () => import('layouts/StorageShareLayout.vue'),
+    meta: {
+      requireLogin: false
+    }
+  },
+  {
     path: '/:catchAll(.*)*',
     component: () => import('layouts/MyLayout.vue'),
     meta: {

@@ -38,6 +38,10 @@ const titleTable = {
     zh: '对象存储-',
     en: 'Object Storage-'
   },
+  share: {
+    zh: '分享文件-',
+    en: 'Shared Files-'
+  },
   hpc: {
     zh: '高性能计算-',
     en: 'HPC-'
@@ -103,7 +107,8 @@ export default route(function (/* { store/!* , ssrContext  *!/ } */) {
       next({ path: '/' })
     } else if (!to.meta.requireLogin && isLogin) {
       // 不要求登录的页面，如果已经登录，则跳转到/my
-      next({ path: '/my' })
+      // next({ path: '/my' })
+      // 取消了，因为要在登录状态下查看/storage/share，该页面不需要登录。
     } else {
       // 之前都是登录状态有关的强制跳转。进入else后登录状态已经正常，进行页面访问权限的限制跳转
     }
