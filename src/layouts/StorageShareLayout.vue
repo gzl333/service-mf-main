@@ -68,9 +68,13 @@ const releaseTime = process.env.releaseTime
       </q-toolbar>
     </q-header>
 
-    <q-page-container>
-      <router-view :key="$route.fullPath" style="min-width: 1350px;"/>
-    </q-page-container>
+    <!--    <q-page-container>-->
+    <!--      <router-view style="min-width: 1350px;"/>-->
+    <!--    </q-page-container>-->
+
+    <!--    把header的高度占出来-->
+    <div style="height: 60px">
+    </div>
 
   </q-layout>
 </template>

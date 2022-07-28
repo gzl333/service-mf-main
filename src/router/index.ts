@@ -125,6 +125,11 @@ export default route(function (/* { store/!* , ssrContext  *!/ } */) {
       next({ path: '/my' })
     }
 
+    // my 统一跳转
+    if (to.fullPath === '/my') {
+      next({ path: '/my/server' })
+    }
+
     // 不符合上述所有条件的catch-all跳转，否则会卡在空白页
     next()
   })
