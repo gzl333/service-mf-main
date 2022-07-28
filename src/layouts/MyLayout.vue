@@ -152,7 +152,7 @@ const releaseTime = process.env.releaseTime
     </q-header>
 
     <q-page-container>
-      <router-view style="min-width: 1350px;"/>
+      <router-view :key="$route.fullPath" style="min-width: 1350px;"/>
     </q-page-container>
 
   </q-layout>

@@ -92,7 +92,7 @@ const dynamicBackground = computed(() => {
       <q-page class="non-selectable">
         <q-scroll-area class="home-scroll-area">
           <q-scroll-observer @scroll="onScroll"/>
-          <router-view/>
+          <router-view :key="$route.fullPath"/>
         </q-scroll-area>
       </q-page>
     </q-page-container>

@@ -30,7 +30,7 @@ const routes: RouteRecordRaw[] = [
     ]
   },
   {
-    path: '/storage/share/:serviceId?',
+    path: '/storage',
     component: () => import('layouts/StorageShareLayout.vue'),
     meta: {
       requireLogin: false
