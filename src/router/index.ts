@@ -18,9 +18,7 @@ import { i18n } from 'boot/i18n'
  * with the Router instance.
  */
 
-// 二级路由（app）登记表，有两个作用：
-// 1. 供@cnic-main记录验证合法二级路由
-// 2. 修改对应二级路由的title
+// 二级路由（app）登记表：修改对应二级路由的title
 const titleTable = {
   default: {
     zh: '中国科技云',
@@ -37,6 +35,10 @@ const titleTable = {
   storage: {
     zh: '对象存储-',
     en: 'Object Storage-'
+  },
+  share: {
+    zh: '分享文件-',
+    en: 'Shared Files-'
   },
   hpc: {
     zh: '高性能计算-',
@@ -103,21 +105,24 @@ export default route(function (/* { store/!* , ssrContext  *!/ } */) {
       next({ path: '/' })
     } else if (!to.meta.requireLogin && isLogin) {
       // 不要求登录的页面，如果已经登录，则跳转到/my
-      next({ path: '/my' })
+      // next({ path: '/my' })
+      // 取消了，因为要在登录状态下查看/storage/share，该页面不需要登录。
     } else {
       // 之前都是登录状态有关的强制跳转。进入else后登录状态已经正常，进行页面访问权限的限制跳转
     }
 
-    // 根据当前path（取第三位）更新store.currentApp，保证main里header的app选择正确。不写在header里是因为header只setup一次，不能实时根据路径更新
+    // 根据当前path（取第3位）更新store.currentApp，保证main里header的app选择正确。不写在header里是因为header只setup一次，不能实时根据路径更新
     store.items.currentApp = to.path.split('/')[2] || 'my'
 
-    // 验证二级路由（app）是否合法
+    // 修改title
     if (titleTable[store.items.currentApp]) {
       // 能从table取到则合法, 修改对应title
       document.title = i18n.global.locale === 'zh' ? titleTable[store.items.currentApp].zh + titleTable.default.zh : titleTable[store.items.currentApp].en + titleTable.default.en
-    } else {
-      // 二级路由不合法, 跳转至/my
-      next({ path: '/my' })
+    }
+
+    // my 统一跳转
+    if (to.fullPath === '/my') {
+      next({ path: '/my/server' })
     }
 
     // 不符合上述所有条件的catch-all跳转，否则会卡在空白页

@@ -2,6 +2,7 @@
 import { ref, computed } from 'vue'
 import { useStore } from 'stores/store'
 import { i18n } from 'boot/i18n'
+import { navigateToUrl } from 'single-spa'
 
 import I18nSwitch from 'components/I18nSwitch.vue'
 
@@ -36,7 +37,7 @@ const dynamicBackground = computed(() => {
     <q-header :elevated="scrollRatio===0.4" class="home-header row justify-center" :style="dynamicBackground">
       <div class="row justify-between items-center no-wrap content-fixed-width">
 
-        <div class="col-auto row items-center">
+        <div class="col-auto row items-center cursor-pointer" shrink @click="navigateToUrl('/')">
           <img src="../assets/cstcloud_logo.png" style="height: 50px;"/>
           <div class="text-grey-3 text-h5">{{ tc('一体化云服务平台') }}</div>
         </div>
@@ -91,7 +92,7 @@ const dynamicBackground = computed(() => {
       <q-page class="non-selectable">
         <q-scroll-area class="home-scroll-area">
           <q-scroll-observer @scroll="onScroll"/>
-          <router-view/>
+          <router-view :key="$route.fullPath"/>
         </q-scroll-area>
       </q-page>
     </q-page-container>
