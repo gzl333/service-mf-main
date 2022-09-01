@@ -14,6 +14,13 @@ declare global {
 // 因只提供英文和简体中文两种locale，只截取locale code的前两位
 const browserLocale = localStorage.getItem('usp_locale') as string || Quasar.lang.getLocale()?.slice(0, 2)
 
+const locale = browserLocale?.includes('zh') ? 'zh-CN' : 'en-US'
+
+// set quasar language set locale
+void import('quasar/lang/' + locale).then(lang => {
+  Quasar.lang.set(lang.default)
+})
+
 // 导出i18n实例供全局使用，singleSpa中避免使用useI18n方式
 export const i18n = createI18n({
   locale: browserLocale === 'zh' ? 'zh' : 'en', // i18n模块的初始locale。不是中文的一律显示英文
