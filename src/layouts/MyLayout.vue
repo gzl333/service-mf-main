@@ -90,6 +90,12 @@ const releaseTime = process.env.releaseTime
                  @click="navigateToUrl('/my/monitor')">
             {{ tc('综合监控') }}
           </q-btn>
+          <q-btn flat no-caps dense :ripple="false"
+                 class="full-height q-mx-md"
+                 :class="currentApp === 'support' ? 'active-btn':'inactive-btn'"
+                 @click="navigateToUrl('/my/support')">
+            {{ tc('用户支持') }}
+          </q-btn>
 
         </div>
 
