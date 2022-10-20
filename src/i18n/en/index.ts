@@ -11,6 +11,7 @@ export default {
   高性能计算: 'High Performance Computing',
   用量账单: 'Billing',
   综合监控: 'Monitor',
+  用户支持: 'Support',
   使用手册: 'User Manual',
 
   注册: 'Register',
