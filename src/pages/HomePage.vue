@@ -2,6 +2,8 @@
 import { ref, /* computed, */ onMounted, onUnmounted } from 'vue'
 // import { useStore } from 'stores/store'
 import { i18n } from 'boot/i18n'
+import { navigateToUrl } from 'single-spa'
+
 import * as THREE from 'three'
 import VANTA from 'vanta/dist/vanta.clouds.min'
 
@@ -20,17 +22,17 @@ const { tc } = i18n.global
 const part1 = ref()
 
 onMounted(() => {
-  part1.value = VANTA({
-    THREE,
-    el: part1.value,
-    mouseControls: true,
-    touchControls: true,
-    gyroControls: false,
-    minHeight: 200.00,
-    minWidth: 200.00,
-    skyColor: 0x2977a4,
-    sunColor: 0xe88628
-  })
+  // part1.value = VANTA({
+  //   THREE,
+  //   el: part1.value,
+  //   mouseControls: true,
+  //   touchControls: true,
+  //   gyroControls: false,
+  //   minHeight: 200.00,
+  //   minWidth: 200.00,
+  //   skyColor: 0x2977a4,
+  //   sunColor: 0xe88628
+  // })
 })
 onUnmounted(() => {
   part1.value.destroy()
@@ -41,7 +43,63 @@ onUnmounted(() => {
   <div class="HomePage">
 
     <!--    <div class="part1 shapedivider" ref="part1">-->
-    <div ref="part1" class="column items-center" style="height: 100vh;">
+    <div ref="part1" class="column items-center" style="height: 50vh;">
+
+      <div class="" style="height: 100px;">
+        <div class="row justify-between items-center no-wrap content-fixed-width">
+
+          <div class="col-auto row items-center cursor-pointer" shrink @click="navigateToUrl('/')">
+            <img src="../assets/cstcloud_logo.png" style="height: 50px;"/>
+            <div class="text-grey-3 text-h5">{{ tc('一体化云服务平台') }}</div>
+          </div>
+
+          <div class="col-auto row">
+
+            <I18nSwitch class="q-mr-lg" :is-dark="true"/>
+
+            <q-btn class="q-mr-lg gt-xs" flat :ripple="false" color="white" type="a" no-caps dense
+                   href="https://passport.escience.cn/regist.jsp"
+                   target="_blank">
+              {{ tc('注册') }}
+            </q-btn>
+
+            <q-btn flat
+                   dense
+                   :ripple="false"
+                   color="white"
+                   no-caps
+                   @click="store.askUrl('passport')"
+            >
+              {{ tc('科技云通行证登录') }}
+            </q-btn>
+
+            <q-btn-dropdown
+              class="transparent"
+              content-class="transparent"
+              flat
+              dense
+              no-caps
+              auto-close
+              padding="none"
+              :ripple="false"
+              color="grey-1"
+            >
+              <q-btn
+                class="full-width transparent"
+                flat
+                :ripple="false"
+                text-color="white"
+                no-caps
+                @click="store.askUrl('aai')">
+                {{ tc('科技云AAI登录') }}
+              </q-btn>
+            </q-btn-dropdown>
+
+          </div>
+        </div>
+      </div>
+
+      <q-separator color="grey"/>
 
       <div class="col column justify-center">
         <div class="text-black text-h3">{{ tc('一体化云服务平台') }}</div>
@@ -54,16 +112,22 @@ onUnmounted(() => {
 
     </div>
 
-    <!--    <div class="part2" ref="part2">-->
-    <!--      <div class="q-pa-lg">-->
-    <!--        <h3>服务简介</h3>-->
-    <!--      </div>-->
-    <!--    </div>-->
+    <div class="part2" ref="part2">
+      <div class="q-pa-lg">
+        <h3>服务1</h3>
+      </div>
+    </div>
 
-    <!--    <div class="home-footer">-->
-    <!--      <div>{{ tc('home.copyright') }}</div>-->
-    <!--      <div>京ICP备09112257号-94</div>-->
-    <!--    </div>-->
+    <div class="part2" >
+      <div class="q-pa-lg">
+        <h3>服务2</h3>
+      </div>
+    </div>
+
+    <div class="home-footer">
+      <div>{{ tc('home.copyright') }}</div>
+      <div>京ICP备09112257号-94</div>
+    </div>
   </div>
 </template>
 
@@ -96,7 +160,7 @@ onUnmounted(() => {
   left: 0;
   z-index: -10;
   width: 100%;
-  background-color: white;
+  background-color: grey;
 
   h3 {
     text-align: center;
