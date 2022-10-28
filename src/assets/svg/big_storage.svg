@@ -1,0 +1,247 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 219.51 243.07" class="svg-product">
+  <defs>
+    <style>
+      .object-storage-center-a,
+      .object-storage-center-g,
+      .object-storage-center-h,
+      .object-storage-center-i,
+      .object-storage-center-j,
+      .object-storage-center-y,
+      .object-storage-center-z {
+      fill: none;
+      }
+      .object-storage-center-b {
+      opacity: 0.08;
+      fill: url(#object-storage-center-gradient-a);
+      }
+      .object-storage-center-ab,
+      .object-storage-center-b,
+      .object-storage-center-g,
+      .object-storage-center-h,
+      .object-storage-center-i,
+      .object-storage-center-j,
+      .object-storage-center-y {
+      isolation: isolate;
+      }
+      .object-storage-center-c {
+      fill: url(#object-storage-center-gradient-b);
+      }
+      .object-storage-center-d {
+      fill: url(#object-storage-center-gradient-c);
+      }
+      .object-storage-center-aa,
+      .object-storage-center-e,
+      .object-storage-center-x {
+      fill: #fff;
+      }
+      .object-storage-center-e {
+      fill-opacity: 0.5;
+      }
+      .object-storage-center-f {
+      fill: #333c5e;
+      }
+      .object-storage-center-g,
+      .object-storage-center-h,
+      .object-storage-center-i,
+      .object-storage-center-j {
+      stroke: #142149;
+      }
+      .object-storage-center-aa,
+      .object-storage-center-g,
+      .object-storage-center-h,
+      .object-storage-center-i,
+      .object-storage-center-j,
+      .object-storage-center-x,
+      .object-storage-center-y,
+      .object-storage-center-z {
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      }
+      .object-storage-center-g,
+      .object-storage-center-h {
+      stroke-width: 2.14px;
+      }
+      .object-storage-center-g,
+      .object-storage-center-i,
+      .object-storage-center-j {
+      opacity: 0.32;
+      }
+      .object-storage-center-h {
+      opacity: 0.48;
+      }
+      .object-storage-center-i {
+      stroke-width: 2.01px;
+      }
+      .object-storage-center-j {
+      stroke-width: 2.06px;
+      }
+      .object-storage-center-k {
+      clip-path: url(#object-storage-center-clip-path-d);
+      }
+      .object-storage-center-ab,
+      .object-storage-center-l {
+      opacity: 0.8;
+      }
+      .object-storage-center-m {
+      fill: url(#object-storage-center-gradient-e);
+      }
+      .object-storage-center-n {
+      fill: url(#object-storage-center-gradient-f);
+      }
+      .object-storage-center-o {
+      fill: url(#object-storage-center-gradient-g);
+      }
+      .object-storage-center-p {
+      fill: url(#object-storage-center-gradient-h);
+      }
+      .object-storage-center-q {
+      fill: url(#object-storage-center-gradient-i);
+      }
+      .object-storage-center-r {
+      fill: url(#object-storage-center-gradient-j);
+      }
+      .object-storage-center-s {
+      fill: url(#object-storage-center-gradient-k);
+      }
+      .object-storage-center-t {
+      fill: url(#object-storage-center-gradient-l);
+      }
+      .object-storage-center-u {
+      fill: url(#object-storage-center-gradient-m);
+      }
+      .object-storage-center-v {
+      fill: url(#object-storage-center-gradient-n);
+      }
+      .object-storage-center-w {
+      fill: url(#object-storage-center-gradient-o);
+      }
+      .object-storage-center-aa,
+      .object-storage-center-x,
+      .object-storage-center-z {
+      stroke: #fff;
+      }
+      .object-storage-center-x,
+      .object-storage-center-y,
+      .object-storage-center-z {
+      stroke-width: 2px;
+      }
+      .object-storage-center-y {
+      stroke: #101c4f;
+      opacity: 0.4;
+      }
+      .object-storage-center-aa {
+      stroke-width: 3px;
+      }
+      .object-storage-center-ab {
+      fill: url(#object-storage-center-gradient-p);
+      }
+    </style>
+    <linearGradient id="object-storage-center-gradient-a" x1="122" y1="-1441.5" x2="122" y2="-1567.15" gradientTransform="matrix(1, 0, 0, -1, 0, -1324)" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#13151e" stop-opacity="0"></stop>
+      <stop offset="1" stop-color="#131532"></stop>
+    </linearGradient>
+    <linearGradient id="object-storage-center-gradient-b" x1="12" y1="834.1" x2="231" y2="834.1" gradientTransform="translate(0 -712)" gradientUnits="userSpaceOnUse">
+      <stop offset="0.48" stop-color="#d2d8e6"></stop>
+      <stop offset="0.52" stop-color="#e0e4ef"></stop>
+    </linearGradient>
+    <linearGradient id="object-storage-center" x1="12.1" y1="834.1" x2="231.1" y2="834.1" gradientTransform="translate(0 -712)" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#bbc1d4" stop-opacity="0"></stop>
+      <stop offset="0.35" stop-color="#bbc1d4" stop-opacity="0.7"></stop>
+      <stop offset="1" stop-color="#bbc1d4" stop-opacity="0"></stop>
+    </linearGradient>
+    <clipPath id="object-storage-center-clip-path-d" transform="translate(-11.99 -0.08)">
+      <path class="object-storage-center-a" d="M231,63.9c0-.6-.1-1.8-2.1-2.9L124.9,1.2A7.59,7.59,0,0,0,121.3.1a5.32,5.32,0,0,0-3.8,1.1L65.4,31.3,56,36.7h0l-29.3,17h0L15.4,60.1c-2.4,1.4-3,2.7-3,3.6h-.1V92.2c0,1.5,1,3,2.9,4.1l100.9,58.5c3.3,1.8,7.3,2.1,10.1.6l11.1-6.4.1.1,30.8-18.2h0l59.9-34.2c2-1.1,2.9-2.6,2.9-4.1V64.4h-.1A.9.9,0,0,1,231,63.9Z"></path>
+    </clipPath>
+    <linearGradient id="object-storage-center-gradient-e" x1="-239.82" y1="-655.96" x2="-239.82" y2="-656.46" gradientTransform="translate(43281.65 107749.78) scale(179.97 163.97)" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#17bdff" stop-opacity="0"></stop>
+      <stop offset="0.01" stop-color="#17bdff" stop-opacity="0"></stop>
+      <stop offset="0.2" stop-color="#17bdff" stop-opacity="0"></stop>
+      <stop offset="1" stop-color="#17bdff"></stop>
+    </linearGradient>
+    <linearGradient id="object-storage-center-gradient-f" x1="-239.54" y1="-656.23" x2="-239.54" y2="-656.73" gradientTransform="translate(43181.65 128782.54) scale(179.97 195.97)" xlink:href="#object-storage-center-gradient-e"></linearGradient>
+    <linearGradient id="object-storage-center-gradient-g" x1="-240.09" y1="-655.99" x2="-240.09" y2="-656.49" gradientTransform="translate(43379.65 117189.46) scale(179.97 178.39)" xlink:href="#object-storage-center-gradient-e"></linearGradient>
+    <linearGradient id="object-storage-center-gradient-h" x1="-240.07" y1="-651.81" x2="-239.57" y2="-651.81" gradientTransform="translate(43288 45026.49) scale(180 68.98)" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#1e54db"></stop>
+      <stop offset="1" stop-color="#3a5cb7"></stop>
+      <stop offset="1" stop-color="#3a5cb7"></stop>
+    </linearGradient>
+    <linearGradient id="object-storage-center-gradient-i" x1="-240.07" y1="-653.9" x2="-239.57" y2="-653.9" gradientTransform="translate(43289.63 68045.52) scale(180.01 103.99)" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#0399f6"></stop>
+      <stop offset="1" stop-color="#00b9ff"></stop>
+    </linearGradient>
+    <linearGradient id="object-storage-center-gradient-j" x1="-240.37" y1="-652.22" x2="-239.87" y2="-652.22" gradientTransform="translate(43632 45082.49) scale(181 68.98)" xlink:href="#object-storage-center-gradient-h"></linearGradient>
+    <linearGradient id="object-storage-center-gradient-k" x1="-240.34" y1="-654.16" x2="-239.84" y2="-654.16" gradientTransform="translate(43388.63 68101.52) scale(180.01 103.99)" xlink:href="#object-storage-center-gradient-i"></linearGradient>
+    <linearGradient id="object-storage-center-gradient-l" x1="-239.79" y1="-652.22" x2="-239.29" y2="-652.22" gradientTransform="translate(43189 45082.49) scale(180 68.98)" xlink:href="#object-storage-center-gradient-h"></linearGradient>
+    <linearGradient id="object-storage-center-gradient-m" x1="-239.79" y1="-654.17" x2="-239.29" y2="-654.17" gradientTransform="translate(43206.04 68121.98) scale(180.07 104.02)" xlink:href="#object-storage-center-gradient-i"></linearGradient>
+    <linearGradient id="object-storage-center-gradient-n" x1="-240.07" y1="-652.62" x2="-239.57" y2="-652.62" gradientTransform="translate(43289 45138.49) scale(180 68.98)" xlink:href="#object-storage-center-gradient-h"></linearGradient>
+    <linearGradient id="object-storage-center-gradient-o" x1="-240.07" y1="-654.44" x2="-239.57" y2="-654.44" gradientTransform="translate(43306.04 68178.98) scale(180.07 104.02)" xlink:href="#object-storage-center-gradient-i"></linearGradient>
+    <linearGradient id="object-storage-center-gradient-p" x1="12" y1="-356.22" x2="231" y2="-356.22" gradientTransform="matrix(1, 0, 0, -1, 0, -278)" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#17bdff"></stop>
+      <stop offset="1" stop-color="#17bdff" stop-opacity="0.2"></stop>
+    </linearGradient>
+  </defs>
+  <g class="animation-element" data-animation-shadow="" style="opacity: 1;">
+    <path class="object-storage-center-b" d="M122,117.5a9.07,9.07,0,0,0-4.3,1c-1.1.6-102.3,58.7-103.4,59.3a3,3,0,0,0-1.8,2.5h0a3.13,3.13,0,0,0,1.8,2.5c1.1.6,102.3,58.7,103.4,59.3a9.33,9.33,0,0,0,8.6,0c1.1-.6,102.3-58.7,103.4-59.3a3,3,0,0,0,1.8-2.5h0a3.13,3.13,0,0,0-1.8-2.5c-1.1-.6-102.3-58.7-103.4-59.3a10.43,10.43,0,0,0-4.3-1" transform="translate(-11.99 -0.08)"></path>
+  </g>
+  <g class="animation-element" data-animation-bottom="" style="transform: translateY(0px); opacity: 1;">
+    <path class="object-storage-center-c" d="M231,107.9h0v29.2a3.13,3.13,0,0,1-1.8,2.5c-1.1.6-102.3,58.7-103.4,59.3a9.33,9.33,0,0,1-8.6,0c-1.1-.6-102.3-58.7-103.4-59.3a3,3,0,0,1-1.8-2.5V108h0v-.5h.1a3.39,3.39,0,0,1,1.7-2c1.1-.6,102.3-59.6,103.4-60.2a9.33,9.33,0,0,1,8.6,0c1.1.6,102.3,59.6,103.4,60.2a3.39,3.39,0,0,1,1.7,2h.1Z" transform="translate(-11.99 -0.08)"></path>
+    <path class="object-storage-center-d" d="M231.1,107.9h0v29.2a3.13,3.13,0,0,1-1.8,2.5c-1.1.6-102.3,58.7-103.4,59.3a9.33,9.33,0,0,1-8.6,0c-1.1-.6-102.3-58.7-103.4-59.3a3,3,0,0,1-1.8-2.5V108h0v-.5h.1a3.39,3.39,0,0,1,1.7-2c1.1-.6,102.3-59.6,103.4-60.2a9.33,9.33,0,0,1,8.6,0c1.1.6,102.3,59.6,103.4,60.2a3.39,3.39,0,0,1,1.7,2h.1Z" transform="translate(-11.99 -0.08)"></path>
+    <path class="object-storage-center-e" d="M229.2,110.1c-1.1.6-102.3,59.1-103.4,59.8a9.33,9.33,0,0,1-8.6,0c-1.1-.6-102.3-59.1-103.4-59.8a2.7,2.7,0,0,1-1.7-3.3,2.86,2.86,0,0,1,1.7-1.7c1.1-.6,102.3-59.1,103.4-59.8a9.33,9.33,0,0,1,8.6,0c1.1.6,102.3,59.1,103.4,59.8a2.56,2.56,0,0,1,1.6,3.3A2.68,2.68,0,0,1,229.2,110.1Zm-7.2-5.2c-1-.6-96-55.9-97.1-56.5a8.9,8.9,0,0,0-8.1,0c-1,.6-96,55.9-97.1,56.5a2.5,2.5,0,0,0,0,4.7c1,.6,96.1,55.9,97.1,56.5a8.9,8.9,0,0,0,8.1,0c1-.6,96.1-55.9,97.1-56.5a2.45,2.45,0,0,0,1.5-3.2A3.11,3.11,0,0,0,222,104.9Z" transform="translate(-11.99 -0.08)"></path>
+    <path class="object-storage-center-f" d="M116.9,165.9c-.8-.4-50.8-29.5-78.8-45.7,30.3-17.5,78.3-45.2,79-45.7a9.33,9.33,0,0,1,8.6,0c.8.4,48.1,27.8,78.5,45.4-27.9,16.2-78.5,45.6-79.3,46A8.69,8.69,0,0,1,116.9,165.9Z" transform="translate(-11.99 -0.08)"></path>
+    <path class="object-storage-center-g" d="M25,127.8l5.3,3.2" transform="translate(-11.99 -0.08)"></path>
+    <path class="object-storage-center-h" d="M25,133.1l5.3,3.2" transform="translate(-11.99 -0.08)"></path>
+    <path class="object-storage-center-h" d="M34.6,133.1l5.3,3.2" transform="translate(-11.99 -0.08)"></path>
+    <path class="object-storage-center-g" d="M34.6,138.5l5.3,3.2" transform="translate(-11.99 -0.08)"></path>
+    <path class="object-storage-center-i" d="M210,132.5v7" transform="translate(-11.99 -0.08)"></path>
+    <path class="object-storage-center-i" d="M214,130v7" transform="translate(-11.99 -0.08)"></path>
+    <path class="object-storage-center-i" d="M218,127.5V135" transform="translate(-11.99 -0.08)"></path>
+    <path class="object-storage-center-i" d="M222,125.4v7" transform="translate(-11.99 -0.08)"></path>
+    <path class="object-storage-center-j" d="M69.5,156.8l38.6,22.1" transform="translate(-11.99 -0.08)"></path>
+  </g>
+
+  <g class="animation-element" data-animation-top="" style="transform: translateY(0px); opacity: 1;">
+    <g class="object-storage-center-k">
+      <g class="object-storage-center-l">
+        <path class="object-storage-center-m" d="M77,108.81v30.8L167,191v-80.9Z" transform="translate(-11.99 -0.08)"></path>
+      </g>
+      <g class="object-storage-center-l">
+        <path class="object-storage-center-n" d="M27,81.81v46.7l90,51.3V85.11Z" transform="translate(-11.99 -0.08)"></path>
+      </g>
+      <g class="object-storage-center-l">
+        <path class="object-storage-center-o" d="M126,78.81V168l90-52.2V81Z" transform="translate(-11.99 -0.08)"></path>
+      </g>
+      <path class="object-storage-center-p" d="M76,53.11v-7h90v7s0,2.4-1,3l-41.8,24.2a4.17,4.17,0,0,1-3.9-.2L77.4,55.91C76.2,55.31,76,53.11,76,53.11Z" transform="translate(-11.99 -0.08)"></path>
+      <path class="object-storage-center-q" d="M76.7,45l42.5-24.6a4.17,4.17,0,0,1,3.9.2L165,44.81c1.2.7,1.3,1.7.3,2.3l-42.5,24.6a4.17,4.17,0,0,1-3.9-.2L77,47.21C75.8,46.51,75.7,45.51,76.7,45Z" transform="translate(-11.99 -0.08)"></path>
+      <path class="object-storage-center-r" d="M125,81.11v-7h91v7s0,2.4-1,3l-42.6,24.2a4.17,4.17,0,0,1-3.9-.2l-42.1-24.2C125.2,83.31,125,81.11,125,81.11Z" transform="translate(-11.99 -0.08)"></path>
+      <path class="object-storage-center-s" d="M126.7,73.11l42.5-24.6a4.17,4.17,0,0,1,3.9.2L215,72.91c1.2.7,1.3,1.7.3,2.3l-42.5,24.6a4.17,4.17,0,0,1-3.9-.2L127,75.41C125.8,74.71,125.7,73.61,126.7,73.11Z" transform="translate(-11.99 -0.08)"></path>
+      <path class="object-storage-center-t" d="M27,81.11v-7h90v7s0,2.4-1,3l-41.8,24.2a4.17,4.17,0,0,1-3.9-.2L28.4,83.91C27.2,83.31,27,81.11,27,81.11Z" transform="translate(-11.99 -0.08)"></path>
+      <path class="object-storage-center-u" d="M27.7,72.91l42.4-24.5a4.17,4.17,0,0,1,3.9.2l41.8,24.1c1.2.7,1.3,1.7.3,2.3L73.7,99.51a4.17,4.17,0,0,1-3.9-.2L28,75.11C26.8,74.51,26.7,73.51,27.7,72.91Z" transform="translate(-11.99 -0.08)"></path>
+      <path class="object-storage-center-v" d="M76.8,109.21v-7H167v7s0,2.4-1,3l-41.9,24.2a4.17,4.17,0,0,1-3.9-.2L78.3,112C77,111.41,76.8,109.21,76.8,109.21Z" transform="translate(-11.99 -0.08)"></path>
+      <path class="object-storage-center-w" d="M77.3,101.61,119.9,77a4.17,4.17,0,0,1,3.9.2l42,24.3c1.2.7,1.3,1.7.3,2.3l-42.6,24.6a4.17,4.17,0,0,1-3.9-.2l-42-24.3C76.4,103.21,76.3,102.21,77.3,101.61Z" transform="translate(-11.99 -0.08)"></path>
+      <g>
+        <path class="object-storage-center-x" d="M62.9,70.91,70,75l.9-4.7Z" transform="translate(-11.99 -0.08)"></path>
+        <line class="object-storage-center-y" x1="58.81" y1="87.13" x2="83.91" y2="72.63"></line>
+        <line class="object-storage-center-z" x1="58.81" y1="87.13" x2="68.31" y2="81.63"></line>
+      </g>
+      <g>
+        <path class="object-storage-center-z" d="M110.6,46.51V52h9.5" transform="translate(-11.99 -0.08)"></path>
+        <path class="object-storage-center-z" d="M120.7,39.81h9.5v5.5" transform="translate(-11.99 -0.08)"></path>
+        <line class="object-storage-center-z" x1="104.21" y1="40.23" x2="112.71" y2="50.83"></line>
+      </g>
+      <g>
+        <line class="object-storage-center-z" x1="88.41" y1="103.63" x2="113.91" y2="88.63"></line>
+        <line class="object-storage-center-z" x1="91.91" y1="106.13" x2="117.41" y2="91.13"></line>
+        <line class="object-storage-center-z" x1="96.41" y1="108.63" x2="122.01" y2="93.63"></line>
+        <line class="object-storage-center-z" x1="100.91" y1="111.13" x2="126.51" y2="96.13"></line>
+        <line class="object-storage-center-z" x1="104.91" y1="113.63" x2="130.51" y2="98.63"></line>
+        <line class="object-storage-center-z" x1="108.91" y1="116.23" x2="126.51" y2="106.13"></line>
+        <line class="object-storage-center-z" x1="83.91" y1="101.13" x2="109.41" y2="86.13"></line>
+      </g>
+      <g>
+        <path class="object-storage-center-aa" d="M163.3,81.81l.1-7.5,14.9.6.6-4.7,7.6.6,5.8,2.9L171.2,86Z" transform="translate(-11.99 -0.08)"></path>
+        <ellipse class="object-storage-center-aa" cx="156.41" cy="64.93" rx="2.9" ry="1.8"></ellipse>
+      </g>
+    </g>
+    <path class="object-storage-center-ab" d="M231,63.9c0-.6-.1-1.8-2.1-2.9L124.9,1.2A7.59,7.59,0,0,0,121.3.1a5.32,5.32,0,0,0-3.8,1.1L65.4,31.3,56,36.7h0l-29.3,17h0L15.4,60.1a7,7,0,0,0-3.4,5V92.2a6.21,6.21,0,0,0,3.2,4.1l100.9,58.5c3.3,1.8,7.3,2.1,10.1.6l11.1-6.4.1.1,30.8-18.2h0l59.9-34.2c2-1.1,2.9-2.6,2.9-4.1V64.1h-.1C230.9,64.2,230.9,64.1,231,63.9Z" transform="translate(-11.99 -0.08)"></path>
+  </g>
+</svg>
