@@ -23,17 +23,17 @@ const { tc } = i18n.global
 const part1 = ref()
 
 onMounted(() => {
-  // part1.value = VANTA({
-  //   THREE,
-  //   el: part1.value,
-  //   mouseControls: true,
-  //   touchControls: true,
-  //   gyroControls: false,
-  //   minHeight: 200.00,
-  //   minWidth: 200.00,
-  //   skyColor: 0x2977a4,
-  //   sunColor: 0xe88628
-  // })
+  part1.value = VANTA({
+    THREE,
+    el: part1.value,
+    mouseControls: true,
+    touchControls: true,
+    gyroControls: false,
+    minHeight: 200.00,
+    minWidth: 200.00,
+    skyColor: 0x2977a4,
+    sunColor: 0xe88628
+  })
 
   // todo 判断帧率，过慢则取消动画
 })
