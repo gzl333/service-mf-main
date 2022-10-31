@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, /* computed, */ onMounted, onUnmounted } from 'vue'
+import { ref, /* computed, */ onMounted, onUnmounted, computed } from 'vue'
 // import { useStore } from 'stores/store'
 import { i18n } from 'boot/i18n'
 // import { navigateToUrl } from 'single-spa'
@@ -34,10 +34,31 @@ onMounted(() => {
   //   skyColor: 0x2977a4,
   //   sunColor: 0xe88628
   // })
+
+  // todo 判断帧率，过慢则取消动画
 })
 onUnmounted(() => {
   part1.value.destroy()
 })
+
+// const dynamicWords = computed(() => i18n.global.locale === 'zh' ? ['云计算', '对象存储', '运维监控'] : ['Cloud Computing', 'Object Storage', 'Operations'])
+// const displayWord = ref(dynamicWords.value[0])
+// const displayIndex = ref(1)
+// setInterval(() => {
+//   const currentWord = dynamicWords.value[displayIndex.value % 3]
+//   let innerIndex = 0
+//   let step = 1
+//   const innerTimer = setInterval(() => {
+//     displayWord.value = currentWord.slice(innerIndex)
+//     innerIndex += step
+//     if (innerIndex + 1 === currentWord.length) {
+//       step = -1
+//     }
+//   }, 100)
+//   clearInterval(innerTimer)
+//   displayIndex.value += 1
+// }, 3000)
+
 </script>
 
 <template>
@@ -57,7 +78,13 @@ onUnmounted(() => {
           {{ tc('一体化') }}
         </div>
         <div class="row items-center justify-center text-black text-h2 text-weight-bold q-pb-xl">
-          {{ tc('计算、存储与运维的解决方案') }}
+<!--          <div class="col-auto"-->
+<!--               style="border-bottom: rgba(0,112,218,1) 10px solid ">-->
+<!--            {{ displayWord }}-->
+<!--          </div>-->
+          <div class="col-auto">
+            {{ tc('计算、存储与运维的解决方案') }}
+          </div>
         </div>
         <div class="row items-center justify-center text-black text-h5">
           {{ tc('一站式满足科研IT需求') }}
@@ -281,7 +308,7 @@ onUnmounted(() => {
       <div class="col row items-center justify-center content-fixed-width q-gutter-x-lg q-ma-xl"
            style="min-height: 500px;">
 
-        <q-card v-for="i in [1,2,3,4,5,6]" :key="i" class="col-auto" style="width: 300px;" flat>
+        <q-card v-for="i in ['灵活配置','快速部署','轻松扩容','多重备份','高可靠性','安全保障']" :key="i" class="col-auto" style="width: 300px;" flat>
           <q-card-section>
             <div class="row justify-center">
               <img :src="require('assets/svg/compute.svg')" style="width: 80px;"/>
@@ -290,7 +317,7 @@ onUnmounted(() => {
 
           <q-card-section class="q-pt-none">
             <div class="row justify-center text-center">
-              <div class="text-h6 text-weight-bold">特点{{ i }}</div>
+              <div class="text-h6 text-weight-bold">{{ i }}</div>
             </div>
 
           </q-card-section>
@@ -331,7 +358,7 @@ onUnmounted(() => {
                   </div>
 
                   <div class="col-auto">
-                    <q-btn class="" color="primary" >案例链接</q-btn>
+                    <q-btn class="" color="primary">案例链接</q-btn>
                   </div>
 
                 </div>
@@ -360,67 +387,4 @@ onUnmounted(() => {
 <style lang="scss" scoped>
 .HomePage {
 }
-
-//.part1 {
-//  padding-top: 80px;
-//  user-select: none;
-//  height: 100vh; // calc(100vh - 50px);
-//  top: 0;
-//  left: 0;
-//  z-index: -10;
-//  width: 100%;
-//  //background-image: linear-gradient(to right top, #92FFC0, #002661);
-//  //background-image: linear-gradient(110.5deg, rgba(71, 114, 148, 1) 14.9%, rgba(149, 245, 211, 1) 77.9%);
-//}
-
-//.part2 {
-//  padding-top: 80px;
-//  user-select: none;
-//  height: 100vh;
-//  top: 0;
-//  left: 0;
-//  z-index: -10;
-//  width: 100%;
-//  background-color: grey-1;
-//
-//  h3 {
-//    text-align: center;
-//    margin-top: 40vh;
-//  }
-//}
-
-//.shapedivider {
-//  overflow: hidden;
-//  position: relative;
-//}
-//
-//.shapedivider::before {
-//  content: '';
-//  //font-family: 'shape divider from ShapeDividers.com';
-//  position: absolute;
-//  z-index: 3;
-//  pointer-events: none;
-//  background-repeat: no-repeat;
-//  bottom: -0.1vw;
-//  left: -0.1vw;
-//  right: -0.1vw;
-//  top: -0.1vw;
-//  background-size: 100% 258px;
-//  background-position: 50% 100%;
-//  background-image: url('data:image/svg+xml;charset=utf8, <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 35.28 2.17" preserveAspectRatio="none"><path d="M35.28 1.67c-3.07-.55-9.27.41-16.15 0-6.87-.4-13.74-.58-19.13.1v.4h35.28z" fill="%23ffffff"/><path d="M35.28 1.16c-3.17-.8-7.3.4-10.04.56-2.76.17-9.25-1.47-12.68-1.3-3.42.16-4.64.84-7.04.86C3.12 1.31 0 .4 0 .4v1.77h35.28z" opacity=".5" fill="%23ffffff"/><path d="M35.28.31c-2.57.84-7.68.3-11.8.43-4.1.12-6.85.61-9.57.28C11.18.69 8.3-.16 5.3.02 2.3.22.57.85 0 .87v1.2h35.28z" opacity=".5" fill="%23ffffff"/></svg>');
-//}
-//
-//@media (min-width: 2100px) {
-//  .shapedivider::before {
-//    background-size: 100% calc(2vw + 258px);
-//  }
-//}
-
-//.home-footer {
-//  color: #ECEFF4;
-//  text-align: center;
-//  height: 50px;
-//  line-height: 25px;
-//  background-color: rgba(0,0,0,0.1) //#2E3440;
-//}
 </style>
