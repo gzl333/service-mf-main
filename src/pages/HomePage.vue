@@ -20,18 +20,8 @@ import HeaderContent from 'components/HeaderContent.vue'
 const { tc } = i18n.global
 // const store = useStore()
 
-// 单一开关控制动画
-// const isAnimationPlaying = ref(true)
-// watch(isAnimationPlaying, () => {
-//   if (isAnimationPlaying) {
-//
-//   } else {
-//
-//   }
-// })
-
-const videoDom = ref()
-const animation = ref()
+const videoDom = ref() // 容纳动画的dom对象
+const animation = ref() // 动画对象
 
 const startAnimation = () => {
   animation.value = VANTA({
@@ -49,6 +39,17 @@ const startAnimation = () => {
 const stopAnimation = () => {
   animation.value.destroy()
 }
+
+// 单一开关控制动画
+const isAnimationPlaying = ref(true)
+watch(isAnimationPlaying, () => {
+  if (isAnimationPlaying.value) {
+    // mount the animation
+    startAnimation()
+  } else {
+    stopAnimation()
+  }
+})
 
 /* FPS测量 */
 const avgFps = ref(60) // 认为初始帧率为满值
@@ -70,12 +71,12 @@ const countFps = () => {
 }
 /* FPS测量 */
 
-/* 过低FPS侦测, 过低帧率则停止动画 */
-const monitorFps = () => {
+/* 过低FPS保护, 过低帧率则停止动画 */
+const guardFps = () => {
   const MIN_FPS = 18 // 最低帧率
   const timer = setInterval(() => {
     if (avgFps.value < MIN_FPS) {
-      stopAnimation()
+      isAnimationPlaying.value = false
       clearInterval(timer)
     }
   }, 100)
@@ -101,14 +102,12 @@ const monitorFps = () => {
 // }, 3000)
 
 onMounted(() => {
-  // mount the animation
+  // start animation
   startAnimation()
-
   // start FPS counting
   countFps()
-
   // monitor FPS
-  monitorFps()
+  guardFps()
 })
 
 onUnmounted(() => {
@@ -121,14 +120,14 @@ onUnmounted(() => {
   <div class="HomePage">
 
     <q-page-sticky position="bottom-left" :offset="[5, 5]">
-      <div class="text-grey-5" @click="startAnimation">开启动画</div>
-      <div class="text-grey-5" @click="stopAnimation">关闭动画</div>
+      <div class="text-grey-5 cursor-pointer" @click="isAnimationPlaying = true">开启动画</div>
+      <div class="text-grey-5 cursor-pointer" @click="isAnimationPlaying = false">关闭动画</div>
       <div class="text-grey-5">FPS: {{ avgFps.toFixed(2) }}</div>
     </q-page-sticky>
 
-    <div ref="videoDom" class="column items-center bg-grey-5"
-         style="height: 50vh; min-height: 500px; background-color: #1976D2;
-                -webkit-mask-image: -webkit-gradient(linear, left top, left bottom, from(rgba(0,0,0,1)), color-stop(0.6, rgba(0,0,0,1)), color-stop(0.9, rgba(0,0,0,0.2)), to(rgba(0,0,0,0)));">
+    <div ref="videoDom"
+         class="column items-center"
+         style="height: 50vh; min-height: 500px; background-color: #5997BE; -webkit-mask-image: -webkit-gradient(linear, left top, left bottom, from(rgba(0, 0, 0, 1)), color-stop(0.6, rgba(0, 0, 0, 1)), color-stop(0.9, rgba(0, 0, 0, 0.2)), to(rgba(0, 0, 0, 0)));">
 
       <HeaderContent/>
 
@@ -502,5 +501,16 @@ onUnmounted(() => {
 
 <style lang="scss" scoped>
 .HomePage {
+}
+
+.AnimationPlaying {
+
+}
+
+.AnimationNotPlaying {
+  -webkit-mask-image: -webkit-gradient(linear, left top, left bottom, from(rgba(0, 0, 0, 1)), color-stop(0.6, rgba(0, 0, 0, 1)), color-stop(0.9, rgba(0, 0, 0, 0.2)), to(rgba(0, 0, 0, 0)));
+  //background: #2980B9; /* fallback for old browsers */
+  //background: -webkit-linear-gradient(to bottom, #FFFFFF, #6DD5FA, #2980B9); /* Chrome 10-25, Safari 5.1-6 */
+  //background: linear-gradient(to bottom, #FFFFFF, #6DD5FA, #2980B9); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 }
 </style>
