@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import { ref, /* computed, */ onMounted, onUnmounted, computed } from 'vue'
+import { ref, watch, /* computed, */ onMounted, onUnmounted } from 'vue'
 // import { useStore } from 'stores/store'
 import { i18n } from 'boot/i18n'
-// import { navigateToUrl } from 'single-spa'
+import { navigateToUrl } from 'single-spa'
 import * as THREE from 'three'
 import VANTA from 'vanta/dist/vanta.clouds.min'
 
@@ -20,12 +20,23 @@ import HeaderContent from 'components/HeaderContent.vue'
 const { tc } = i18n.global
 // const store = useStore()
 
-const part1 = ref()
+// 单一开关控制动画
+// const isAnimationPlaying = ref(true)
+// watch(isAnimationPlaying, () => {
+//   if (isAnimationPlaying) {
+//
+//   } else {
+//
+//   }
+// })
 
-onMounted(() => {
-  part1.value = VANTA({
+const videoDom = ref()
+const animation = ref()
+
+const startAnimation = () => {
+  animation.value = VANTA({
     THREE,
-    el: part1.value,
+    el: videoDom.value,
     mouseControls: true,
     touchControls: true,
     gyroControls: false,
@@ -34,12 +45,42 @@ onMounted(() => {
     skyColor: 0x2977a4,
     sunColor: 0xe88628
   })
+}
+const stopAnimation = () => {
+  animation.value.destroy()
+}
 
-  // todo 判断帧率，过慢则取消动画
-})
-onUnmounted(() => {
-  part1.value.destroy()
-})
+/* FPS测量 */
+const avgFps = ref(60) // 认为初始帧率为满值
+const countFps = () => {
+  let fps = 0
+  let before = Date.now()
+  let now = Date.now()
+  requestAnimationFrame(
+    function loop () {
+      now = Date.now()
+      fps = Math.round(1000 / (now - before))
+      before = now
+      requestAnimationFrame(loop)
+    }
+  )
+  setInterval(() => {
+    avgFps.value = (avgFps.value + fps) / 2
+  }, 1000)
+}
+/* FPS测量 */
+
+/* 过低FPS侦测, 过低帧率则停止动画 */
+const monitorFps = () => {
+  const MIN_FPS = 18 // 最低帧率
+  const timer = setInterval(() => {
+    if (avgFps.value < MIN_FPS) {
+      stopAnimation()
+      clearInterval(timer)
+    }
+  }, 100)
+}
+/* 过低FPS侦测 */
 
 // const dynamicWords = computed(() => i18n.global.locale === 'zh' ? ['云计算', '对象存储', '运维监控'] : ['Cloud Computing', 'Object Storage', 'Operations'])
 // const displayWord = ref(dynamicWords.value[0])
@@ -59,13 +100,34 @@ onUnmounted(() => {
 //   displayIndex.value += 1
 // }, 3000)
 
+onMounted(() => {
+  // mount the animation
+  startAnimation()
+
+  // start FPS counting
+  countFps()
+
+  // monitor FPS
+  monitorFps()
+})
+
+onUnmounted(() => {
+  stopAnimation()
+})
+
 </script>
 
 <template>
   <div class="HomePage">
 
-    <div ref="part1" class="column items-center bg-grey-5"
-         style="height: 60vh; min-height: 600px;
+    <q-page-sticky position="bottom-left" :offset="[5, 5]">
+      <div class="text-grey-5" @click="startAnimation">开启动画</div>
+      <div class="text-grey-5" @click="stopAnimation">关闭动画</div>
+      <div class="text-grey-5">FPS: {{ avgFps.toFixed(2) }}</div>
+    </q-page-sticky>
+
+    <div ref="videoDom" class="column items-center bg-grey-5"
+         style="height: 50vh; min-height: 500px; background-color: #1976D2;
                 -webkit-mask-image: -webkit-gradient(linear, left top, left bottom, from(rgba(0,0,0,1)), color-stop(0.6, rgba(0,0,0,1)), color-stop(0.9, rgba(0,0,0,0.2)), to(rgba(0,0,0,0)));">
 
       <HeaderContent/>
@@ -73,21 +135,26 @@ onUnmounted(() => {
       <!--      <q-separator/>-->
 
       <div class="col column justify-center">
-        <div class="row items-center justify-center text-black text-h1 text-weight-bold q-pb-xl"
+        <div class="row items-center justify-center text-black text-h1 text-weight-bold q-pb-lg"
              style="background: -webkit-linear-gradient(45deg, rgba(0,0,0,1) 0%, rgba(0,112,218,1) 90% ); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">
           {{ tc('一体化') }}
         </div>
-        <div class="row items-center justify-center text-black text-h2 text-weight-bold q-pb-xl">
-<!--          <div class="col-auto"-->
-<!--               style="border-bottom: rgba(0,112,218,1) 10px solid ">-->
-<!--            {{ displayWord }}-->
-<!--          </div>-->
+        <div class="row items-center justify-center text-black text-h2 text-weight-bold q-pb-lg">
+          <!--          <div class="col-auto"-->
+          <!--               style="border-bottom: rgba(0,112,218,1) 10px solid ">-->
+          <!--            {{ displayWord }}-->
+          <!--          </div>-->
           <div class="col-auto">
-            {{ tc('计算、存储与运维的解决方案') }}
+            {{ tc('计算、存储与监控的解决方案') }}
           </div>
         </div>
-        <div class="row items-center justify-center text-black text-h5">
+        <div class="row items-center justify-center text-black text-h5 q-pb-lg">
           {{ tc('一站式满足科研IT需求') }}
+        </div>
+        <div class="row items-center justify-center q-gutter-md">
+          <q-btn class="col-auto" color="primary" unelevated no-caps @click="navigateToUrl('/about')">关于项目</q-btn>
+          <q-btn class="col-auto" color="primary" unelevated no-caps @click="navigateToUrl('/case')">成功案例</q-btn>
+          <q-btn class="col-auto" color="primary" icon-right="play_arrow" unelevated no-caps>开始使用</q-btn>
         </div>
       </div>
 
@@ -95,7 +162,7 @@ onUnmounted(() => {
 
     <div class="column items-center justify-center">
 
-      <div class="col row items-center justify-center content-fixed-width q-gutter-x-lg q-ma-xl"
+      <div class="col row items-center justify-center content-fixed-width q-gutter-x-lg q-mb-xl"
            style="min-height: 300px;">
 
         <q-card class="col-auto shadow-24" style="width: 300px;">
@@ -107,19 +174,19 @@ onUnmounted(() => {
 
           <q-card-section class="q-pt-none">
             <div class="row justify-center text-center">
-              <div class="text-h5 text-weight-bold text-primary">云计算</div>
+              <div class="text-h5 text-weight-bold text-primary">科研云主机</div>
             </div>
 
           </q-card-section>
 
-          <q-card-section>
-            <div class="row justify-center">
-              <div class="text-grey">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-                tempor incididunt ut labore et dolore magna aliqua.
-              </div>
-            </div>
-          </q-card-section>
+          <!--          <q-card-section>-->
+          <!--            <div class="row justify-center">-->
+          <!--              <div class="text-grey">-->
+          <!--                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod-->
+          <!--                tempor incididunt ut labore et dolore magna aliqua.-->
+          <!--              </div>-->
+          <!--            </div>-->
+          <!--          </q-card-section>-->
         </q-card>
 
         <q-card class="col-auto shadow-24" style="width: 300px;">
@@ -136,14 +203,14 @@ onUnmounted(() => {
 
           </q-card-section>
 
-          <q-card-section>
-            <div class="row justify-center">
-              <div class="text-grey">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-                tempor incididunt ut labore et dolore magna aliqua.
-              </div>
-            </div>
-          </q-card-section>
+          <!--          <q-card-section>-->
+          <!--            <div class="row justify-center">-->
+          <!--              <div class="text-grey">-->
+          <!--                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod-->
+          <!--                tempor incididunt ut labore et dolore magna aliqua.-->
+          <!--              </div>-->
+          <!--            </div>-->
+          <!--          </q-card-section>-->
         </q-card>
 
         <q-card class="col-auto shadow-24" style="width: 300px;">
@@ -155,19 +222,19 @@ onUnmounted(() => {
 
           <q-card-section class="q-pt-none">
             <div class="row justify-center text-center">
-              <div class="text-h5 text-weight-bold text-primary">运维监控</div>
+              <div class="text-h5 text-weight-bold text-primary">云监控</div>
             </div>
 
           </q-card-section>
 
-          <q-card-section>
-            <div class="row justify-center">
-              <div class="text-grey">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-                tempor incididunt ut labore et dolore magna aliqua.
-              </div>
-            </div>
-          </q-card-section>
+          <!--          <q-card-section>-->
+          <!--            <div class="row justify-center">-->
+          <!--              <div class="text-grey">-->
+          <!--                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod-->
+          <!--                tempor incididunt ut labore et dolore magna aliqua.-->
+          <!--              </div>-->
+          <!--            </div>-->
+          <!--          </q-card-section>-->
         </q-card>
 
       </div>
@@ -186,7 +253,7 @@ onUnmounted(() => {
 
                 <div class="col column">
                   <div class="col row text-h5 text-weight-bold text-primary">
-                    云主机
+                    科研云主机
                   </div>
 
                   <div class="col row text-h6 text-weight-bold">
@@ -275,7 +342,7 @@ onUnmounted(() => {
 
                 <div class="col column">
                   <div class="col row text-h5 text-weight-bold text-primary">
-                    运维监控
+                    云监控
                   </div>
 
                   <div class="col row text-h6 text-weight-bold">
@@ -308,7 +375,8 @@ onUnmounted(() => {
       <div class="col row items-center justify-center content-fixed-width q-gutter-x-lg q-ma-xl"
            style="min-height: 500px;">
 
-        <q-card v-for="i in ['灵活配置','快速部署','轻松扩容','多重备份','高可靠性','安全保障']" :key="i" class="col-auto" style="width: 300px;" flat>
+        <q-card v-for="i in ['灵活配置','快速部署','轻松扩容','多重备份','高可靠性','安全保障']" :key="i"
+                class="col-auto" style="width: 300px;" flat>
           <q-card-section>
             <div class="row justify-center">
               <img :src="require('assets/svg/compute.svg')" style="width: 80px;"/>
@@ -322,19 +390,19 @@ onUnmounted(() => {
 
           </q-card-section>
 
-          <q-card-section class="q-pt-none">
-            <div class="row justify-center">
-              <div class="text-grey">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-                tempor incididunt ut labore et dolore magna aliqua.
-              </div>
-            </div>
-          </q-card-section>
+          <!--          <q-card-section class="q-pt-none">-->
+          <!--            <div class="row justify-center">-->
+          <!--              <div class="text-grey">-->
+          <!--                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod-->
+          <!--                tempor incididunt ut labore et dolore magna aliqua.-->
+          <!--              </div>-->
+          <!--            </div>-->
+          <!--          </q-card-section>-->
         </q-card>
 
       </div>
 
-      <div class="col row items-center justify-center content-fixed-width q-gutter-x-lg q-ma-xl"
+      <div class="col row items-center justify-center content-fixed-width q-gutter-x-lg q-mb-xl"
            style="min-height: 500px;">
         <q-card class="col-auto" style="width: 900px;" flat>
           <q-card-section horizontal>
@@ -349,7 +417,7 @@ onUnmounted(() => {
                   </div>
 
                   <div class="col row text-h6 text-weight-bold">
-                    案例介绍
+                    案例简介
                   </div>
 
                   <div class="col row text-grey">
@@ -358,7 +426,7 @@ onUnmounted(() => {
                   </div>
 
                   <div class="col-auto">
-                    <q-btn class="" color="primary">案例链接</q-btn>
+                    <q-btn class="" color="primary" @click="navigateToUrl('/case')">案例链接</q-btn>
                   </div>
 
                 </div>
@@ -369,6 +437,54 @@ onUnmounted(() => {
 
             <img :src="require('assets/svg/big_storage.svg')" style="width: 300px;"/>
 
+          </q-card-section>
+        </q-card>
+
+      </div>
+
+      <div class="col row items-center justify-center content-fixed-width q-gutter-x-lg q-mb-xl"
+           style="min-height: 300px;">
+
+        <q-card class="col-auto" style="width: 900px;" flat>
+          <q-card-section horizontal>
+
+            <!--            <img :src="require('assets/svg/big_compute.svg')" style="width: 400px;"/>-->
+
+            <q-card-section>
+
+              <div class="row items-center justify-center">
+
+                <div class="col column">
+                  <div class="col row text-h5 text-weight-bold text-primary">
+                    研发团队简介
+                  </div>
+
+                  <!--                  <div class="col row text-h6 text-weight-bold">-->
+                  <!--                    灵活配置-->
+                  <!--                  </div>-->
+
+                  <!--                  <div class="col row text-grey">-->
+                  <!--                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod-->
+                  <!--                    tempor incididunt ut labore et dolore magna aliqua.-->
+                  <!--                  </div>-->
+
+                  <!--                  <div class="col row text-h6 text-weight-bold">-->
+                  <!--                    丰富操作系统-->
+                  <!--                  </div>-->
+
+                  <div class="col row text-grey">
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+                    tempor incididunt ut labore et dolore magna aliqua.
+                  </div>
+
+                  <div class="col-auto">
+                    <q-btn class="" color="primary" @click="navigateToUrl('/about')">团队介绍链接</q-btn>
+                  </div>
+                </div>
+
+              </div>
+
+            </q-card-section>
           </q-card-section>
         </q-card>
 
