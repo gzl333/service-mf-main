@@ -126,8 +126,9 @@ onUnmounted(() => {
     </q-page-sticky>
 
     <div ref="videoDom"
-         class="column items-center"
-         style="height: 50vh; min-height: 500px; background-color: #5997BE; -webkit-mask-image: -webkit-gradient(linear, left top, left bottom, from(rgba(0, 0, 0, 1)), color-stop(0.6, rgba(0, 0, 0, 1)), color-stop(0.9, rgba(0, 0, 0, 0.2)), to(rgba(0, 0, 0, 0)));">
+         class="column items-center gradient-background"
+         :class="isAnimationPlaying?'animation-mask':''"
+         style="height: 50vh; min-height: 500px;">
 
       <HeaderContent/>
 
@@ -147,13 +148,23 @@ onUnmounted(() => {
             {{ tc('计算、存储与监控的解决方案') }}
           </div>
         </div>
-        <div class="row items-center justify-center text-black text-h5 q-pb-lg">
+        <div class="row items-center justify-center text-grey-7 text-h5 q-pb-lg">
           {{ tc('一站式满足科研IT需求') }}
         </div>
         <div class="row items-center justify-center q-gutter-md">
-          <q-btn class="col-auto" color="primary" unelevated no-caps @click="navigateToUrl('/about')">关于项目</q-btn>
-          <q-btn class="col-auto" color="primary" unelevated no-caps @click="navigateToUrl('/case')">成功案例</q-btn>
-          <q-btn class="col-auto" color="primary" icon-right="play_arrow" unelevated no-caps>开始使用</q-btn>
+          <q-btn class="col-auto" style="background-color: #0055A6;" text-color="white" unelevated no-caps
+                 :ripple="false"
+                 @click="navigateToUrl('/about')">
+            平台介绍
+          </q-btn>
+          <q-btn class="col-auto" style="background-color: #0055A6;" text-color="white" unelevated no-caps
+                 :ripple="false"
+                 @click="navigateToUrl('/case')">成功案例
+          </q-btn>
+          <q-btn class="col-auto" style="background-color: #0055A6;" text-color="white" :ripple="false"
+                 icon-right="chevron_right"
+                 unelevated no-caps>开始使用
+          </q-btn>
         </div>
       </div>
 
@@ -164,7 +175,7 @@ onUnmounted(() => {
       <div class="col row items-center justify-center content-fixed-width q-gutter-x-lg q-mb-xl"
            style="min-height: 300px;">
 
-        <q-card class="col-auto shadow-24" style="width: 300px;">
+        <q-card class="col-auto cursor-pointer" style="width: 300px;" flat>
           <q-card-section>
             <div class="row justify-center">
               <img :src="require('assets/svg/compute.svg')" style="width: 200px;"/>
@@ -175,20 +186,10 @@ onUnmounted(() => {
             <div class="row justify-center text-center">
               <div class="text-h5 text-weight-bold text-primary">科研云主机</div>
             </div>
-
           </q-card-section>
-
-          <!--          <q-card-section>-->
-          <!--            <div class="row justify-center">-->
-          <!--              <div class="text-grey">-->
-          <!--                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod-->
-          <!--                tempor incididunt ut labore et dolore magna aliqua.-->
-          <!--              </div>-->
-          <!--            </div>-->
-          <!--          </q-card-section>-->
         </q-card>
 
-        <q-card class="col-auto shadow-24" style="width: 300px;">
+        <q-card class="col-auto cursor-pointer" style="width: 300px;" flat>
           <q-card-section>
             <div class="row justify-center">
               <img :src="require('assets/svg/object_storage.svg')" style="width: 200px;"/>
@@ -199,20 +200,10 @@ onUnmounted(() => {
             <div class="row justify-center text-center">
               <div class="text-h5 text-weight-bold text-primary">对象存储</div>
             </div>
-
           </q-card-section>
-
-          <!--          <q-card-section>-->
-          <!--            <div class="row justify-center">-->
-          <!--              <div class="text-grey">-->
-          <!--                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod-->
-          <!--                tempor incididunt ut labore et dolore magna aliqua.-->
-          <!--              </div>-->
-          <!--            </div>-->
-          <!--          </q-card-section>-->
         </q-card>
 
-        <q-card class="col-auto shadow-24" style="width: 300px;">
+        <q-card class="col-auto cursor-pointer" style="width: 300px;" flat>
           <q-card-section>
             <div class="row justify-center">
               <img :src="require('assets/svg/ops.svg')" style="width: 200px;"/>
@@ -223,17 +214,7 @@ onUnmounted(() => {
             <div class="row justify-center text-center">
               <div class="text-h5 text-weight-bold text-primary">云监控</div>
             </div>
-
           </q-card-section>
-
-          <!--          <q-card-section>-->
-          <!--            <div class="row justify-center">-->
-          <!--              <div class="text-grey">-->
-          <!--                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod-->
-          <!--                tempor incididunt ut labore et dolore magna aliqua.-->
-          <!--              </div>-->
-          <!--            </div>-->
-          <!--          </q-card-section>-->
         </q-card>
 
       </div>
@@ -503,14 +484,13 @@ onUnmounted(() => {
 .HomePage {
 }
 
-.AnimationPlaying {
-
+.gradient-background {
+  background-color: #5997BE; /* fallback for old browsers */
+  background: -webkit-linear-gradient(to bottom, #5997BE, #FFFFFF); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to bottom, #5997BE, #FFFFFF); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 }
 
-.AnimationNotPlaying {
-  -webkit-mask-image: -webkit-gradient(linear, left top, left bottom, from(rgba(0, 0, 0, 1)), color-stop(0.6, rgba(0, 0, 0, 1)), color-stop(0.9, rgba(0, 0, 0, 0.2)), to(rgba(0, 0, 0, 0)));
-  //background: #2980B9; /* fallback for old browsers */
-  //background: -webkit-linear-gradient(to bottom, #FFFFFF, #6DD5FA, #2980B9); /* Chrome 10-25, Safari 5.1-6 */
-  //background: linear-gradient(to bottom, #FFFFFF, #6DD5FA, #2980B9); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+.animation-mask {
+  -webkit-mask-image: -webkit-gradient(linear, left top, left bottom, from(rgba(0, 0, 0, 1)), color-stop(0.8, rgba(0, 0, 0, 1)), to(rgba(0, 0, 0, 0)));
 }
 </style>

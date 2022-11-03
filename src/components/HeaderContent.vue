@@ -5,7 +5,7 @@ import { useStore } from 'stores/store'
 // import { useRoute } from 'vue-router'
 import { i18n } from 'boot/i18n'
 import { navigateToUrl } from 'single-spa'
-import I18nSwitch from 'components/I18nSwitch.vue'
+// import I18nSwitch from 'components/I18nSwitch.vue'
 
 // const props = defineProps({
 //   foo: {
@@ -35,7 +35,7 @@ const store = useStore()
 
         <div class="col-auto row">
 
-          <I18nSwitch class="q-mr-lg" :is-dark="true"/>
+<!--          <I18nSwitch class="q-mr-lg" :is-dark="true"/>-->
 
           <q-btn class="q-mr-lg gt-xs" flat :ripple="false" color="white" type="a" no-caps dense
                  href="https://passport.escience.cn/regist.jsp"
