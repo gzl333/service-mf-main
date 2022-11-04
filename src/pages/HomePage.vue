@@ -3,6 +3,7 @@ import { ref, watch, /* computed, */ onMounted, onUnmounted } from 'vue'
 // import { useStore } from 'stores/store'
 import { i18n } from 'boot/i18n'
 import { navigateToUrl } from 'single-spa'
+import { scroll } from 'quasar'
 import * as THREE from 'three'
 import VANTA from 'vanta/dist/vanta.clouds.min'
 
@@ -19,22 +20,37 @@ import HeaderContent from 'components/HeaderContent.vue'
 
 const { tc } = i18n.global
 // const store = useStore()
+const {
+  getScrollTarget,
+  setVerticalScrollPosition
+} = scroll
+
+// jump within the page
+function scrollToElement (el: HTMLElement, duration = 1000) {
+  const target = getScrollTarget(el)
+  const offset = el.offsetTop
+  setVerticalScrollPosition(target, offset, duration)
+}
+
+const serverDom = ref()
+const storageDom = ref()
+const monitorDom = ref()
 
 const videoDom = ref() // 容纳动画的dom对象
 const animation = ref() // 动画对象
 
 const startAnimation = () => {
-  animation.value = VANTA({
-    THREE,
-    el: videoDom.value,
-    mouseControls: true,
-    touchControls: true,
-    gyroControls: false,
-    minHeight: 200.00,
-    minWidth: 200.00,
-    skyColor: 0x2977a4,
-    sunColor: 0xe88628
-  })
+  // animation.value = VANTA({
+  //   THREE,
+  //   el: videoDom.value,
+  //   mouseControls: true,
+  //   touchControls: true,
+  //   gyroControls: false,
+  //   minHeight: 200.00,
+  //   minWidth: 200.00,
+  //   skyColor: 0x2977a4,
+  //   sunColor: 0xe88628
+  // })
 }
 const stopAnimation = () => {
   animation.value.destroy()
@@ -161,65 +177,63 @@ onUnmounted(() => {
                  :ripple="false"
                  @click="navigateToUrl('/case')">成功案例
           </q-btn>
-          <q-btn class="col-auto" style="background-color: #0055A6;" text-color="white" :ripple="false"
-                 icon-right="chevron_right"
-                 unelevated no-caps>开始使用
-          </q-btn>
+          <!--          <q-btn class="col-auto" style="background-color: #0055A6;" text-color="white" :ripple="false"-->
+          <!--                 icon-right="chevron_right"-->
+          <!--                 unelevated no-caps>开始使用-->
+          <!--          </q-btn>-->
         </div>
       </div>
 
     </div>
 
     <div class="column items-center justify-center">
-
-      <div class="col row items-center justify-center content-fixed-width q-gutter-x-lg q-mb-xl"
+      <div class="col row items-center justify-center content-fixed-width q-gutter-x-md"
            style="min-height: 300px;">
 
-        <q-card class="col-auto cursor-pointer" style="width: 300px;" flat>
+        <q-card class="col-auto cursor-pointer" style="width: 300px;" flat @click="scrollToElement(serverDom, 1000)">
           <q-card-section>
             <div class="row justify-center">
-              <img :src="require('assets/svg/compute.svg')" style="width: 200px;"/>
+              <img :src="require('assets/svg/compute.svg')" style="width: 180px;"/>
             </div>
           </q-card-section>
 
           <q-card-section class="q-pt-none">
             <div class="row justify-center text-center">
-              <div class="text-h5 text-weight-bold text-primary">科研云主机</div>
+              <div class="text-h5 text-weight-bold text-black">科研云主机</div>
             </div>
           </q-card-section>
         </q-card>
 
-        <q-card class="col-auto cursor-pointer" style="width: 300px;" flat>
+        <q-card class="col-auto cursor-pointer" style="width: 300px;" flat @click="scrollToElement(storageDom, 2000)">
           <q-card-section>
             <div class="row justify-center">
-              <img :src="require('assets/svg/object_storage.svg')" style="width: 200px;"/>
+              <img :src="require('assets/svg/object_storage.svg')" style="width: 180px;"/>
             </div>
           </q-card-section>
 
           <q-card-section class="q-pt-none">
             <div class="row justify-center text-center">
-              <div class="text-h5 text-weight-bold text-primary">对象存储</div>
+              <div class="text-h5 text-weight-bold text-black">对象存储</div>
             </div>
           </q-card-section>
         </q-card>
 
-        <q-card class="col-auto cursor-pointer" style="width: 300px;" flat>
+        <q-card class="col-auto cursor-pointer" style="width: 300px;" flat @click="scrollToElement(monitorDom, 3000)">
           <q-card-section>
             <div class="row justify-center">
-              <img :src="require('assets/svg/ops.svg')" style="width: 200px;"/>
+              <img :src="require('assets/svg/ops.svg')" style="width: 180px;"/>
             </div>
           </q-card-section>
 
           <q-card-section class="q-pt-none">
             <div class="row justify-center text-center">
-              <div class="text-h5 text-weight-bold text-primary">云监控</div>
+              <div class="text-h5 text-weight-bold text-black">云监控</div>
             </div>
           </q-card-section>
         </q-card>
-
       </div>
 
-      <div class="col row items-center justify-center content-fixed-width q-gutter-x-lg q-ma-xl"
+      <div ref="serverDom" class="col row items-center justify-center content-fixed-width q-gutter-x-lg q-mb-xl"
            style="min-height: 300px;">
 
         <q-card class="col-auto" style="width: 900px;" flat>
@@ -231,28 +245,44 @@ onUnmounted(() => {
 
               <div class="row items-center justify-center">
 
-                <div class="col column">
-                  <div class="col row text-h5 text-weight-bold text-primary">
+                <div class="col column" style="height: 350px;">
+                  <div class="col row items-center text-h5 text-weight-bold text-primary">
                     科研云主机
                   </div>
 
-                  <div class="col row text-h6 text-weight-bold">
-                    灵活配置
+                  <div class="col column">
+                    <div class="col row items-center text-h6 text-weight-bold">
+                      灵活配置
+                    </div>
+
+                    <div class="col row text-grey">
+                      可以根据科研需求，灵活选择所需硬件配置。
+                      CPU、内存、操作系统、网络类型等均可轻松选择配置。
+                    </div>
                   </div>
 
-                  <div class="col row text-grey">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-                    tempor incididunt ut labore et dolore magna aliqua.
+                  <div class="col column">
+                    <div class="col row items-center text-h6 text-weight-bold">
+                      一键部署
+                    </div>
+
+                    <div class="col row text-grey">
+                      点击部署按键之后，平台将自动接管部署任务。
+                      并在极短时间内将所需云主机实例部署在对应的服务单元内，无需任何额外的操作。
+                    </div>
                   </div>
 
-                  <div class="col row text-h6 text-weight-bold">
-                    丰富操作系统
+                  <div class="col column">
+                    <div class="col row items-center text-h6 text-weight-bold">
+                      简单易用
+                    </div>
+
+                    <div class="col row text-grey">
+                      精心设计的管理界面使得云主机的管理变得简单而符合直觉，无需学习即可点击使用。
+                      常见的管理操作，例如开关机、重置实例、操作保护等，均可在几次点击中实现。
+                    </div>
                   </div>
 
-                  <div class="col row text-grey">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-                    tempor incididunt ut labore et dolore magna aliqua.
-                  </div>
                 </div>
 
               </div>
@@ -263,7 +293,7 @@ onUnmounted(() => {
 
       </div>
 
-      <div class="col row items-center justify-center content-fixed-width q-gutter-x-lg q-ma-xl"
+      <div ref="storageDom" class="col row items-center justify-center content-fixed-width q-gutter-x-lg q-mb-xl"
            style="min-height: 300px;">
 
         <q-card class="col-auto" style="width: 900px;" flat>
@@ -273,42 +303,56 @@ onUnmounted(() => {
 
               <div class="row items-center justify-center">
 
-                <div class="col column">
-                  <div class="col row text-h5 text-weight-bold text-primary">
+                <div class="col column" style="height: 350px;">
+                  <div class="col row items-center text-h5 text-weight-bold text-primary">
                     对象存储
                   </div>
 
-                  <div class="col row text-h6 text-weight-bold">
-                    灵活容量
+                  <div class="col column">
+                    <div class="col row items-center text-h6 text-weight-bold">
+                      海量存储
+                    </div>
+
+                    <div class="col row text-grey">
+                      基于存储桶的管理模式，可支持PB级非/半结构化数据的海量存储。存储桶容量不存在理论上限，随用随存，适合数据密集的项目采用。
+                    </div>
                   </div>
 
-                  <div class="col row text-grey">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-                    tempor incididunt ut labore et dolore magna aliqua.
+                  <div class="col column">
+                    <div class="col row items-center text-h6 text-weight-bold">
+                      高安全性
+                    </div>
+
+                    <div class="col row text-grey">
+                      底层存储基于纠删码技术，采用多服务中心冗余备份，提供稳定持久、高性能、高可用分布式存储服务。
+                    </div>
                   </div>
 
-                  <div class="col row text-h6 text-weight-bold">
-                    安全备份
+                  <div class="col column">
+                    <div class="col row items-center text-h6 text-weight-bold">
+                      丰富接口
+                    </div>
+
+                    <div class="col row text-grey">
+                      除了可以在本平台Web页面进行上传、下载、共享对象存储桶的数据，还可以通过HTTP RESTFul
+                      API、FTP协议、Rclone客户端等多种方式访问对象数据，方便地进行数据传输。
+                    </div>
                   </div>
 
-                  <div class="col row text-grey">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-                    tempor incididunt ut labore et dolore magna aliqua.
-                  </div>
                 </div>
 
               </div>
 
             </q-card-section>
 
-            <img :src="require('assets/svg/big_storage.svg')" style="width: 350px;"/>
+            <img :src="require('assets/svg/big_storage.svg')" style="width: 400px;"/>
 
           </q-card-section>
         </q-card>
 
       </div>
 
-      <div class="col row items-center justify-center content-fixed-width q-gutter-x-lg q-ma-xl"
+      <div ref="monitorDom" class="col row items-center justify-center content-fixed-width q-gutter-x-lg q-mb-xl"
            style="min-height: 300px;">
 
         <q-card class="col-auto" style="width: 900px;" flat>
@@ -320,28 +364,41 @@ onUnmounted(() => {
 
               <div class="row items-center justify-center">
 
-                <div class="col column">
-                  <div class="col row text-h5 text-weight-bold text-primary">
+                <div class="col column" style="height: 350px;">
+                  <div class="col row items-center text-h5 text-weight-bold text-primary">
                     云监控
                   </div>
 
-                  <div class="col row text-h6 text-weight-bold">
-                    集中管理
+                  <div class="col column">
+                    <div class="col row items-center text-h6 text-weight-bold">
+                      集中采集
+                    </div>
+
+                    <div class="col row text-grey">
+                      对跨地区跨机房的多服务单元的运行数据进行集中采集，构建针对视频会议平台、主机集群、存储集群的统一监控，汇聚众多监控数据。
+                    </div>
                   </div>
 
-                  <div class="col row text-grey">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-                    tempor incididunt ut labore et dolore magna aliqua.
+                  <div class="col column">
+                    <div class="col row items-center text-h6 text-weight-bold">
+                      实时展示
+                    </div>
+
+                    <div class="col row text-grey">
+                      实时、可视化地展示各集群的主机状态、集群状态、CPU使用率、内存使用率、磁盘使用率等。
+                    </div>
                   </div>
 
-                  <div class="col row text-h6 text-weight-bold">
-                    快速响应
+                  <div class="col column">
+                    <div class="col row items-center text-h6 text-weight-bold">
+                      持久化存储
+                    </div>
+
+                    <div class="col row text-grey">
+                      监控数据实现了持久化存储，可用来进行运维管理、事故追溯、智能分析等。
+                    </div>
                   </div>
 
-                  <div class="col row text-grey">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-                    tempor incididunt ut labore et dolore magna aliqua.
-                  </div>
                 </div>
 
               </div>
@@ -352,38 +409,59 @@ onUnmounted(() => {
 
       </div>
 
-      <div class="col row items-center justify-center content-fixed-width q-gutter-x-lg q-ma-xl"
-           style="min-height: 500px;">
+      <!--      <div class="col row items-center justify-center content-fixed-width q-gutter-x-lg q-ma-xl"-->
+      <!--           style="min-height: 500px;">-->
+      <!--        <q-card v-for="i in ['灵活配置','快速部署','轻松扩容','多重备份','高可靠性','安全保障']" :key="i"-->
+      <!--                class="col-auto" style="width: 300px;" flat>-->
+      <!--          <q-card-section>-->
+      <!--            <div class="row justify-center">-->
+      <!--              <img :src="require('assets/svg/compute.svg')" style="width: 80px;"/>-->
+      <!--            </div>-->
+      <!--          </q-card-section>-->
 
-        <q-card v-for="i in ['灵活配置','快速部署','轻松扩容','多重备份','高可靠性','安全保障']" :key="i"
-                class="col-auto" style="width: 300px;" flat>
+      <!--          <q-card-section class="q-pt-none">-->
+      <!--            <div class="row justify-center text-center">-->
+      <!--              <div class="text-h6 text-weight-bold">{{ i }}</div>-->
+      <!--            </div>-->
+
+      <!--          </q-card-section>-->
+      <!--        </q-card>-->
+      <!--      </div>-->
+
+      <div class="col row items-center justify-center content-fixed-width q-gutter-x-lg q-mb-xl"
+           style="min-height: 300px;">
+        <q-card-section horizontal>
+
           <q-card-section>
-            <div class="row justify-center">
-              <img :src="require('assets/svg/compute.svg')" style="width: 80px;"/>
-            </div>
+            100
           </q-card-section>
 
-          <q-card-section class="q-pt-none">
-            <div class="row justify-center text-center">
-              <div class="text-h6 text-weight-bold">{{ i }}</div>
+          <q-card-section>
+
+            <div class="row items-center justify-center">
+
+              <div class="col column" style="height: 350px;">
+
+                <div class="col column">
+                  <div class="col row items-center text-h6 text-weight-bold">
+                    集中采集
+                  </div>
+
+                  <div class="col row text-grey">
+                    对跨地区跨机房的多服务单元的运行数据进行集中采集，构建针对视频会议平台、主机集群、存储集群的统一监控，汇聚众多监控数据。
+                  </div>
+                </div>
+
+              </div>
+
             </div>
 
           </q-card-section>
-
-          <!--          <q-card-section class="q-pt-none">-->
-          <!--            <div class="row justify-center">-->
-          <!--              <div class="text-grey">-->
-          <!--                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod-->
-          <!--                tempor incididunt ut labore et dolore magna aliqua.-->
-          <!--              </div>-->
-          <!--            </div>-->
-          <!--          </q-card-section>-->
-        </q-card>
-
+        </q-card-section>
       </div>
 
       <div class="col row items-center justify-center content-fixed-width q-gutter-x-lg q-mb-xl"
-           style="min-height: 500px;">
+           style="min-height: 100px;">
         <q-card class="col-auto" style="width: 900px;" flat>
           <q-card-section horizontal>
 
@@ -415,7 +493,7 @@ onUnmounted(() => {
 
             </q-card-section>
 
-            <img :src="require('assets/svg/big_storage.svg')" style="width: 300px;"/>
+            <img :src="require('assets/svg/big_storage.svg')" style="width: 400px;"/>
 
           </q-card-section>
         </q-card>
@@ -423,7 +501,7 @@ onUnmounted(() => {
       </div>
 
       <div class="col row items-center justify-center content-fixed-width q-gutter-x-lg q-mb-xl"
-           style="min-height: 300px;">
+           style="min-height: 100px;">
 
         <q-card class="col-auto" style="width: 900px;" flat>
           <q-card-section horizontal>
