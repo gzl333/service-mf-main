@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref, watch, /* computed, */ onMounted, onUnmounted } from 'vue'
-// import { useStore } from 'stores/store'
+import { useStore } from 'stores/store'
 import { i18n } from 'boot/i18n'
 import { navigateToUrl } from 'single-spa'
 import { scroll } from 'quasar'
@@ -19,7 +19,7 @@ import HeaderContent from 'components/HeaderContent.vue'
 // const emits = defineEmits(['change', 'delete'])
 
 const { tc } = i18n.global
-// const store = useStore()
+const store = useStore()
 const {
   getScrollTarget,
   setVerticalScrollPosition
@@ -175,12 +175,16 @@ onUnmounted(() => {
           </q-btn>
           <q-btn class="col-auto" style="background-color: #0055A6;" text-color="white" unelevated no-caps
                  :ripple="false"
-                 @click="navigateToUrl('/case')">成功案例
+                 @click="navigateToUrl('/case')">
+            成功案例
           </q-btn>
-          <!--          <q-btn class="col-auto" style="background-color: #0055A6;" text-color="white" :ripple="false"-->
-          <!--                 icon-right="chevron_right"-->
-          <!--                 unelevated no-caps>开始使用-->
-          <!--          </q-btn>-->
+          <q-btn class="col-auto" style="color: #0055A6;" :ripple="false"
+                 icon-right="chevron_right"
+                 outline
+                 no-caps
+                 @click="store.askUrl('passport')">
+            开始使用
+          </q-btn>
         </div>
       </div>
 
@@ -190,7 +194,7 @@ onUnmounted(() => {
       <div class="col row items-center justify-center content-fixed-width q-gutter-x-md"
            style="min-height: 300px;">
 
-        <q-card class="col-auto cursor-pointer" style="width: 300px;" flat @click="scrollToElement(serverDom, 1000)">
+        <q-card class="col-auto cursor-pointer" style="width: 200px;" flat @click="scrollToElement(serverDom, 1000)">
           <q-card-section>
             <div class="row justify-center">
               <img :src="require('assets/svg/compute.svg')" style="width: 180px;"/>
@@ -204,7 +208,7 @@ onUnmounted(() => {
           </q-card-section>
         </q-card>
 
-        <q-card class="col-auto cursor-pointer" style="width: 300px;" flat @click="scrollToElement(storageDom, 2000)">
+        <q-card class="col-auto cursor-pointer" style="width: 200px;" flat @click="scrollToElement(storageDom, 2000)">
           <q-card-section>
             <div class="row justify-center">
               <img :src="require('assets/svg/object_storage.svg')" style="width: 180px;"/>
@@ -218,7 +222,7 @@ onUnmounted(() => {
           </q-card-section>
         </q-card>
 
-        <q-card class="col-auto cursor-pointer" style="width: 300px;" flat @click="scrollToElement(monitorDom, 3000)">
+        <q-card class="col-auto cursor-pointer" style="width: 200px;" flat @click="scrollToElement(monitorDom, 3000)">
           <q-card-section>
             <div class="row justify-center">
               <img :src="require('assets/svg/ops.svg')" style="width: 180px;"/>
@@ -228,6 +232,20 @@ onUnmounted(() => {
           <q-card-section class="q-pt-none">
             <div class="row justify-center text-center">
               <div class="text-h5 text-weight-bold text-black">云监控</div>
+            </div>
+          </q-card-section>
+        </q-card>
+
+        <q-card class="col-auto cursor-pointer" style="width: 200px;" flat>
+          <q-card-section>
+            <div class="row justify-center">
+              <img :src="require('assets/svg/protect.svg')" style="width: 180px;"/>
+            </div>
+          </q-card-section>
+
+          <q-card-section class="q-pt-none">
+            <div class="row justify-center text-center">
+              <div class="text-h5 text-weight-bold text-black">等保云主机</div>
             </div>
           </q-card-section>
         </q-card>
@@ -428,36 +446,145 @@ onUnmounted(() => {
       <!--        </q-card>-->
       <!--      </div>-->
 
-      <div class="col row items-center justify-center content-fixed-width q-gutter-x-lg q-mb-xl"
-           style="min-height: 300px;">
-        <q-card-section horizontal>
-
-          <q-card-section>
-            100
-          </q-card-section>
-
+      <div class="col row items-center justify-center content-fixed-width q-gutter-x-lg q-mb-lg">
+        <div class="row justify-center" style="width: 900px;">
           <q-card-section>
 
-            <div class="row items-center justify-center">
+            <q-card-section>
 
-              <div class="col column" style="height: 350px;">
+              <q-avatar size="150px" font-size="52px" color="grey-3" text-color="primary">
+                7个
+              </q-avatar>
 
-                <div class="col column">
-                  <div class="col row items-center text-h6 text-weight-bold">
-                    集中采集
+            </q-card-section>
+
+              <div class="row items-center justify-center">
+
+                <div class="col column justify-center" >
+
+                  <div class="col-auto row items-center text-h6 text-weight-bold">
+                    科研云主机服务单元
                   </div>
 
-                  <div class="col row text-grey">
-                    对跨地区跨机房的多服务单元的运行数据进行集中采集，构建针对视频会议平台、主机集群、存储集群的统一监控，汇聚众多监控数据。
+                  <div class="col-auto row text-grey">
+                    来自地球大数据科学工程专项、中国科学院计算机网络信息中心、中国科学院国家空间科学中心等机构
                   </div>
+
                 </div>
 
               </div>
 
-            </div>
+          </q-card-section>
+        </div>
+
+        <div class="row justify-start" style="width: 900px;">
+          <q-card-section horizontal>
+
+            <q-card-section>
+
+              <q-avatar size="150px" font-size="52px" color="grey-3" text-color="primary">
+                2个
+              </q-avatar>
+
+            </q-card-section>
+
+            <q-card-section>
+
+              <div class="row items-center justify-center">
+
+                <div class="col column justify-center" style="height: 150px;">
+
+                  <div class="col-auto row items-center text-h6 text-weight-bold">
+                    对象存储服务单元
+                  </div>
+
+                  <div class="col-auto row text-grey">
+                    来自中国科学院计算机网络信息中心、运维大数据平台等机构
+                  </div>
+
+                </div>
+
+              </div>
+
+            </q-card-section>
 
           </q-card-section>
-        </q-card-section>
+        </div>
+
+        <div class="row justify-center" style="width: 900px;">
+
+          <q-card-section>
+            <q-card-section>
+              <q-avatar size="150px" font-size="26px" color="grey-3" text-color="primary">
+                约8000核
+              </q-avatar>
+            </q-card-section>
+            <div class="col-auto row items-center justify-center text-h6 text-weight-bold">
+              CPU
+            </div>
+          </q-card-section>
+
+          <q-card-section>
+            <q-card-section>
+              <q-avatar size="150px" font-size="26px" color="grey-3" text-color="primary">
+                17466GB
+              </q-avatar>
+            </q-card-section>
+            <div class="col-auto row items-center justify-center text-h6 text-weight-bold">
+              内存
+            </div>
+          </q-card-section>
+
+          <q-card-section>
+            <q-card-section>
+              <q-avatar size="150px" font-size="26px" color="grey-3" text-color="primary">
+                25PB
+              </q-avatar>
+            </q-card-section>
+            <div class="col-auto row items-center justify-center text-h6 text-weight-bold">
+              对象存储
+            </div>
+          </q-card-section>
+
+        </div>
+
+        <div class="row justify-center" style="width: 900px;">
+
+          <q-card-section>
+            <q-card-section>
+              <q-avatar size="150px" font-size="26px" color="grey-3" text-color="primary">
+                139
+              </q-avatar>
+            </q-card-section>
+            <div class="col-auto row items-center justify-center text-h6 text-weight-bold">
+              活跃用户
+            </div>
+          </q-card-section>
+
+          <q-card-section>
+            <q-card-section>
+              <q-avatar size="150px" font-size="26px" color="grey-3" text-color="primary">
+                217
+              </q-avatar>
+            </q-card-section>
+            <div class="col-auto row items-center justify-center text-h6 text-weight-bold">
+              在用云主机
+            </div>
+          </q-card-section>
+
+          <q-card-section>
+            <q-card-section>
+              <q-avatar size="150px" font-size="26px" color="grey-3" text-color="primary">
+                1141
+              </q-avatar>
+            </q-card-section>
+            <div class="col-auto row items-center justify-center text-h6 text-weight-bold">
+              在用存储桶
+            </div>
+          </q-card-section>
+
+        </div>
+
       </div>
 
       <div class="col row items-center justify-center content-fixed-width q-gutter-x-lg q-mb-xl"
@@ -514,7 +641,7 @@ onUnmounted(() => {
 
                 <div class="col column">
                   <div class="col row text-h5 text-weight-bold text-primary">
-                    研发团队简介
+                    团队简介
                   </div>
 
                   <!--                  <div class="col row text-h6 text-weight-bold">-->
