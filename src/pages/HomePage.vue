@@ -2,7 +2,7 @@
 import { ref, watch, /* computed, */ onMounted, onUnmounted } from 'vue'
 import { useStore } from 'stores/store'
 import { i18n } from 'boot/i18n'
-import { navigateToUrl } from 'single-spa'
+// import { navigateToUrl } from 'single-spa'
 import { scroll } from 'quasar'
 import * as THREE from 'three'
 import VANTA from 'vanta/dist/vanta.clouds.min'
@@ -184,12 +184,16 @@ onUnmounted(() => {
         <div class="row items-center justify-center q-gutter-md">
           <q-btn class="col-auto" style="background-color: #0055A6;" text-color="white" unelevated no-caps
                  :ripple="false"
-                 @click="navigateToUrl('')">
+                 to="/manual"
+                 target="_blank"
+          >
             平台介绍
           </q-btn>
           <q-btn class="col-auto" style="background-color: #0055A6;" text-color="white" unelevated no-caps
                  :ripple="false"
-                 @click="navigateToUrl('')">
+                 to="/manual/case"
+                 target="_blank"
+          >
             成功案例
           </q-btn>
           <q-btn class="col-auto" style="color: #0055A6;" :ripple="false"
@@ -657,7 +661,9 @@ onUnmounted(() => {
                  unelevated n
                  o-caps
                  :ripple="false"
-                 @click="navigateToUrl('')">
+                 to="/manual/case"
+                 target="_blank"
+          >
             全部案例
           </q-btn>
         </div>
@@ -736,26 +742,12 @@ onUnmounted(() => {
                  unelevated n
                  o-caps
                  :ripple="false"
-                 @click="navigateToUrl('')">
+                 to="/manual/about"
+                 target="_blank"
+          >
             项目详情
           </q-btn>
         </div>
-
-        <q-card class="col-auto" style="width: 900px;" flat>
-          <q-card-section horizontal>
-            <q-card-section class="row items-center">
-              <div class="col row items-center justify-center text-h5 text-primary" style="width: 200px;">
-                技术团队
-              </div>
-            </q-card-section>
-
-            <q-card-section>
-              <div class="row items-center justify-center" style="font-size: 16px;">
-                一体化云服务平台由科技云运行发展部云联邦与智能运维系统研发室牵头组织实施工程研发工作，形成了“中国科技云联邦”开源社区和前沿的技术栈体系。
-              </div>
-            </q-card-section>
-          </q-card-section>
-        </q-card>
 
         <q-card class="col-auto" style="width: 900px;" flat>
           <q-card-section horizontal>
@@ -774,6 +766,22 @@ onUnmounted(() => {
               </div>
               <div class="row items-center justify-start" style="font-size: 16px;">
                 3.“全球开放科学云”培育计划
+              </div>
+            </q-card-section>
+          </q-card-section>
+        </q-card>
+
+        <q-card class="col-auto" style="width: 900px;" flat>
+          <q-card-section horizontal>
+            <q-card-section class="row items-center">
+              <div class="col row items-center justify-center text-h5 text-primary" style="width: 200px;">
+                技术团队
+              </div>
+            </q-card-section>
+
+            <q-card-section>
+              <div class="row items-center justify-center" style="font-size: 16px;">
+                一体化云服务平台由科技云运行发展部云联邦与智能运维系统研发室牵头组织实施工程研发工作，形成了“中国科技云联邦”开源社区和前沿的技术栈体系。
               </div>
             </q-card-section>
           </q-card-section>
