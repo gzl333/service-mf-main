@@ -72,12 +72,12 @@ const releaseTime = process.env.releaseTime
                  @click="navigateToUrl('/my/storage')">
             {{ tc('对象存储') }}
           </q-btn>
-<!--          <q-btn flat no-caps dense :ripple="false"-->
-<!--                 class="full-height q-mx-md"-->
-<!--                 :class="currentApp === 'hpc' ? 'active-btn':'inactive-btn'"-->
-<!--                 @click="navigateToUrl('/my/hpc')">-->
-<!--            {{ tc('高性能计算') }}-->
-<!--          </q-btn>-->
+          <q-btn flat no-caps dense :ripple="false"
+                 class="full-height q-mx-md"
+                 :class="currentApp === 'hpc' ? 'active-btn':'inactive-btn'"
+                 @click="navigateToUrl('/my/hpc')">
+            {{ tc('高性能计算') }}
+          </q-btn>
           <q-btn flat no-caps dense :ripple="false"
                  class="full-height q-mx-md"
                  :class="currentApp === 'stats' ? 'active-btn':'inactive-btn'"
