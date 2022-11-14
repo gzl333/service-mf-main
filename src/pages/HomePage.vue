@@ -35,6 +35,11 @@ function scrollToElement (el: HTMLElement, duration = 1000) {
   setVerticalScrollPosition(target, offset, duration)
 }
 
+// open new brower tab
+const openURL = (url: string) => {
+  window.open(url)
+}
+
 // carousel
 const slide = ref('1')
 
@@ -105,24 +110,6 @@ const guardFps = () => {
 }
 /* 过低FPS侦测 */
 
-// const dynamicWords = computed(() => i18n.global.locale === 'zh' ? ['云计算', '对象存储', '运维监控'] : ['Cloud Computing', 'Object Storage', 'Operations'])
-// const displayWord = ref(dynamicWords.value[0])
-// const displayIndex = ref(1)
-// setInterval(() => {
-//   const currentWord = dynamicWords.value[displayIndex.value % 3]
-//   let innerIndex = 0
-//   let step = 1
-//   const innerTimer = setInterval(() => {
-//     displayWord.value = currentWord.slice(innerIndex)
-//     innerIndex += step
-//     if (innerIndex + 1 === currentWord.length) {
-//       step = -1
-//     }
-//   }, 100)
-//   clearInterval(innerTimer)
-//   displayIndex.value += 1
-// }, 3000)
-
 onMounted(() => {
   // aos init
   AOS.init()
@@ -171,7 +158,7 @@ onUnmounted(() => {
                      :intervals="0"
                      :delay="5000"
                      :typeSpeed="200"
-                     :array="['计算、存储与监控']"/>
+                     :array="['计算、存储与运维']"/>
           <div class="col">
             {{ tc('解决方案') }}
           </div>
@@ -269,14 +256,16 @@ onUnmounted(() => {
 
           <q-card-section class="q-pt-none">
             <div class="row justify-center text-center">
-              <div class="text-h5 text-weight-bold text-black">云监控</div>
+              <div class="text-h5 text-weight-bold text-black">运维</div>
             </div>
           </q-card-section>
         </q-card>
 
         <q-card class="col-auto cursor-pointer"
                 style="width: 200px;"
-                flat>
+                flat
+                @click="openURL('https://aecs.cstcloud.cn/')"
+        >
           <q-card-section>
             <div class="row justify-center">
               <img :src="require('assets/svg/protect.svg')"
@@ -441,7 +430,7 @@ onUnmounted(() => {
 
                   <div class="col row items-center">
                     <div class="text-h3 text-weight-bold brand-text-gradient">
-                      云监控
+                      运维
                     </div>
                   </div>
 
