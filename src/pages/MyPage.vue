@@ -27,7 +27,8 @@ const tc = i18n.global.tc
     <div class="MyPage" style="height: 100vh">
       登录后的首页：全局统计信息，快捷方式
 
-      <div class="q-pa-md row items-start q-gutter-lg">
+      <div class="q-pa-md row items-start q-gutter-sm">
+
         <q-card class="my-card" style="width: 250px;">
           <q-card-section class="bg-primary text-white">
             <div class="text-h6">{{ tc('云主机') }}</div>

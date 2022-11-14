@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "@quasar/extras": "^1.14.0",
+    "aos": "^2.3.4",
     "axios": "^0.21.1",
     "core-js": "^3.6.5",
     "jwt-decode": "^3.1.2",
@@ -24,7 +25,8 @@
     "vanta": "^0.5.22",
     "vue": "^3.0.0",
     "vue-i18n": "^9.0.0",
-    "vue-router": "^4.0.0"
+    "vue-router": "^4.0.0",
+    "vue-writer": "^1.2.0"
   },
   "devDependencies": {
     "@quasar/app-webpack": "^3.5.3",
