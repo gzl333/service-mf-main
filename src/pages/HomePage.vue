@@ -215,7 +215,7 @@ onUnmounted(() => {
 
           <q-card-section class="q-pt-none">
             <div class="row justify-center text-center">
-              <div class="text-h5 text-weight-bold text-black">科研云主机</div>
+              <div class="text-h5 text-weight-bold text-black">开放科学云主机</div>
             </div>
           </q-card-section>
         </q-card>
@@ -278,7 +278,7 @@ onUnmounted(() => {
 
           <q-card-section class="q-pt-none">
             <div class="row justify-center text-center">
-              <div class="text-h5 text-weight-bold text-black">等保云主机</div>
+              <div class="text-h5 text-weight-bold text-black">公共服务云主机</div>
             </div>
           </q-card-section>
         </q-card>
@@ -301,7 +301,7 @@ onUnmounted(() => {
                 <div class="col column" style="height: 350px;">
                   <div class="col row items-center">
                     <div class="text-h3 text-weight-bold brand-text-gradient">
-                      科研云主机
+                      开放科学云主机
                     </div>
                   </div>
 
@@ -518,7 +518,7 @@ onUnmounted(() => {
             <div class="row items-center justify-center">
               <div class="col column justify-center">
                 <div class="col-auto row items-center justify-center text-h6 text-weight-bold">
-                  科研云主机服务单元
+                  云主机服务单元
                 </div>
                 <div class="col-auto row items-center justify-center text-grey">
                   来自地球大数据科学工程专项、中国科学院计算机网络信息中心、中国科学院国家空间科学中心等机构
