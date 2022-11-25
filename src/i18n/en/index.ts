@@ -15,6 +15,7 @@ export default {
   综合监控: 'Monitor',
   用户支持: 'Support',
   使用手册: 'User Manual',
+  更多: 'More',
 
   注册: 'Register',
   登录: 'Login',

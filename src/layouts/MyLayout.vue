@@ -72,18 +72,18 @@ const releaseTime = process.env.releaseTime
                  @click="navigateToUrl('/my/storage')">
             {{ tc('对象存储') }}
           </q-btn>
-          <q-btn flat no-caps dense :ripple="false"
-                 class="full-height q-mx-xs"
-                 :class="currentApp === 'hpc' ? 'active-btn':'inactive-btn'"
-                 @click="navigateToUrl('/my/hpc')">
-            {{ tc('高性能计算') }}
-          </q-btn>
-          <q-btn flat no-caps dense :ripple="false"
-                 class="full-height q-mx-xs"
-                 :class="currentApp === 'public' ? 'active-btn':'inactive-btn'"
-                 @click="navigateToUrl('/my/public')">
-            {{ tc('中国科技云公共服务平台') }}
-          </q-btn>
+          <!--          <q-btn flat no-caps dense :ripple="false"-->
+          <!--                 class="full-height q-mx-xs"-->
+          <!--                 :class="currentApp === 'hpc' ? 'active-btn':'inactive-btn'"-->
+          <!--                 @click="navigateToUrl('/my/hpc')">-->
+          <!--            {{ tc('高性能计算') }}-->
+          <!--          </q-btn>-->
+          <!--          <q-btn flat no-caps dense :ripple="false"-->
+          <!--                 class="full-height q-mx-xs"-->
+          <!--                 :class="currentApp === 'public' ? 'active-btn':'inactive-btn'"-->
+          <!--                 @click="navigateToUrl('/my/public')">-->
+          <!--            {{ tc('中国科技云公共服务平台') }}-->
+          <!--          </q-btn>-->
           <q-btn flat no-caps dense :ripple="false"
                  class="full-height q-mx-xs"
                  :class="currentApp === 'stats' ? 'active-btn':'inactive-btn'"
@@ -102,6 +102,31 @@ const releaseTime = process.env.releaseTime
                  @click="navigateToUrl('/my/support')">
             {{ tc('用户支持') }}
           </q-btn>
+
+          <q-btn-dropdown
+            class="full-height q-mx-xs"
+            :class="currentApp === 'hpc' || currentApp === 'public' ? 'active-btn':'inactive-btn'"
+            :color="currentApp === 'hpc' || currentApp === 'public' ? 'primary':'black'"
+            :ripple="false"
+            flat
+            dense
+            no-caps
+            :label="tc('更多')"
+          >
+            <q-list>
+              <q-item clickable v-close-popup @click="navigateToUrl('/my/hpc')">
+                <q-item-section>
+                  <q-item-label  :class="currentApp === 'hpc' ? 'text-primary':''">{{ tc('高性能计算') }}</q-item-label>
+                </q-item-section>
+              </q-item>
+
+              <q-item clickable v-close-popup @click="navigateToUrl('/my/public')">
+                <q-item-section>
+                  <q-item-label :class="currentApp === 'public' ? 'text-primary':''">{{ tc('中国科技云公共服务平台') }}</q-item-label>
+                </q-item-section>
+              </q-item>
+            </q-list>
+          </q-btn-dropdown>
 
         </div>
 
