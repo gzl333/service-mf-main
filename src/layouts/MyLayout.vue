@@ -59,39 +59,45 @@ const releaseTime = process.env.releaseTime
 
         <q-space/>
 
-        <div class="row full-height items-center q-pr-xl">
+        <div class="row full-height items-center q-pr-xs">
           <q-btn flat no-caps dense :ripple="false"
-                 class="full-height q-mx-md"
+                 class="full-height q-mx-xs"
                  :class="currentApp === 'server' ? 'active-btn':'inactive-btn'"
                  @click="navigateToUrl('/my/server')">
             {{ tc('云主机') }}
           </q-btn>
           <q-btn flat no-caps dense :ripple="false"
-                 class="full-height q-mx-md"
+                 class="full-height q-mx-xs"
                  :class="currentApp === 'storage' ? 'active-btn':'inactive-btn'"
                  @click="navigateToUrl('/my/storage')">
             {{ tc('对象存储') }}
           </q-btn>
           <q-btn flat no-caps dense :ripple="false"
-                 class="full-height q-mx-md"
+                 class="full-height q-mx-xs"
                  :class="currentApp === 'hpc' ? 'active-btn':'inactive-btn'"
                  @click="navigateToUrl('/my/hpc')">
             {{ tc('高性能计算') }}
           </q-btn>
           <q-btn flat no-caps dense :ripple="false"
-                 class="full-height q-mx-md"
+                 class="full-height q-mx-xs"
+                 :class="currentApp === 'public' ? 'active-btn':'inactive-btn'"
+                 @click="navigateToUrl('/my/public')">
+            {{ tc('中国科技云公共服务平台') }}
+          </q-btn>
+          <q-btn flat no-caps dense :ripple="false"
+                 class="full-height q-mx-xs"
                  :class="currentApp === 'stats' ? 'active-btn':'inactive-btn'"
                  @click="navigateToUrl('/my/stats')">
             {{ tc('用量账单') }}
           </q-btn>
           <q-btn flat no-caps dense :ripple="false"
-                 class="full-height q-mx-md"
+                 class="full-height q-mx-xs"
                  :class="currentApp === 'monitor' ? 'active-btn':'inactive-btn'"
                  @click="navigateToUrl('/my/monitor')">
             {{ tc('综合监控') }}
           </q-btn>
           <q-btn flat no-caps dense :ripple="false"
-                 class="full-height q-mx-md"
+                 class="full-height q-mx-xs"
                  :class="currentApp === 'support' ? 'active-btn':'inactive-btn'"
                  @click="navigateToUrl('/my/support')">
             {{ tc('用户支持') }}
