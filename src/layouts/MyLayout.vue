@@ -98,6 +98,12 @@ const releaseTime = process.env.releaseTime
           </q-btn>
           <q-btn flat no-caps dense :ripple="false"
                  class="full-height q-mx-xs"
+                 :class="currentApp === 'wallet' ? 'active-btn':'inactive-btn'"
+                 @click="navigateToUrl('/my/wallet')">
+            {{ tc('钱包') }}
+          </q-btn>
+          <q-btn flat no-caps dense :ripple="false"
+                 class="full-height q-mx-xs"
                  :class="currentApp === 'support' ? 'active-btn':'inactive-btn'"
                  @click="navigateToUrl('/my/support')">
             {{ tc('用户支持') }}
