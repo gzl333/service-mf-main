@@ -44,11 +44,16 @@ export const useStore = defineStore('main', {
         } else if (loginType === 'aai') {
           respPostLoginUrl = await api.login.aai.postAskUrl({ query: { clientUrl: window.location.origin + '/login-aai' } })
         }
+
         console.log(respPostLoginUrl?.data.data)
         // https://gosc-login.cstcloud.cn/oidc/openid_connect_login?identifier=https://aai.cstcloud.net/oidc/&clientUrl=http://servicedev.cstcloud.cn/login-aai
 
-        // 跳转至获取token的url
-        window.location.href = respPostLoginUrl?.data.data
+        if (respPostLoginUrl?.data.code === 200) {
+          // 跳转至获取token的url
+          window.location.href = respPostLoginUrl?.data.data
+        } else {
+          // 通知错误
+        }
       } catch (exception) {
         exceptionNotifier(exception)
       }
@@ -200,6 +205,7 @@ export const useStore = defineStore('main', {
           if (respPostCheckToken?.data.code === 200 && respPostCheckToken?.data.data === true) {
             this.retainToken()
           } else {
+            // 通知错误
             this.userLogout()
           }
         } catch (exception) {

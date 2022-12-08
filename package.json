@@ -10,7 +10,7 @@
     "test": "echo \"No test specified\" && exit 0"
   },
   "dependencies": {
-    "@quasar/extras": "^1.14.0",
+    "@quasar/extras": "^1.0.0",
     "aos": "^2.3.4",
     "axios": "^0.27.2",
     "core-js": "^3.6.5",
@@ -18,7 +18,7 @@
     "normalizr": "^3.6.2",
     "pinia": "^2.0.11",
     "qs": "^6.10.3",
-    "quasar": "^2.7.1",
+    "quasar": "^2.6.0",
     "single-spa": "^5.9.3",
     "single-spa-vue": "^2.5.1",
     "three": "^0.142.0",
