@@ -4,6 +4,8 @@ import jwtDecode from 'jwt-decode'
 import { baseURLLogin } from 'boot/axios'
 import { /*  Dialog, */ Notify } from 'quasar'
 
+import useExceptionNotifier from 'src/hooks/useExceptionNotifier'
+
 export interface DecodedToken {
   id: string
   name: string
@@ -14,6 +16,8 @@ export interface DecodedToken {
   iat: number
   iss: string
 }
+
+const exceptionNotifier = useExceptionNotifier()
 
 export const useStore = defineStore('main', {
   state: () => {
@@ -33,74 +37,109 @@ export const useStore = defineStore('main', {
   actions: {
     async askUrl (loginType: 'passport' | 'aai') {
       // 本函数只负责获取登录页面地址，并跳转。 code及token处理、/login路由跳转逻辑处理，均放在router.beforeEach中
-      let respPostLoginUrl
-      if (loginType === 'passport') {
-        respPostLoginUrl = await api.login.passport.postAskUrl({ query: { clientUrl: window.location.origin + '/login-passport' } })
-      } else if (loginType === 'aai') {
-        respPostLoginUrl = await api.login.aai.postAskUrl({ query: { clientUrl: window.location.origin + '/login-aai' } })
-      }
-      console.log(respPostLoginUrl?.data.data)
-      // https://gosc-login.cstcloud.cn/oidc/openid_connect_login?identifier=https://aai.cstcloud.net/oidc/&clientUrl=http://servicedev.cstcloud.cn/login-aai
+      try {
+        let respPostLoginUrl
+        if (loginType === 'passport') {
+          respPostLoginUrl = await api.login.passport.postAskUrl({ query: { clientUrl: window.location.origin + '/login-passport' } })
+        } else if (loginType === 'aai') {
+          respPostLoginUrl = await api.login.aai.postAskUrl({ query: { clientUrl: window.location.origin + '/login-aai' } })
+        }
+        console.log(respPostLoginUrl?.data.data)
+        // https://gosc-login.cstcloud.cn/oidc/openid_connect_login?identifier=https://aai.cstcloud.net/oidc/&clientUrl=http://servicedev.cstcloud.cn/login-aai
 
-      // 跳转至获取token的url
-      window.location.href = respPostLoginUrl?.data.data
+        // 跳转至获取token的url
+        window.location.href = respPostLoginUrl?.data.data
+      } catch (exception) {
+        exceptionNotifier(exception)
+      }
     },
     async userLogin (loginType: 'passport' | 'aai', code: string) {
-      // 获取token
-      let respPostDealCode
-      if (loginType === 'passport') {
-        respPostDealCode = await api.login.passport.postDealCode({ query: { code } })
-      } else if (loginType === 'aai') {
-        respPostDealCode = await api.login.aai.postDealCode({ query: { code } })
-      }
-      // 保存token并改变用户登录状态,保存用户信息
-      this.items.isLogin = true
-      this.items.loginType = loginType
-      this.items.tokenAccess = respPostDealCode?.data.data.accessToken as string
-      this.items.tokenRefresh = respPostDealCode?.data.data.refreshToken as string
-      this.items.tokenDecoded = jwtDecode(respPostDealCode?.data.data.accessToken as string)
-
-      // localStorage
-      localStorage.setItem('usp_access', this.items.tokenAccess)
-      localStorage.setItem('usp_refresh', this.items.tokenRefresh)
-      localStorage.setItem('usp_loginType', this.items.loginType)
-
-      // dispatch global token event. Listened at micro-app's boot/axios
-      window.dispatchEvent(new CustomEvent('token', {
-        detail: {
-          tokenAccess: this.items.tokenAccess,
-          tokenDecoded: this.items.tokenDecoded
+      try {
+        // 获取token
+        let respPostDealCode
+        if (loginType === 'passport') {
+          respPostDealCode = await api.login.passport.postDealCode({ query: { code } })
+        } else if (loginType === 'aai') {
+          respPostDealCode = await api.login.aai.postDealCode({ query: { code } })
         }
-      }))
 
-      // retain token
-      this.retainToken()
+        // 登录接口的风格是http请求成功即为200，内容状态放在response.data.code
+        // {
+        //   "success": false,
+        //   "code": 500,
+        //   "message": "系统异常,提供的code无效或者已过期.获取accessToken错误urlhttps://passport.escience.cn/oauth2/token",
+        //   "data": false,
+        //   "exceptionClazz": null
+        // }
+
+        // 登录成功
+        if (respPostDealCode?.data.code === 200) {
+          // 保存token并改变用户登录状态,保存用户信息
+          this.items.isLogin = true
+          this.items.loginType = loginType
+          this.items.tokenAccess = respPostDealCode?.data.data.accessToken as string
+          this.items.tokenRefresh = respPostDealCode?.data.data.refreshToken as string
+          this.items.tokenDecoded = jwtDecode(respPostDealCode?.data.data.accessToken as string)
+
+          // localStorage
+          localStorage.setItem('usp_access', this.items.tokenAccess)
+          localStorage.setItem('usp_refresh', this.items.tokenRefresh)
+          localStorage.setItem('usp_loginType', this.items.loginType)
+
+          // dispatch global token event. Listened at micro-app's boot/axios
+          window.dispatchEvent(new CustomEvent('token', {
+            detail: {
+              tokenAccess: this.items.tokenAccess,
+              tokenDecoded: this.items.tokenDecoded
+            }
+          }))
+
+          // retain token
+          this.retainToken()
+        } else {
+          // 登录失败
+          console.log(respPostDealCode?.data)
+          Notify.create({
+            classes: 'notification-negative shadow-15',
+            icon: 'mdi-alert',
+            textColor: 'negative',
+            message: respPostDealCode?.data.code,
+            caption: respPostDealCode?.data.message,
+            position: 'bottom',
+            closeBtn: true,
+            timeout: 60000,
+            multiLine: false
+          })
+        }
+      } catch (exception) {
+        exceptionNotifier(exception)
+      }
     },
     userLogout () {
-      // temp loginType
-      const loginType = this.items.loginType
-      // del store
-      this.items.isLogin = false
-      delete this.items.loginType
-      delete this.items.tokenAccess
-      delete this.items.tokenRefresh
-      delete this.items.tokenDecoded
-      // localStorage
-      localStorage.removeItem('usp_access')
-      localStorage.removeItem('usp_refresh')
-      localStorage.removeItem('usp_loginType')
-      // logout remote
-      let logoutUrl = ''
-      if (loginType === 'passport') {
-        logoutUrl = baseURLLogin + '/open/api/UMTOauthLogin/loginOut?loginOutUrl=' + window.location.origin
-      } else if (loginType === 'aai') {
-        logoutUrl = baseURLLogin + '/open/api/AAILogin/loginOut?loginOutUrl=' + window.location.origin
+      try {
+        // temp loginType
+        const loginType = this.items.loginType
+        // del store
+        this.items.isLogin = false
+        delete this.items.loginType
+        delete this.items.tokenAccess
+        delete this.items.tokenRefresh
+        delete this.items.tokenDecoded
+        // localStorage
+        localStorage.removeItem('usp_access')
+        localStorage.removeItem('usp_refresh')
+        localStorage.removeItem('usp_loginType')
+        // logout remote
+        let logoutUrl = ''
+        if (loginType === 'passport') {
+          logoutUrl = baseURLLogin + '/open/api/UMTOauthLogin/loginOut?loginOutUrl=' + window.location.origin
+        } else if (loginType === 'aai') {
+          logoutUrl = baseURLLogin + '/open/api/AAILogin/loginOut?loginOutUrl=' + window.location.origin
+        }
+        window.location.href = logoutUrl
+      } catch (exception) {
+        exceptionNotifier(exception)
       }
-      window.location.href = logoutUrl
-
-      // @ts-ignore
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-call
-      // this.$router.push('/') // 登出后的路由目标均为首页，其跳转写在这里
     },
     // 页面刷新时从浏览器localStorage里读取token
     async reloadToken () {
@@ -163,7 +202,8 @@ export const useStore = defineStore('main', {
           } else {
             this.userLogout()
           }
-        } catch (e) {
+        } catch (exception) {
+          exceptionNotifier(exception)
           this.userLogout()
         }
 
@@ -228,7 +268,8 @@ export const useStore = defineStore('main', {
                     })
                   }
                 }
-              } catch (error) {
+              } catch (exception) {
+                exceptionNotifier(exception)
                 this.userLogout()
               }
             })()

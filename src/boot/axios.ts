@@ -31,15 +31,12 @@ const axiosLogin = axios.create({
 axios.interceptors.request.use(config => {
   return config
 }, (error: AxiosError) => {
-  console.log('axios-REQ-Error', error)
-  return error.request // throw error无法把错误传递给发送请求处
+  return Promise.reject(error)
 })
 axios.interceptors.response.use(config => {
   return config
 }, (error: AxiosError) => {
-  console.log('axios-RESP-Error', error)
-  // 响应里的error信息在error.response.data里面，被包成了axios error对象
-  return error.response // throw error无法把错误传递给发送请求处
+  return Promise.reject(error)
 })
 /* 原生axios的拦截器 */
 
@@ -47,15 +44,12 @@ axios.interceptors.response.use(config => {
 axiosLogin.interceptors.request.use(config => {
   return config
 }, (error: AxiosError) => {
-  console.log('axiosServer-REQ-Error', error)
-  return error.request // throw error无法把错误传递给发送请求处
+  return Promise.reject(error)
 })
 axiosLogin.interceptors.response.use(config => {
   return config
 }, (error: AxiosError) => {
-  console.log('axiosServer-RESP-Error', error)
-  // 响应里的error信息在error.response.data里面，被包成了axios error对象
-  return error.response // throw error无法把错误传递给发送请求处
+  return Promise.reject(error)
 })
 /* axiosLogin的拦截器 */
 

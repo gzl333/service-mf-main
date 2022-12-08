@@ -12,7 +12,7 @@
   "dependencies": {
     "@quasar/extras": "^1.14.0",
     "aos": "^2.3.4",
-    "axios": "^0.21.1",
+    "axios": "^0.27.2",
     "core-js": "^3.6.5",
     "jwt-decode": "^3.1.2",
     "normalizr": "^3.6.2",
