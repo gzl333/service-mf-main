@@ -51,6 +51,14 @@ const titleTable = {
   monitor: {
     zh: '综合监控-',
     en: 'Monitor-'
+  },
+  support: {
+    zh: '用户支持-',
+    en: 'Support-'
+  },
+  wallet: {
+    zh: '钱包-',
+    en: 'Wallet-'
   }
 } as Record<string, Record<'zh' | 'en', string>>
 

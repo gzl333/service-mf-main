@@ -13,6 +13,7 @@ export default {
   中国科技云公共服务平台: 'Public Service',
   用量账单: 'Billing',
   综合监控: 'Monitor',
+  钱包: 'Wallet',
   用户支持: 'Support',
   使用手册: 'User Manual',
   更多: 'More',
