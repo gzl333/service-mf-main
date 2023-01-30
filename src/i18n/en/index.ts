@@ -26,5 +26,8 @@ export default {
   科技云AAI登录: 'Login with CSTCloud AAI',
 
   使用科技云通行证登录: 'Logged in with CSTCloud Passport',
-  使用科技云AAI登录: 'Logged in with CSTCloud AAI'
+  使用科技云AAI登录: 'Logged in with CSTCloud AAI',
+
+  // notify
+  '登录失效，请重新登录': 'Login expires, please login again'
 }

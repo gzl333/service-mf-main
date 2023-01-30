@@ -2,9 +2,13 @@ import { defineStore } from 'pinia'
 import api from 'src/api'
 import jwtDecode from 'jwt-decode'
 import { baseURLLogin } from 'boot/axios'
-import { /*  Dialog, */ Notify } from 'quasar'
+import { Notify } from 'quasar'
+import { i18n } from 'boot/i18n'
 
 import useExceptionNotifier from 'src/hooks/useExceptionNotifier'
+
+const { tc } = i18n.global
+const exceptionNotifier = useExceptionNotifier()
 
 export interface DecodedToken {
   id: string
@@ -16,8 +20,6 @@ export interface DecodedToken {
   iat: number
   iss: string
 }
-
-const exceptionNotifier = useExceptionNotifier()
 
 export const useStore = defineStore('main', {
   state: () => {
@@ -62,8 +64,8 @@ export const useStore = defineStore('main', {
             message: respPostLoginUrl?.data.code,
             caption: respPostLoginUrl?.data.message,
             position: 'bottom',
-            // closeBtn: true,
-            timeout: 5000,
+            closeBtn: true,
+            timeout: 0,
             multiLine: false
           })
         }
@@ -125,7 +127,7 @@ export const useStore = defineStore('main', {
             caption: respPostDealCode?.data.message,
             position: 'bottom',
             closeBtn: true,
-            timeout: 60000,
+            timeout: 0,
             multiLine: false
           })
         }
@@ -220,6 +222,18 @@ export const useStore = defineStore('main', {
           } else {
             // 通知错误
             this.userLogout()
+
+            Notify.create({
+              classes: 'notification-negative shadow-15',
+              icon: 'mdi-alert',
+              textColor: 'negative',
+              message: 'Refresh JWT Token Failed',
+              caption: `${tc('登录失效，请重新登录')}`,
+              position: 'bottom',
+              closeBtn: true,
+              timeout: 0,
+              multiLine: false
+            })
           }
         } catch (exception) {
           exceptionNotifier(exception)
@@ -279,10 +293,11 @@ export const useStore = defineStore('main', {
                       classes: 'notification-negative shadow-15',
                       icon: 'mdi-alert',
                       textColor: 'negative',
-                      message: '登录失效，请重新登录',
+                      message: 'Refresh JWT Token Failed',
+                      caption: `${tc('登录失效，请重新登录')}`,
                       position: 'bottom',
                       closeBtn: true,
-                      timeout: 5000,
+                      timeout: 0,
                       multiLine: false
                     })
                   }
