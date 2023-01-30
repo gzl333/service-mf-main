@@ -45,7 +45,7 @@ export const useStore = defineStore('main', {
           respPostLoginUrl = await api.login.aai.postAskUrl({ query: { clientUrl: window.location.origin + '/login-aai' } })
         }
 
-        console.log(respPostLoginUrl?.data.data)
+        console.log('Login Response: ', respPostLoginUrl?.data)
         // https://gosc-login.cstcloud.cn/oidc/openid_connect_login?identifier=https://aai.cstcloud.net/oidc/&clientUrl=http://servicedev.cstcloud.cn/login-aai
 
         if (respPostLoginUrl?.data.code === 200) {
@@ -53,6 +53,19 @@ export const useStore = defineStore('main', {
           window.location.href = respPostLoginUrl?.data.data
         } else {
           // 通知错误
+          console.log(respPostLoginUrl?.data.message)
+
+          Notify.create({
+            classes: 'notification-negative shadow-15',
+            icon: 'mdi-alert',
+            textColor: 'negative',
+            message: respPostLoginUrl?.data.code,
+            caption: respPostLoginUrl?.data.message,
+            position: 'bottom',
+            // closeBtn: true,
+            timeout: 5000,
+            multiLine: false
+          })
         }
       } catch (exception) {
         exceptionNotifier(exception)
