@@ -70,7 +70,7 @@ export const useStore = defineStore('main', {
           })
         }
       } catch (exception) {
-        exceptionNotifier(exception)
+        exceptionNotifier(exception, 'Login: askURL')
       }
     },
     async userLogin (loginType: 'passport' | 'aai', code: string) {
@@ -132,7 +132,7 @@ export const useStore = defineStore('main', {
           })
         }
       } catch (exception) {
-        exceptionNotifier(exception)
+        exceptionNotifier(exception, 'Login: userLogin')
       }
     },
     userLogout () {
@@ -158,7 +158,7 @@ export const useStore = defineStore('main', {
         }
         window.location.href = logoutUrl
       } catch (exception) {
-        exceptionNotifier(exception)
+        exceptionNotifier(exception, 'Login: userLogout')
       }
     },
     // 页面刷新时从浏览器localStorage里读取token
@@ -236,7 +236,7 @@ export const useStore = defineStore('main', {
             })
           }
         } catch (exception) {
-          exceptionNotifier(exception)
+          exceptionNotifier(exception, 'Login: reloadToken')
           this.userLogout()
         }
 
@@ -303,7 +303,7 @@ export const useStore = defineStore('main', {
                   }
                 }
               } catch (exception) {
-                exceptionNotifier(exception)
+                exceptionNotifier(exception, 'Login: retainToken')
                 this.userLogout()
               }
             })()
