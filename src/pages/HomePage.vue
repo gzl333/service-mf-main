@@ -7,7 +7,7 @@ import { scroll } from 'quasar'
 import * as THREE from 'three'
 import VANTA from 'vanta/dist/vanta.clouds.min'
 import VueWriter from 'vue-writer'
-import AOS from 'aos'
+// import AOS from 'aos'
 import 'aos/dist/aos.css'
 
 import HeaderContent from 'components/HeaderContent.vue'
@@ -112,7 +112,7 @@ const guardFps = () => {
 
 onMounted(() => {
   // aos init
-  AOS.init()
+  // AOS.init()
   // start animation
   startAnimation()
   // start FPS counting
@@ -205,10 +205,13 @@ onUnmounted(() => {
                 @click="scrollToElement(serverDom, 1000)">
           <q-card-section>
             <div class="row justify-center">
+              <!--              <img :src="require('assets/svg/compute.svg')"-->
+              <!--                   style="width: 180px;"-->
+              <!--                   data-aos="fade-up"-->
+              <!--                   data-aos-duration="1000"-->
+              <!--              />              -->
               <img :src="require('assets/svg/compute.svg')"
                    style="width: 180px;"
-                   data-aos="fade-up"
-                   data-aos-duration="1000"
               />
             </div>
           </q-card-section>
@@ -226,10 +229,13 @@ onUnmounted(() => {
                 @click="scrollToElement(storageDom, 2000)">
           <q-card-section>
             <div class="row justify-center">
+              <!--              <img :src="require('assets/svg/object_storage.svg')"-->
+              <!--                   style="width: 180px;"-->
+              <!--                   data-aos="fade-up"-->
+              <!--                   data-aos-duration="1500"-->
+              <!--              />              -->
               <img :src="require('assets/svg/object_storage.svg')"
                    style="width: 180px;"
-                   data-aos="fade-up"
-                   data-aos-duration="1500"
               />
             </div>
           </q-card-section>
@@ -247,10 +253,12 @@ onUnmounted(() => {
                 @click="scrollToElement(monitorDom, 3000)">
           <q-card-section>
             <div class="row justify-center">
+              <!--              <img :src="require('assets/svg/ops.svg')"-->
+              <!--                   style="width: 180px;"-->
+              <!--                   data-aos="fade-up"-->
+              <!--                   data-aos-duration="2000"/>              -->
               <img :src="require('assets/svg/ops.svg')"
-                   style="width: 180px;"
-                   data-aos="fade-up"
-                   data-aos-duration="2000"/>
+                   style="width: 180px;"/>
             </div>
           </q-card-section>
 
@@ -268,11 +276,13 @@ onUnmounted(() => {
         >
           <q-card-section>
             <div class="row justify-center">
+              <!--              <img :src="require('assets/svg/protect.svg')"-->
+              <!--                   style="width: 180px;"-->
+              <!--                   data-aos="fade-up"-->
+              <!--                   data-aos-duration="2500"-->
+              <!--              />              -->
               <img :src="require('assets/svg/protect.svg')"
-                   style="width: 180px;"
-                   data-aos="fade-up"
-                   data-aos-duration="2500"
-              />
+                   style="width: 180px;"/>
             </div>
           </q-card-section>
 
