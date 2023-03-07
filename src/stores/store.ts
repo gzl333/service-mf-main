@@ -42,9 +42,10 @@ export const useStore = defineStore('main', {
       try {
         let respPostLoginUrl
         if (loginType === 'passport') {
-          respPostLoginUrl = await api.login.passport.postAskUrl({ query: { clientUrl: window.location.origin + '/login-passport' } })
+          // respPostLoginUrl = await api.login.passport.postAskUrl({ query: { clientUrl: window.location.origin + '/login-passport' } })
+          respPostLoginUrl = await api.login.passport.postAskUrl({ query: { clientUrl: window.location.origin + '/login/passport' } })
         } else if (loginType === 'aai') {
-          respPostLoginUrl = await api.login.aai.postAskUrl({ query: { clientUrl: window.location.origin + '/login-aai' } })
+          respPostLoginUrl = await api.login.aai.postAskUrl({ query: { clientUrl: window.location.origin + '/login/aai' } })
         }
 
         console.log('Login Response: ', respPostLoginUrl?.data)
