@@ -1,4 +1,5 @@
 import { RouteRecordRaw } from 'vue-router'
+import { useStore } from 'stores/store'
 
 const routes: RouteRecordRaw[] = [
   {
@@ -19,6 +20,32 @@ const routes: RouteRecordRaw[] = [
       {
         path: 'case',
         component: () => import('pages/CasePage.vue')
+      },
+      {
+        path: 'login:afterLogin(.*)',
+        component: {
+          template: '' // 不渲染任何模板的空组件，本路由只用来接收 'login/passport?code=xxx' and ’login/aai?code=xxx‘
+        },
+        beforeEnter: async (to, from, next) => {
+          // 获取store中的登录状态
+          const store = useStore()
+          const { isLogin } = store.items
+          // 未登录则获取code，换取token，进行登录
+          if (!isLogin) {
+            // console.log(to.fullPath)
+            // 此处截取code
+            const code = to.fullPath.slice(to.fullPath.indexOf('=') + 1)
+            // console.log(code)
+            // 保存登录状态, 此处区分是passport还是aai
+            if (to.fullPath.includes('passport')) {
+              void await store.userLogin('passport', code)
+            } else if (to.fullPath.includes('aai')) {
+              void await store.userLogin('aai', code)
+            }
+            // 跳转至内页
+            next({ path: '/my' })
+          }
+        }
       }
     ]
   },
