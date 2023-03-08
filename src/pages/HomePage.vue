@@ -147,7 +147,10 @@ onUnmounted(() => {
 
       <div class="col column justify-center">
         <div class="row items-center justify-center q-pb-lg">
-          <div class="text-h1 text-weight-bold brand-text-gradient" data-aos="fade-in" data-aos-duration="1000">
+<!--          <div class="text-h1 text-weight-bold brand-text-gradient" data-aos="fade-in" data-aos-duration="1000">-->
+<!--            {{ tc('一体化') }}-->
+<!--          </div>          -->
+          <div class="text-h1 text-weight-bold brand-text-gradient">
             {{ tc('一体化') }}
           </div>
         </div>
