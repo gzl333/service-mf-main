@@ -12,7 +12,7 @@
 
 const { configure } = require('quasar/wrappers')
 const resolve = require('path').resolve
-const { name } = require('./package')
+const { name, version } = require('./package')
 const SystemJSPublicPathWebpackPlugin = require('systemjs-webpack-interop/SystemJSPublicPathWebpackPlugin')
 
 module.exports = configure(function (ctx) {
@@ -63,6 +63,7 @@ module.exports = configure(function (ctx) {
       vueRouterMode: 'history', // available values: 'hash', 'history'
       distDir: 'dist/main', // @mimas: change quasar build dir, quasar will clean this folder each time building
       env: {
+        appVersion: version, // @mimas: application version, process.env.appVersion
         releaseTime: `${new Date()}` // @mimas: release time stamp, process.env.releaseTime
       },
       // transpile: false,

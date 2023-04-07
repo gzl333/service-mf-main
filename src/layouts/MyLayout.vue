@@ -34,6 +34,7 @@ const gotoManual = () => {
   window.open(url.value)
 }
 
+const appVersion = process.env.appVersion
 const releaseTime = process.env.releaseTime
 </script>
 
@@ -52,8 +53,18 @@ const releaseTime = process.env.releaseTime
         </q-toolbar-title>
 
         <q-icon name="info" color="grey-5" size="xs">
-          <q-tooltip>
-            发布时间: {{ new Date(releaseTime).toLocaleString() }}
+          <q-tooltip class="bg-grey-3">
+
+            <div class="text-grey text-caption text-center">{{ tc('appVersion') }}</div>
+            <div class="text-grey text-caption text-center">
+              {{ appVersion }}
+            </div>
+
+            <div class="text-grey text-caption text-center">{{ tc('releaseTime') }}</div>
+            <div class="text-grey text-caption text-center">
+              {{ new Date(releaseTime).toLocaleString(i18n.global.locale) }}
+            </div>
+
           </q-tooltip>
         </q-icon>
 
@@ -131,7 +142,7 @@ const releaseTime = process.env.releaseTime
 
               <q-item clickable v-close-popup @click="navigateToUrl('/my/public')">
                 <q-item-section>
-                  <q-item-label :class="currentApp === 'public' ? 'text-primary':''">{{ tc('中国科技云公共服务平台') }}</q-item-label>
+                  <q-item-label :class="currentApp === 'public' ? 'text-primary':''">{{ tc('等保云主机') }}</q-item-label>
                 </q-item-section>
               </q-item>
             </q-list>

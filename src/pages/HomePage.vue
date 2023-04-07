@@ -291,7 +291,7 @@ onUnmounted(() => {
 
           <q-card-section class="q-pt-none">
             <div class="row justify-center text-center">
-              <div class="text-h5 text-weight-bold text-black">公共服务云主机</div>
+              <div class="text-h5 text-weight-bold text-black">等保云主机</div>
             </div>
           </q-card-section>
         </q-card>
