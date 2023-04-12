@@ -181,7 +181,7 @@ onUnmounted(() => {
           </q-btn>
           <q-btn class="col-auto" style="background-color: #0055A6;" text-color="white" unelevated no-caps
                  :ripple="false"
-                 to="/manual/case"
+                 to="/manual/about/case"
                  target="_blank"
           >
             成功案例
@@ -663,7 +663,7 @@ onUnmounted(() => {
                  unelevated n
                  o-caps
                  :ripple="false"
-                 to="/manual/case"
+                 to="/manual/about/case"
                  target="_blank"
           >
             全部案例
@@ -744,7 +744,7 @@ onUnmounted(() => {
                  unelevated n
                  o-caps
                  :ripple="false"
-                 to="/manual/about"
+                 to="/manual/about/project"
                  target="_blank"
           >
             项目详情
