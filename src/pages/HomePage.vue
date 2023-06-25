@@ -130,18 +130,25 @@ onUnmounted(() => {
 <template>
   <div class="HomePage">
 
-    <q-page-sticky position="bottom-left" :offset="[5, 5]">
-      <div class="text-grey-5 cursor-pointer" @click="isAnimationPlaying = true">开启动画</div>
-      <div class="text-grey-5 cursor-pointer" @click="isAnimationPlaying = false">关闭动画</div>
-      <div class="text-grey-5">FPS: {{ avgFps.toFixed(2) }}</div>
-    </q-page-sticky>
-
     <div ref="videoDom"
          class="column items-center gradient-background"
          :class="isAnimationPlaying?'animation-mask':''"
          style="height: 50vh; min-height: 500px;">
 
       <HeaderContent/>
+
+      <q-page-sticky position="top-right" :offset="[10, 5]">
+        <div class="row items-center">
+          <div class="text-primary">FPS {{ avgFps.toFixed(2) }}</div>
+          <q-toggle
+            v-model="isAnimationPlaying"
+            dense
+            dark
+            keep-color
+            color="primary"
+          />
+        </div>
+      </q-page-sticky>
 
       <!--      <q-separator/>-->
 
