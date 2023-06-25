@@ -224,20 +224,20 @@ export const useStore = defineStore('main', {
             // 通知错误
             this.userLogout()
 
-            Notify.create({
-              classes: 'notification-negative shadow-15',
-              icon: 'mdi-alert',
-              textColor: 'negative',
-              message: 'Refresh JWT Token Failed',
-              caption: `${tc('登录失效，请重新登录')}`,
-              position: 'bottom',
-              closeBtn: true,
-              timeout: 0,
-              multiLine: false
-            })
+            // Notify.create({
+            //   classes: 'notification-negative shadow-15',
+            //   icon: 'mdi-alert',
+            //   textColor: 'negative',
+            //   message: 'Refresh JWT Token Failed',
+            //   caption: `${tc('登录失效，请重新登录')}`,
+            //   position: 'bottom',
+            //   closeBtn: true,
+            //   timeout: 0,
+            //   multiLine: false
+            // })
           }
         } catch (exception) {
-          exceptionNotifier(exception, 'Login: reloadToken')
+          // exceptionNotifier(exception, 'Login: reloadToken')
           this.userLogout()
         }
 

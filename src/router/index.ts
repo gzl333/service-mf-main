@@ -111,7 +111,12 @@ export default route(function (/* { store/!* , ssrContext  *!/ } */) {
       // 已经登录，访问/login，重定向到/my
       next({ path: '/my' })
     } else if (to.meta.requireLogin && !isLogin) {
-      // 要求登录的页面，如果没有登录，则返回home页面
+      // 要求登录的页面，如果没有登录
+
+      // localstorage记录所尝试的path
+      localStorage.setItem('try_path', to.fullPath)
+
+      // 返回home页面
       next({ path: '/' })
     } else if (!to.meta.requireLogin && isLogin) {
       // !!以下取消了，因为要在登录状态下查看/storage/share，该页面不需要登录。!!
@@ -132,7 +137,15 @@ export default route(function (/* { store/!* , ssrContext  *!/ } */) {
 
     // my 统一跳转
     if (to.fullPath === '/my') {
-      next({ path: '/my/server' })
+      // 如果localstorage里有尝试path
+      if (localStorage.getItem('try_path')) {
+        const tryPath = localStorage.getItem('try_path') as string
+        localStorage.removeItem('try_path')
+        next({ path: tryPath })
+      } else {
+        // 没有就正常跳转
+        next({ path: '/my/server' })
+      }
     }
 
     // 不符合上述所有条件的catch-all跳转，否则会卡在空白页
